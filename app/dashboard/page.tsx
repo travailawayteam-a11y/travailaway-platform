@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import LogoutButton from "./logout-button";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -28,7 +29,7 @@ export default async function DashboardPage() {
   return (
     <main className="min-h-screen bg-[#f7faf8]">
       <header className="border-b border-gray-200 bg-white px-5 py-5">
-        <div className="mx-auto flex max-w-6xl items-center justify-between">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
           <Link
             href="/"
             className="text-2xl font-bold tracking-tight text-[#176b50]"
@@ -36,9 +37,12 @@ export default async function DashboardPage() {
             travailaway
           </Link>
 
-          <span className="rounded-full bg-[#e8f3ed] px-4 py-2 text-sm font-medium capitalize text-[#176b50]">
-            {accountType} account
-          </span>
+          <div className="flex items-center gap-3">
+            <span className="rounded-full bg-[#e8f3ed] px-4 py-2 text-sm font-medium capitalize text-[#176b50]">
+              {accountType} account
+            </span>
+            <LogoutButton />
+          </div>
         </div>
       </header>
 
