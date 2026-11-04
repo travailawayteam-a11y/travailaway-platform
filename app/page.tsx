@@ -32,425 +32,531 @@ const logo =
   "https://sbgfaplqdxejirqfqfpn.supabase.co/storage/v1/object/public/brand-assets/1000296575-removebg-preview.png";
 
 const slides = [
-  "https://sbgfaplqdxejirqfqfpn.supabase.co/storage/v1/object/public/homepage-images/omar-ramadan-y_OLIOot4VU-unsplash.jpg",
-  "https://sbgfaplqdxejirqfqfpn.supabase.co/storage/v1/object/public/homepage-images/elya-foll-u9ZSmQNuhuw-unsplash.jpg",
-  "https://sbgfaplqdxejirqfqfpn.supabase.co/storage/v1/object/public/homepage-images/duy-pham-Cecb0_8Hx-o-unsplash%20(1).jpg",
-  "https://sbgfaplqdxejirqfqfpn.supabase.co/storage/v1/object/public/homepage-images/chermiti-mohamed-CD2Y9kMmCIQ-unsplash.jpg",
-  "https://sbgfaplqdxejirqfqfpn.supabase.co/storage/v1/object/public/homepage-images/alexander-schimmeck-MraFXV3v7Ts-unsplash.jpg",
+  {
+    image:
+      "https://images.unsplash.com/photo-1530789253388-582c481c54b0?w=1800",
+    title: "Travel beyond the ordinary.",
+    subtitle:
+      "Discover meaningful experiences, connect with people and explore the world through cultural exchange.",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1800",
+    title: "Discover. Connect. Experience.",
+    subtitle:
+      "Find welcoming hosts and unforgettable opportunities in destinations around the world.",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1800",
+    title: "Make the world your home.",
+    subtitle:
+      "Share your skills, learn new cultures and create memories that last a lifetime.",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1800",
+    title: "Your journey starts here.",
+    subtitle:
+      "From farms and family homes to hostels and community projects, find your next adventure.",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=1800",
+    title: "Travel with purpose.",
+    subtitle:
+      "Meet local communities, exchange experiences and see the world differently.",
+  },
 ];
 
 const destinations = [
   {
     name: "Africa",
-    detail: "Connect with communities and nature",
-    image: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=900",
+    detail: "Discover culture, nature and community",
+    image:
+      "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=900",
   },
   {
     name: "Europe",
-    detail: "Discover culture and new experiences",
-    image: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=900",
+    detail: "Explore historic towns and diverse cultures",
+    image:
+      "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=900",
   },
   {
     name: "Asia",
-    detail: "Experience traditions and hospitality",
-    image: "https://images.unsplash.com/photo-1528181304800-259b08848526?w=900",
+    detail: "Experience traditions and new adventures",
+    image:
+      "https://images.unsplash.com/photo-1528181304800-259b08848526?w=900",
   },
   {
     name: "North America",
-    detail: "Explore iconic cities and landscapes",
-    image: "https://images.unsplash.com/photo-1556146385-97d8a0b5e66b?w=900",
+    detail: "Discover cities, nature and new communities",
+    image:
+      "https://images.unsplash.com/photo-1556146385-97d8a0b5e66b?w=900",
   },
   {
     name: "South America",
-    detail: "Discover ancient wonders and adventure",
-    image: "https://images.unsplash.com/photo-1578746401323-f997c71f4096?w=900",
-  },
-  {
-    name: "Central America",
-    detail: "Explore colourful towns and cultures",
-    image: "https://images.unsplash.com/photo-1628128594359-25d5e30661dd?w=900",
+    detail: "Explore vibrant cultures and landscapes",
+    image:
+      "https://images.unsplash.com/photo-1578746401323-f997c71f4096?w=900",
   },
   {
     name: "Oceania",
-    detail: "Experience islands and coastal beauty",
-    image: "https://images.unsplash.com/photo-1596428025491-662bbaf50351?w=900",
+    detail: "Discover islands, coastlines and nature",
+    image:
+      "https://images.unsplash.com/photo-1596428025491-662bbaf50351?w=900",
   },
 ];
 
 const categories = [
-  { title: "Farmstays & gardening", icon: Sprout, text: "Learn about growing, harvesting and life close to the land." },
-  { title: "Hostels & guesthouses", icon: Home, text: "Join welcoming teams and meet travellers from everywhere." },
-  { title: "Hotels & lodges", icon: Compass, text: "Discover hospitality and the places that make travel special." },
-  { title: "NGOs & charities", icon: HandHeart, text: "Support community-led initiatives and meaningful causes." },
-  { title: "Families & homestays", icon: Users, text: "Experience everyday life, traditions and local culture." },
-  { title: "House & pet sitting", icon: PawPrint, text: "Care for homes and animals while discovering somewhere new." },
-  { title: "Teaching & education", icon: GraduationCap, text: "Share knowledge, practise languages and learn together." },
-  { title: "Environment & conservation", icon: Leaf, text: "Take part in projects that care for nature and wildlife." },
-  { title: "Animal care", icon: PawPrint, text: "Help care for animals through responsible local projects." },
-  { title: "Construction & renovation", icon: Home, text: "Contribute practical skills to suitable community projects." },
-  { title: "Community development", icon: HandHeart, text: "Connect with people working to strengthen their communities." },
-  { title: "Arts & culture", icon: Palette, text: "Exchange creativity, stories, music and cultural traditions." },
-  { title: "Boats & sailing", icon: Sailboat, text: "Discover life on the water and maritime experiences." },
-  { title: "Eco-tourism", icon: Globe2, text: "Explore thoughtful travel and locally rooted experiences." },
+  { name: "Farmstays & gardening", icon: Sprout },
+  { name: "Hostels & guesthouses", icon: Home },
+  { name: "Hotels & lodges", icon: Compass },
+  { name: "NGOs & charities", icon: HandHeart },
+  { name: "Families & homestays", icon: Heart },
+  { name: "House & pet sitting", icon: PawPrint },
+  { name: "Teaching & education", icon: GraduationCap },
+  { name: "Environment & conservation", icon: Leaf },
+  { name: "Animal care", icon: PawPrint },
+  { name: "Construction & renovation", icon: Home },
+  { name: "Community development", icon: Users },
+  { name: "Arts & culture", icon: Palette },
+  { name: "Boats & sailing", icon: Sailboat },
+  { name: "Eco-tourism", icon: Globe2 },
 ];
 
 const languages = [
-  { code: "en", label: "English" },
-  { code: "fr", label: "Français" },
-  { code: "es", label: "Español" },
-  { code: "pt", label: "Português" },
-  { code: "de", label: "Deutsch" },
-  { code: "it", label: "Italiano" },
-  { code: "nl", label: "Nederlands" },
-  { code: "ar", label: "العربية" },
-  { code: "zh", label: "简体中文" },
-  { code: "ru", label: "Русский" },
-  { code: "sw", label: "Kiswahili" },
+  "English",
+  "French",
+  "Spanish",
+  "Portuguese",
+  "German",
+  "Italian",
+  "Dutch",
+  "Arabic",
+  "Chinese",
+  "Russian",
+  "Swahili",
 ];
 
-const languageCopy: Record<string, {
-  explore: string;
-  how: string;
-  community: string;
-  login: string;
-  join: string;
-  headline: string;
-  intro: string;
-  exploreButton: string;
-  hostButton: string;
-}> = {
-  en: {
+const languageCopy: Record<
+  string,
+  {
+    explore: string;
+    how: string;
+    community: string;
+    login: string;
+    join: string;
+    headline: string;
+    intro: string;
+    exploreButton: string;
+    hostButton: string;
+  }
+> = {
+  English: {
     explore: "Explore",
     how: "How it works",
     community: "Community",
     login: "Log in",
     join: "Join Travailaway",
-    headline: "Discover Places. Share Experiences. Belong Anywhere.",
-    intro: "Connect with welcoming hosts, discover new cultures and create unforgettable experiences wherever your journey takes you.",
-    exploreButton: "Explore opportunities",
+    headline: "Travel beyond the ordinary.",
+    intro:
+      "Discover meaningful experiences, connect with people and explore the world through cultural exchange.",
+    exploreButton: "Find an experience",
     hostButton: "Become a host",
   },
-  fr: {
+  French: {
     explore: "Explorer",
     how: "Comment ça marche",
     community: "Communauté",
     login: "Connexion",
     join: "Rejoindre Travailaway",
-    headline: "Découvrez des lieux. Partagez des expériences. Sentez-vous chez vous partout.",
-    intro: "Rencontrez des hôtes accueillants, découvrez de nouvelles cultures et vivez des expériences inoubliables.",
-    exploreButton: "Voir les opportunités",
+    headline: "Voyagez autrement.",
+    intro:
+      "Découvrez des expériences enrichissantes, rencontrez des personnes et explorez le monde grâce aux échanges culturels.",
+    exploreButton: "Trouver une expérience",
     hostButton: "Devenir hôte",
   },
-  es: {
+  Spanish: {
     explore: "Explorar",
     how: "Cómo funciona",
     community: "Comunidad",
     login: "Iniciar sesión",
     join: "Únete a Travailaway",
-    headline: "Descubre lugares. Comparte experiencias. Siéntete en casa en cualquier lugar.",
-    intro: "Conecta con anfitriones acogedores, descubre nuevas culturas y crea recuerdos inolvidables.",
-    exploreButton: "Explorar oportunidades",
+    headline: "Viaja más allá de lo habitual.",
+    intro:
+      "Descubre experiencias significativas, conecta con personas y explora el mundo mediante el intercambio cultural.",
+    exploreButton: "Encontrar una experiencia",
     hostButton: "Ser anfitrión",
   },
-  pt: {
+  Portuguese: {
     explore: "Explorar",
     how: "Como funciona",
     community: "Comunidade",
     login: "Entrar",
     join: "Junte-se à Travailaway",
-    headline: "Descubra lugares. Partilhe experiências. Sinta-se em casa em qualquer lugar.",
-    intro: "Conheça anfitriões acolhedores, descubra novas culturas e viva experiências inesquecíveis.",
-    exploreButton: "Explorar oportunidades",
+    headline: "Viaje além do comum.",
+    intro:
+      "Descubra experiências significativas, conecte-se com pessoas e explore o mundo através do intercâmbio cultural.",
+    exploreButton: "Encontrar uma experiência",
     hostButton: "Tornar-se anfitrião",
   },
-  de: {
+  German: {
     explore: "Entdecken",
     how: "So funktioniert es",
-    community: "Community",
+    community: "Gemeinschaft",
     login: "Anmelden",
     join: "Travailaway beitreten",
-    headline: "Orte entdecken. Erfahrungen teilen. Überall dazugehören.",
-    intro: "Lerne gastfreundliche Gastgeber kennen, entdecke neue Kulturen und sammle unvergessliche Erfahrungen.",
-    exploreButton: "Möglichkeiten entdecken",
+    headline: "Reisen Sie über das Gewöhnliche hinaus.",
+    intro:
+      "Entdecken Sie besondere Erfahrungen, lernen Sie Menschen kennen und erkunden Sie die Welt durch kulturellen Austausch.",
+    exploreButton: "Erlebnis finden",
     hostButton: "Gastgeber werden",
   },
-  it: {
+  Italian: {
     explore: "Esplora",
     how: "Come funziona",
     community: "Comunità",
     login: "Accedi",
     join: "Unisciti a Travailaway",
-    headline: "Scopri luoghi. Condividi esperienze. Sentiti a casa ovunque.",
-    intro: "Connettiti con ospiti accoglienti, scopri nuove culture e crea ricordi indimenticabili.",
-    exploreButton: "Esplora opportunità",
-    hostButton: "Diventa host",
+    headline: "Viaggia oltre l'ordinario.",
+    intro:
+      "Scopri esperienze significative, incontra persone ed esplora il mondo attraverso lo scambio culturale.",
+    exploreButton: "Trova un'esperienza",
+    hostButton: "Diventa ospitante",
   },
-  nl: {
+  Dutch: {
     explore: "Ontdekken",
     how: "Hoe het werkt",
     community: "Gemeenschap",
     login: "Inloggen",
     join: "Word lid van Travailaway",
-    headline: "Ontdek plekken. Deel ervaringen. Voel je overal thuis.",
-    intro: "Ontmoet gastvrije hosts, ontdek nieuwe culturen en beleef onvergetelijke ervaringen.",
-    exploreButton: "Bekijk mogelijkheden",
-    hostButton: "Word host",
+    headline: "Reis buiten het gewone.",
+    intro:
+      "Ontdek bijzondere ervaringen, ontmoet mensen en verken de wereld door culturele uitwisseling.",
+    exploreButton: "Vind een ervaring",
+    hostButton: "Word gastheer",
   },
-  ar: {
+  Arabic: {
     explore: "استكشف",
-    how: "كيف تعمل",
+    how: "كيف يعمل",
     community: "المجتمع",
     login: "تسجيل الدخول",
     join: "انضم إلى Travailaway",
-    headline: "اكتشف أماكن جديدة. شارك التجارب. اشعر بالانتماء أينما كنت.",
-    intro: "تواصل مع مضيفين مرحبين، واكتشف ثقافات جديدة، واصنع ذكريات لا تُنسى.",
-    exploreButton: "استكشف الفرص",
+    headline: "سافر إلى ما هو أبعد من المعتاد.",
+    intro:
+      "اكتشف تجارب مميزة وتواصل مع الناس واستكشف العالم من خلال التبادل الثقافي.",
+    exploreButton: "ابحث عن تجربة",
     hostButton: "كن مضيفاً",
   },
-  zh: {
+  Chinese: {
     explore: "探索",
-    how: "运作方式",
+    how: "使用方法",
     community: "社区",
     login: "登录",
     join: "加入 Travailaway",
-    headline: "探索世界，分享体验，无论身在何处都找到归属。",
-    intro: "结识热情好客的房东，发现不同文化，创造难忘的旅行体验。",
-    exploreButton: "探索机会",
+    headline: "开启不一样的旅行。",
+    intro: "发现有意义的体验，结识新朋友，通过文化交流探索世界。",
+    exploreButton: "寻找体验",
     hostButton: "成为房东",
   },
-  ru: {
+  Russian: {
     explore: "Исследовать",
     how: "Как это работает",
     community: "Сообщество",
     login: "Войти",
-    join: "Присоединиться к Travailaway",
-    headline: "Открывайте места. Делитесь опытом. Чувствуйте себя как дома везде.",
-    intro: "Знакомьтесь с гостеприимными хозяевами, открывайте новые культуры и создавайте незабываемые воспоминания.",
-    exploreButton: "Найти возможности",
+    join: "Присоединиться",
+    headline: "Путешествуйте за пределами обычного.",
+    intro:
+      "Откройте для себя новые впечатления, знакомьтесь с людьми и исследуйте мир через культурный обмен.",
+    exploreButton: "Найти опыт",
     hostButton: "Стать хозяином",
   },
-  sw: {
+  Swahili: {
     explore: "Gundua",
     how: "Jinsi inavyofanya kazi",
     community: "Jumuiya",
     login: "Ingia",
     join: "Jiunge na Travailaway",
-    headline: "Gundua maeneo. Shiriki uzoefu. Jisikie nyumbani popote.",
-    intro: "Kutana na wenyeji wakarimu, gundua tamaduni mpya na tengeneza kumbukumbu zisizosahaulika.",
-    exploreButton: "Gundua fursa",
+    headline: "Safiri zaidi ya kawaida.",
+    intro:
+      "Gundua uzoefu wenye maana, kutana na watu na chunguza dunia kupitia kubadilishana tamaduni.",
+    exploreButton: "Tafuta uzoefu",
     hostButton: "Kuwa mwenyeji",
   },
-};export default function HomePage() {
+};
+
+export default function HomePage() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState("English");
   const [destination, setDestination] = useState("");
-  const [exchangeType, setExchangeType] = useState("All experiences");
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [exchangeType, setExchangeType] = useState("");
+  const [activeCategory, setActiveCategory] = useState("");
 
-  const copy = languageCopy[language] || languageCopy.en;
-  const isArabic = language === "ar";
+  const copy = languageCopy[language] || languageCopy.English;
 
   useEffect(() => {
-    const savedLanguage = window.localStorage.getItem("travailaway-language");
+    const savedLanguage = localStorage.getItem("travailaway-language");
     if (savedLanguage && languageCopy[savedLanguage]) {
       setLanguage(savedLanguage);
     }
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem("travailaway-language", language);
-    document.documentElement.lang = language;
-    document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+    localStorage.setItem("travailaway-language", language);
+    document.documentElement.lang = language.toLowerCase();
+    document.documentElement.dir = language === "Arabic" ? "rtl" : "ltr";
   }, [language]);
 
   useEffect(() => {
-    const timer = window.setInterval(() => {
+    const timer = setInterval(() => {
       setActiveSlide((current) => (current + 1) % slides.length);
     }, 6000);
 
-    return () => window.clearInterval(timer);
+    return () => clearInterval(timer);
   }, []);
 
   const exploreOpportunities = () => {
-    setActiveCategory(exchangeType === "All experiences" ? "All" : exchangeType);
-    document.getElementById("explore")?.scrollIntoView({ behavior: "smooth" });
+    const params = new URLSearchParams();
+
+    if (destination.trim()) {
+      params.set("destination", destination.trim());
+    }
+
+    if (exchangeType) {
+      params.set("category", exchangeType);
+    }
+
+    if (activeCategory) {
+      params.set("category", activeCategory);
+    }
+
+    window.location.href = `/explore?${params.toString()}`;
   };
 
   return (
-    <main className="min-h-screen overflow-hidden bg-white text-slate-800">
-      <header className="absolute z-40 w-full">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-10">
-          <a href="/" className="flex items-center">
-            <img src={logo} alt="Travailaway" className="h-12 w-auto md:h-14" />
+    <main className="min-h-screen bg-white text-gray-900">
+      {/* HEADER */}
+      <header className="sticky top-0 z-50 border-b border-gray-100 bg-white shadow-sm">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-8">
+          <a href="/" className="flex shrink-0 items-center">
+            <img
+              src={logo}
+              alt="Travailaway"
+              className="h-16 w-auto max-w-[230px] object-contain md:h-20 md:max-w-[280px] lg:h-24"
+            />
           </a>
 
-          <nav className="hidden items-center gap-6 text-sm font-semibold text-white lg:flex">
-            <a href="#explore" className="transition hover:text-yellow-300">
+          <nav className="hidden items-center gap-7 lg:flex">
+            <a
+              href="#destinations"
+              className="font-medium text-gray-700 transition hover:text-amber-700"
+            >
               {copy.explore}
             </a>
 
-            <a href="#how-it-works" className="transition hover:text-yellow-300">
+            <a
+              href="#how-it-works"
+              className="font-medium text-gray-700 transition hover:text-amber-700"
+            >
               {copy.how}
             </a>
 
             <div className="relative">
               <button
                 onClick={() => setInfoOpen(!infoOpen)}
-                className="flex items-center gap-1 transition hover:text-yellow-300"
+                className="flex items-center gap-1 font-medium text-gray-700 hover:text-amber-700"
               >
-                Information Centre <ChevronDown size={15} />
+                Information Centre
+                <ChevronDown size={16} />
               </button>
 
               {infoOpen && (
-                <div className="absolute left-0 top-9 w-64 rounded-xl bg-white p-3 text-slate-800 shadow-2xl">
-                  <a href="#travellers" className="block rounded-lg p-3 hover:bg-slate-100">
-                    <strong>For travellers</strong>
-                    <span className="mt-1 block text-xs text-slate-500">
-                      Discover exchanges and prepare your journey.
-                    </span>
+                <div className="absolute left-0 top-9 w-56 rounded-xl border bg-white p-3 shadow-xl">
+                  <a
+                    href="/safety"
+                    className="block rounded-lg px-3 py-2 hover:bg-amber-50"
+                  >
+                    Safety information
                   </a>
-                  <a href="#hosts" className="block rounded-lg p-3 hover:bg-slate-100">
-                    <strong>For hosts</strong>
-                    <span className="mt-1 block text-xs text-slate-500">
-                      Welcome travellers and share your opportunity.
-                    </span>
+                  <a
+                    href="/faq"
+                    className="block rounded-lg px-3 py-2 hover:bg-amber-50"
+                  >
+                    Frequently asked questions
                   </a>
-                  <a href="#safety" className="block rounded-lg p-3 hover:bg-slate-100">
-                    <strong>Safety and trust</strong>
-                    <span className="mt-1 block text-xs text-slate-500">
-                      Read important travel and community guidance.
-                    </span>
+                  <a
+                    href="/about"
+                    className="block rounded-lg px-3 py-2 hover:bg-amber-50"
+                  >
+                    About Travailaway
                   </a>
-                  <a href="#faq" className="block rounded-lg p-3 hover:bg-slate-100">
-                    <strong>Frequently asked questions</strong>
+                  <a
+                    href="/contact"
+                    className="block rounded-lg px-3 py-2 hover:bg-amber-50"
+                  >
+                    Contact us
                   </a>
                 </div>
               )}
             </div>
 
-            <a href="#community" className="transition hover:text-yellow-300">
+            <a
+              href="#community"
+              className="font-medium text-gray-700 transition hover:text-amber-700"
+            >
               {copy.community}
             </a>
+          </nav>
 
+          <div className="hidden items-center gap-4 lg:flex">
             <select
               value={language}
-              onChange={(event) => setLanguage(event.target.value)}
+              onChange={(e) => setLanguage(e.target.value)}
+              className="rounded-lg border border-gray-200 bg-white px-2 py-2 text-sm outline-none"
               aria-label="Choose language"
-              className="max-w-28 rounded-lg border border-white/40 bg-slate-900/50 px-2 py-2 text-white outline-none"
             >
               {languages.map((item) => (
-                <option key={item.code} value={item.code} className="bg-white text-slate-900">
-                  {item.label}
+                <option key={item} value={item}>
+                  {item}
                 </option>
               ))}
             </select>
 
-            <a href="/login" className="transition hover:text-yellow-300">
+            <a
+              href="/login"
+              className="font-semibold text-gray-700 hover:text-amber-700"
+            >
               {copy.login}
             </a>
 
             <a
               href="/register"
-              className="rounded-full bg-yellow-400 px-5 py-3 font-bold text-slate-900 transition hover:bg-yellow-300"
+              className="rounded-full bg-amber-700 px-5 py-3 font-semibold text-white transition hover:bg-amber-800"
             >
               {copy.join}
             </a>
-          </nav>
+          </div>
 
           <button
-            className="text-white lg:hidden"
+            className="rounded-lg p-2 lg:hidden"
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle navigation menu"
+            aria-label="Open menu"
           >
-            {menuOpen ? <X size={28} /> : <Menu size={28} />}
+            {menuOpen ? <X size={27} /> : <Menu size={27} />}
           </button>
         </div>
 
         {menuOpen && (
-          <nav className="mx-4 rounded-2xl bg-white p-5 text-slate-800 shadow-2xl lg:hidden">
+          <div className="border-t bg-white px-5 py-5 shadow-lg lg:hidden">
             <div className="flex flex-col gap-4">
-              <a href="#explore" onClick={() => setMenuOpen(false)}>{copy.explore}</a>
-              <a href="#how-it-works" onClick={() => setMenuOpen(false)}>{copy.how}</a>
-              <a href="#travellers" onClick={() => setMenuOpen(false)}>For travellers</a>
-              <a href="#hosts" onClick={() => setMenuOpen(false)}>For hosts</a>
-              <a href="#community" onClick={() => setMenuOpen(false)}>{copy.community}</a>
-              <a href="#safety" onClick={() => setMenuOpen(false)}>Safety and trust</a>
+              <a href="#destinations" onClick={() => setMenuOpen(false)}>
+                {copy.explore}
+              </a>
+              <a href="#how-it-works" onClick={() => setMenuOpen(false)}>
+                {copy.how}
+              </a>
+              <a href="#travellers" onClick={() => setMenuOpen(false)}>
+                For travellers
+              </a>
+              <a href="#hosts" onClick={() => setMenuOpen(false)}>
+                For hosts
+              </a>
+              <a href="#community" onClick={() => setMenuOpen(false)}>
+                {copy.community}
+              </a>
+              <a href="/safety">Safety information</a>
+              <a href="/faq">FAQs</a>
 
-              <label className="text-sm font-semibold">
-                Language
-                <select
-                  value={language}
-                  onChange={(event) => setLanguage(event.target.value)}
-                  className="mt-2 w-full rounded-lg border border-slate-300 p-3"
-                >
-                  {languages.map((item) => (
-                    <option key={item.code} value={item.code}>{item.label}</option>
-                  ))}
-                </select>
-              </label>
+              <select
+                value={language}
+                onChange={(e) => setLanguage(e.target.value)}
+                className="w-full rounded-lg border p-3"
+                aria-label="Choose language"
+              >
+                {languages.map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
 
-              <a href="/login" className="font-semibold">{copy.login}</a>
-              <a href="/register" className="rounded-full bg-yellow-400 px-5 py-3 text-center font-bold">
+              <a href="/login" className="font-semibold">
+                {copy.login}
+              </a>
+
+              <a
+                href="/register"
+                className="rounded-full bg-amber-700 px-5 py-3 text-center font-semibold text-white"
+              >
                 {copy.join}
               </a>
             </div>
-          </nav>
+          </div>
         )}
       </header>
 
-      <section className="relative flex min-h-[720px] items-center overflow-hidden bg-slate-900 md:min-h-[790px]">
+      {/* HERO SLIDESHOW */}
+      <section className="relative flex min-h-[620px] items-center overflow-hidden md:min-h-[700px]">
         {slides.map((slide, index) => (
-          <img
-            key={slide}
-            src={slide}
-            alt="Travellers discovering new places and cultures"
-            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
+          <div
+            key={slide.image}
+            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
               activeSlide === index ? "opacity-100" : "opacity-0"
             }`}
+            style={{ backgroundImage: `url(${slide.image})` }}
           />
         ))}
 
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/20" />
+        <div className="absolute inset-0 bg-black/50" />
 
-        <div className={`relative z-10 mx-auto w-full max-w-7xl px-6 pb-16 pt-36 text-white md:px-12 ${isArabic ? "text-right" : "text-left"}`}>
-          <p className="mb-5 text-sm font-bold uppercase tracking-[0.25em] text-yellow-300">
-            Travel. Connect. Experience.
-          </p>
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-5 py-24 text-white md:px-8">
+          <div className="max-w-3xl">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-4 py-2 text-sm backdrop-blur">
+              <Globe2 size={17} />
+              Meaningful travel. Global connections.
+            </div>
 
-          <h1 className="max-w-4xl text-4xl font-extrabold leading-tight md:text-6xl lg:text-7xl">
-            {copy.headline}
-          </h1>
+            <h1 className="mb-6 text-4xl font-bold leading-tight md:text-6xl lg:text-7xl">
+              {activeSlide === 0
+                ? copy.headline
+                : slides[activeSlide].title}
+            </h1>
 
-          <p className="mt-7 max-w-2xl text-lg leading-relaxed text-white/90 md:text-xl">
-            {copy.intro}
-          </p>
+            <p className="mb-9 max-w-2xl text-lg leading-relaxed text-white/90 md:text-xl">
+              {activeSlide === 0
+                ? copy.intro
+                : slides[activeSlide].subtitle}
+            </p>
 
-          <div className={`mt-9 flex flex-wrap gap-4 ${isArabic ? "justify-start" : "justify-start"}`}>
-            <a
-              href="#explore"
-              className="rounded-full bg-yellow-400 px-7 py-4 font-bold text-slate-900 transition hover:bg-yellow-300"
-            >
-              {copy.exploreButton} <ArrowRight className="ml-2 inline" size={18} />
-            </a>
+            <div className="flex flex-wrap gap-4">
+              <a
+                href="#search"
+                className="inline-flex items-center gap-2 rounded-full bg-amber-600 px-7 py-4 font-bold text-white transition hover:bg-amber-700"
+              >
+                {copy.exploreButton}
+                <ArrowRight size={19} />
+              </a>
 
-            <a
-              href="/register"
-              className="rounded-full border border-white/80 px-7 py-4 font-bold text-white transition hover:bg-white/15"
-            >
-              {copy.hostButton}
-            </a>
+              <a
+                href="/register?role=host"
+                className="inline-flex items-center gap-2 rounded-full border-2 border-white px-7 py-4 font-bold text-white transition hover:bg-white hover:text-gray-900"
+              >
+                {copy.hostButton}
+              </a>
+            </div>
           </div>
 
-          <div className="mt-12 flex gap-2">
-            {slides.map((_, index) => (
+          <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 gap-2">
+            {slides.map((slide, index) => (
               <button
-                key={index}
+                key={slide.image}
                 onClick={() => setActiveSlide(index)}
                 aria-label={`Show slide ${index + 1}`}
-                className={`h-2 rounded-full transition-all ${
-                  activeSlide === index ? "w-9 bg-yellow-400" : "w-2 bg-white/70"
+                className={`h-2.5 rounded-full transition-all ${
+                  activeSlide === index ? "w-9 bg-amber-500" : "w-2.5 bg-white/70"
                 }`}
               />
             ))}
@@ -458,332 +564,425 @@ const languageCopy: Record<string, {
         </div>
       </section>
 
-      <section className="relative z-20 mx-auto -mt-12 max-w-6xl px-5">
-        <div className="grid gap-3 rounded-2xl bg-white p-5 shadow-2xl md:grid-cols-[1fr_1fr_auto] md:p-7">
-          <label className="flex items-center gap-3 rounded-xl border border-slate-200 px-4 py-3">
-            <MapPin className="shrink-0 text-emerald-700" />
-            <span className="min-w-0 flex-1">
-              <span className="block text-xs text-slate-500">Where do you want to go?</span>
-              <input
-                value={destination}
-                onChange={(event) => setDestination(event.target.value)}
-                placeholder="Enter a country or destination"
-                className="mt-1 w-full bg-transparent font-medium outline-none placeholder:font-normal placeholder:text-slate-400"
-              />
-            </span>
-          </label>
-
-          <label className="flex items-center gap-3 rounded-xl border border-slate-200 px-4 py-3">
-            <Compass className="shrink-0 text-emerald-700" />
-            <span className="min-w-0 flex-1">
-              <span className="block text-xs text-slate-500">What are you looking for?</span>
-              <select
-                value={exchangeType}
-                onChange={(event) => setExchangeType(event.target.value)}
-                className="mt-1 w-full bg-transparent font-medium outline-none"
-              >
-                <option>All experiences</option>
-                {categories.map((category) => (
-                  <option key={category.title}>{category.title}</option>
-                ))}
-              </select>
-            </span>
-          </label>
-
-          <button
-            onClick={exploreOpportunities}
-            className="rounded-xl bg-emerald-800 px-8 py-4 font-bold text-white transition hover:bg-emerald-700"
-          >
-            <Search className="mr-2 inline" size={18} /> Explore
-          </button>
-        </div>
-      </section>      <section id="explore" className="mx-auto max-w-7xl px-6 py-24 md:px-12">
-        <div className="mb-12 text-center">
-          <p className="font-bold uppercase tracking-widest text-emerald-700">
-            The world is waiting
-          </p>
-          <h2 className="mt-3 text-3xl font-extrabold md:text-5xl">
-            Where will your journey take you?
-          </h2>
-          <p className="mx-auto mt-5 max-w-2xl leading-relaxed text-slate-600">
-            Discover destinations, connect with welcoming hosts and find
-            opportunities to experience everyday life in different cultures.
-          </p>
-        </div>
-
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {destinations.map((destination) => (
-            <a
-              key={destination.name}
-              href={`/register`}
-              className="group relative h-80 overflow-hidden rounded-2xl"
-            >
-              <img
-                src={destination.image}
-                alt={destination.name}
-                className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
-              <div className="absolute bottom-7 left-7 text-white">
-                <h3 className="text-3xl font-extrabold">{destination.name}</h3>
-                <p className="mt-2 text-sm text-white/90">{destination.detail}</p>
-                <span className="mt-4 inline-flex items-center font-semibold text-yellow-300">
-                  Discover opportunities <ArrowRight className="ml-2" size={17} />
-                </span>
-              </div>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-slate-50 px-6 py-24 md:px-12">
-        <div className="mx-auto max-w-7xl">
-          <div className="text-center">
-            <p className="font-bold uppercase tracking-widest text-emerald-700">
-              Find your kind of experience
-            </p>
-            <h2 className="mt-3 text-3xl font-extrabold md:text-5xl">
-              Explore exchange opportunities
-            </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-slate-600">
-              From farms and family homes to conservation projects and
-              community initiatives, discover different ways to connect.
+      {/* SEARCH */}
+      <section id="search" className="relative z-20 mx-auto -mt-10 max-w-6xl px-4">
+        <div className="rounded-2xl bg-white p-5 shadow-2xl md:p-7">
+          <div className="mb-5">
+            <h2 className="text-2xl font-bold">Find your next experience</h2>
+            <p className="mt-1 text-gray-500">
+              Where would you like your journey to take you?
             </p>
           </div>
 
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {categories.map((category) => {
-              const CategoryIcon = category.icon;
+          <div className="grid gap-4 md:grid-cols-3">
+            <div>
+              <label className="mb-2 block text-sm font-semibold">
+                Destination
+              </label>
+              <div className="flex items-center gap-2 rounded-xl border border-gray-200 px-4 py-3">
+                <MapPin className="text-amber-700" size={20} />
+                <input
+                  value={destination}
+                  onChange={(e) => setDestination(e.target.value)}
+                  placeholder="Country or destination"
+                  className="w-full bg-transparent outline-none"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="mb-2 block text-sm font-semibold">
+                Type of exchange
+              </label>
+              <select
+                value={exchangeType}
+                onChange={(e) => setExchangeType(e.target.value)}
+                className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 outline-none"
+              >
+                <option value="">All experiences</option>
+                {categories.map((category) => (
+                  <option key={category.name} value={category.name}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="flex items-end">
+              <button
+                onClick={exploreOpportunities}
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-amber-700 px-5 py-3.5 font-bold text-white transition hover:bg-amber-800"
+              >
+                <Search size={19} />
+                Search opportunities
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* INTRODUCTION */}
+      <section className="mx-auto max-w-7xl px-5 py-20 text-center md:px-8">
+        <span className="font-semibold uppercase tracking-widest text-amber-700">
+          Welcome to Travailaway
+        </span>
+        <h2 className="mx-auto mt-4 max-w-3xl text-3xl font-bold leading-tight md:text-5xl">
+          More than travelling. It's about connecting with the world.
+        </h2>
+        <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-gray-600">
+          Travailaway brings travellers and hosts together through cultural
+          exchange, shared experiences, learning and meaningful connections.
+          Discover places differently while becoming part of the communities
+          you visit.
+        </p>
+      </section>
+
+      {/* DESTINATIONS */}
+      <section id="destinations" className="bg-gray-50 py-20">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
+          <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <span className="font-semibold uppercase tracking-widest text-amber-700">
+                Explore the world
+              </span>
+              <h2 className="mt-3 text-3xl font-bold md:text-4xl">
+                Where will you go?
+              </h2>
+              <p className="mt-3 text-gray-600">
+                Explore opportunities across six global regions.
+              </p>
+            </div>
+
+            <a
+              href="/explore"
+              className="inline-flex items-center gap-2 font-semibold text-amber-800 hover:text-amber-900"
+            >
+              Explore all <ArrowRight size={18} />
+            </a>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {destinations.map((place) => (
+              <a
+                key={place.name}
+                href={`/explore?destination=${encodeURIComponent(place.name)}`}
+                className="group relative h-72 overflow-hidden rounded-2xl shadow-md"
+              >
+                <img
+                  src={place.image}
+                  alt={place.name}
+                  className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+                <div className="absolute bottom-0 p-7 text-white">
+                  <h3 className="text-2xl font-bold">{place.name}</h3>
+                  <p className="mt-2 text-white/90">{place.detail}</p>
+                  <span className="mt-4 inline-flex items-center gap-2 font-semibold">
+                    Discover opportunities <ArrowRight size={17} />
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* EXCHANGE CATEGORIES */}
+      <section className="mx-auto max-w-7xl px-5 py-20 md:px-8">
+        <div className="mb-12 text-center">
+          <span className="font-semibold uppercase tracking-widest text-amber-700">
+            Find your experience
+          </span>
+          <h2 className="mt-3 text-3xl font-bold md:text-4xl">
+            Different ways to experience the world
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-gray-600">
+            Whether you love nature, education, hospitality or community work,
+            discover an exchange that matches your interests.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+          {categories.map((category) => {
+            const Icon = category.icon;
+
+            return (
+              <button
+                key={category.name}
+                onClick={() => {
+                  setActiveCategory(category.name);
+                  window.location.href = `/explore?category=${encodeURIComponent(
+                    category.name
+                  )}`;
+                }}
+                className="group rounded-2xl border border-gray-200 p-5 text-left transition hover:-translate-y-1 hover:border-amber-500 hover:shadow-lg md:p-7"
+              >
+                <div className="mb-4 inline-flex rounded-xl bg-amber-50 p-3 text-amber-800 transition group-hover:bg-amber-700 group-hover:text-white">
+                  <Icon size={27} />
+                </div>
+                <h3 className="font-bold leading-snug">{category.name}</h3>
+                <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-amber-800">
+                  Explore <ArrowRight size={15} />
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* HOW IT WORKS */}
+      <section id="how-it-works" className="bg-amber-50 py-20">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
+          <div className="mb-12 text-center">
+            <span className="font-semibold uppercase tracking-widest text-amber-800">
+              Simple and meaningful
+            </span>
+            <h2 className="mt-3 text-3xl font-bold md:text-4xl">
+              How Travailaway works
+            </h2>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-3">
+            {[
+              {
+                number: "01",
+                title: "Discover",
+                description:
+                  "Explore hosts, destinations and exchange opportunities that match your interests.",
+                icon: Search,
+              },
+              {
+                number: "02",
+                title: "Connect",
+                description:
+                  "Create your profile, contact hosts and discuss your exchange before making plans.",
+                icon: MessageCircle,
+              },
+              {
+                number: "03",
+                title: "Experience",
+                description:
+                  "Travel, share your skills, learn from others and create unforgettable memories.",
+                icon: Compass,
+              },
+            ].map((step) => {
+              const Icon = step.icon;
 
               return (
-                <a
-                  key={category.title}
-                  href="/register"
-                  className="group rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-1 hover:border-emerald-300 hover:shadow-lg"
+                <div
+                  key={step.number}
+                  className="rounded-2xl bg-white p-8 shadow-sm"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 text-emerald-800 transition group-hover:bg-emerald-800 group-hover:text-white">
-                    <CategoryIcon size={25} />
+                  <div className="flex items-center justify-between">
+                    <span className="text-4xl font-bold text-amber-200">
+                      {step.number}
+                    </span>
+                    <Icon size={32} className="text-amber-700" />
                   </div>
-                  <h3 className="mt-5 text-lg font-bold">{category.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                    {category.text}
+                  <h3 className="mt-6 text-2xl font-bold">{step.title}</h3>
+                  <p className="mt-3 leading-relaxed text-gray-600">
+                    {step.description}
                   </p>
-                  <span className="mt-5 inline-flex items-center text-sm font-bold text-emerald-800">
-                    Explore <ArrowRight className="ml-2" size={16} />
-                  </span>
-                </a>
+                </div>
               );
             })}
           </div>
         </div>
       </section>
 
-      <section id="how-it-works" className="px-6 py-24 md:px-12">
-        <div className="mx-auto max-w-7xl">
-          <div className="text-center">
-            <p className="font-bold uppercase tracking-widest text-emerald-700">
-              Your journey begins here
-            </p>
-            <h2 className="mt-3 text-3xl font-extrabold md:text-5xl">
-              How Travailaway works
-            </h2>
-          </div>
-
-          <div className="mt-16 grid gap-12 md:grid-cols-3">
-            <div className="text-center">
-              <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100 text-emerald-800">
-                <Search size={34} />
-              </div>
-              <h3 className="mt-6 text-xl font-bold">1. Discover</h3>
-              <p className="mt-3 leading-relaxed text-slate-600">
-                Explore destinations, find hosts and discover opportunities
-                that match your interests.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100 text-emerald-800">
-                <MessageCircle size={34} />
-              </div>
-              <h3 className="mt-6 text-xl font-bold">2. Connect</h3>
-              <p className="mt-3 leading-relaxed text-slate-600">
-                Get to know hosts, ask questions and discuss the details
-                before arranging an exchange.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100 text-emerald-800">
-                <Heart size={34} />
-              </div>
-              <h3 className="mt-6 text-xl font-bold">3. Experience</h3>
-              <p className="mt-3 leading-relaxed text-slate-600">
-                Share skills, discover cultures and create meaningful
-                memories along the way.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="travellers" className="bg-emerald-950 px-6 py-24 text-white md:px-12">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 md:grid-cols-2">
-          <div>
-            <p className="font-bold uppercase tracking-widest text-yellow-300">
-              More than just a trip
-            </p>
-            <h2 className="mt-4 text-3xl font-extrabold md:text-5xl">
-              Travel differently. Connect more deeply.
-            </h2>
-            <p className="mt-6 text-lg leading-relaxed text-emerald-100">
-              Meet people beyond the usual tourist routes. Discover local
-              traditions, exchange skills and become part of experiences
-              that make every journey special.
-            </p>
-            <a
-              href="/register"
-              className="mt-8 inline-flex items-center rounded-full bg-yellow-400 px-7 py-4 font-bold text-slate-900 hover:bg-yellow-300"
-            >
-              Start your journey <ArrowRight className="ml-2" size={18} />
-            </a>
-          </div>
-
+      {/* TRAVELLERS */}
+      <section id="travellers" className="mx-auto max-w-7xl px-5 py-20 md:px-8">
+        <div className="grid items-center gap-12 md:grid-cols-2">
           <div className="overflow-hidden rounded-3xl">
             <img
               src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200"
-              alt="Friends sharing a travel experience"
-              className="h-[420px] w-full object-cover"
-            />
-          </div>
-        </div>
-      </section>
-
-      <section id="hosts" className="px-6 py-24 md:px-12">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 md:grid-cols-2">
-          <div className="overflow-hidden rounded-3xl">
-            <img
-              src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1200"
-              alt="People working together on a shared project"
+              alt="Friends travelling together"
               className="h-[420px] w-full object-cover"
             />
           </div>
 
           <div>
-            <p className="font-bold uppercase tracking-widest text-emerald-700">
-              Open your doors to the world
-            </p>
-            <h2 className="mt-4 text-3xl font-extrabold md:text-5xl">
-              Become a host. Share what makes your place special.
+            <span className="font-semibold uppercase tracking-widest text-amber-700">
+              For travellers
+            </span>
+            <h2 className="mt-4 text-3xl font-bold md:text-5xl">
+              Travel differently. Discover more.
             </h2>
-            <p className="mt-6 leading-relaxed text-slate-600">
-              Welcome travellers, share your culture, exchange knowledge and
-              introduce people to your community. Whether you run a guesthouse,
-              a farm, a family homestay or a community project, your story
-              deserves to be discovered.
+            <p className="mt-6 leading-relaxed text-gray-600">
+              Go beyond sightseeing. Find opportunities to experience local
+              life, learn new skills, meet welcoming people and discover
+              destinations through the eyes of their communities.
             </p>
+
+            <ul className="mt-6 space-y-4">
+              {[
+                "Discover opportunities around the world",
+                "Connect directly with hosts",
+                "Experience different cultures",
+                "Learn and share valuable skills",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <ShieldCheck
+                    className="mt-0.5 shrink-0 text-amber-700"
+                    size={20}
+                  />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+
             <a
-              href="/register"
-              className="mt-8 inline-flex items-center rounded-full bg-emerald-800 px-7 py-4 font-bold text-white hover:bg-emerald-700"
+              href="/register?role=traveller"
+              className="mt-8 inline-flex items-center gap-2 rounded-full bg-amber-700 px-7 py-4 font-bold text-white hover:bg-amber-800"
             >
-              Become a host <ArrowRight className="ml-2" size={18} />
+              Join as a traveller <ArrowRight size={18} />
             </a>
           </div>
         </div>
       </section>
 
-      <section id="community" className="bg-slate-50 px-6 py-24 md:px-12">
-        <div className="mx-auto max-w-7xl">
-          <div className="text-center">
-            <p className="font-bold uppercase tracking-widest text-emerald-700">
-              A world of connections
-            </p>
-            <h2 className="mt-3 text-3xl font-extrabold md:text-5xl">
-              More ways to connect
+      {/* HOSTS */}
+      <section id="hosts" className="bg-gray-50 py-20">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 md:grid-cols-2 md:px-8">
+          <div className="order-2 md:order-1">
+            <span className="font-semibold uppercase tracking-widest text-amber-700">
+              For hosts
+            </span>
+            <h2 className="mt-4 text-3xl font-bold md:text-5xl">
+              Welcome the world into your community.
             </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-slate-600">
-              Travailaway is about the people you meet, the knowledge you
-              exchange and the communities you discover.
+            <p className="mt-6 leading-relaxed text-gray-600">
+              Are you a farm, hostel, lodge, family, community organisation or
+              project? Connect with travellers who want to contribute, learn
+              and experience local life.
             </p>
+
+            <ul className="mt-6 space-y-4">
+              {[
+                "Create a host profile",
+                "Showcase your project and opportunities",
+                "Connect with travellers from different countries",
+                "Build meaningful cultural relationships",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <Heart
+                    className="mt-0.5 shrink-0 text-amber-700"
+                    size={20}
+                  />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <a
+              href="/register?role=host"
+              className="mt-8 inline-flex items-center gap-2 rounded-full bg-amber-700 px-7 py-4 font-bold text-white hover:bg-amber-800"
+            >
+              Become a host <ArrowRight size={18} />
+            </a>
           </div>
 
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            <div className="rounded-2xl bg-white p-7 shadow-sm">
-              <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-emerald-100 text-emerald-800">
-                <Users size={28} />
-              </div>
-              <h3 className="mt-5 text-xl font-bold">Travel Mates</h3>
-              <p className="mt-3 leading-relaxed text-slate-600">
-                Meet other adult travellers, discover shared interests and
-                explore the possibility of travelling together.
-              </p>
-              <span className="mt-5 inline-block rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-800">
-                Coming soon
-              </span>
-            </div>
-
-            <div className="rounded-2xl bg-white p-7 shadow-sm">
-              <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-emerald-100 text-emerald-800">
-                <Languages size={28} />
-              </div>
-              <h3 className="mt-5 text-xl font-bold">Language exchange</h3>
-              <p className="mt-3 leading-relaxed text-slate-600">
-                Practise languages, learn expressions and connect with people
-                from different backgrounds.
-              </p>
-              <span className="mt-5 inline-block rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-800">
-                Coming soon
-              </span>
-            </div>
-
-            <div className="rounded-2xl bg-white p-7 shadow-sm">
-              <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-emerald-100 text-emerald-800">
-                <CalendarDays size={28} />
-              </div>
-              <h3 className="mt-5 text-xl font-bold">Local events</h3>
-              <p className="mt-3 leading-relaxed text-slate-600">
-                Discover cultural gatherings, community activities and
-                experiences shared by members.
-              </p>
-              <span className="mt-5 inline-block rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-800">
-                Coming soon
-              </span>
-            </div>
+          <div className="order-1 overflow-hidden rounded-3xl md:order-2">
+            <img
+              src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=1200"
+              alt="People sharing a community experience"
+              className="h-[420px] w-full object-cover"
+            />
           </div>
         </div>
       </section>
 
-      <section className="px-6 py-24 md:px-12">
-        <div className="mx-auto max-w-7xl">
+      {/* COMMUNITY */}
+      <section id="community" className="mx-auto max-w-7xl px-5 py-20 md:px-8">
+        <div className="mb-12 text-center">
+          <span className="font-semibold uppercase tracking-widest text-amber-700">
+            Beyond the exchange
+          </span>
+          <h2 className="mt-3 text-3xl font-bold md:text-4xl">
+            Be part of a global community
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-gray-600">
+            Travailaway is about the people you meet and the connections you
+            create along the way.
+          </p>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-3">
+          {[
+            {
+              title: "Travel mates",
+              description:
+                "Meet other travellers, share experiences and discover journeys together.",
+              icon: Users,
+            },
+            {
+              title: "Language exchange",
+              description:
+                "Learn languages through real conversations and cultural connections.",
+              icon: Languages,
+            },
+            {
+              title: "Local events",
+              description:
+                "Discover activities, meetups and experiences in communities around the world.",
+              icon: CalendarDays,
+            },
+          ].map((item) => {
+            const Icon = item.icon;
+
+            return (
+              <div
+                key={item.title}
+                className="rounded-2xl border border-gray-200 p-8"
+              >
+                <Icon size={34} className="text-amber-700" />
+                <h3 className="mt-5 text-xl font-bold">{item.title}</h3>
+                <p className="mt-3 leading-relaxed text-gray-600">
+                  {item.description}
+                </p>
+                <span className="mt-5 inline-block rounded-full bg-amber-50 px-4 py-2 text-sm font-semibold text-amber-800">
+                  Coming soon
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* OUR STORY */}
+      <section className="bg-amber-50 py-20">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
           <div className="grid items-center gap-12 md:grid-cols-2">
             <div>
-              <p className="font-bold uppercase tracking-widest text-emerald-700">
-                Stories that bring us together
-              </p>
-              <h2 className="mt-4 text-3xl font-extrabold md:text-5xl">
-                Every journey has a story.
+              <span className="font-semibold uppercase tracking-widest text-amber-800">
+                Our vision
+              </span>
+              <h2 className="mt-4 text-3xl font-bold md:text-5xl">
+                A world connected through experiences.
               </h2>
-              <p className="mt-6 leading-relaxed text-slate-600">
-                Discover travel inspiration, cultural perspectives and
-                stories about the people and places that make the world
-                extraordinary.
+              <p className="mt-6 leading-relaxed text-gray-700">
+                We believe travel should create more than photographs. It
+                should build understanding, friendships and opportunities.
+                Travailaway aims to bring people together across borders
+                through meaningful cultural exchange.
               </p>
               <a
-                href="/register"
-                className="mt-8 inline-flex items-center font-bold text-emerald-800 hover:text-emerald-600"
+                href="/about"
+                className="mt-8 inline-flex items-center gap-2 font-bold text-amber-900"
               >
-                Be part of the community <ArrowRight className="ml-2" size={18} />
+                Learn about us <ArrowRight size={18} />
               </a>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <img
-                src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=800"
-                alt="Beautiful natural landscape"
+                src="https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800"
+                alt="Nature and wildlife"
                 className="h-64 w-full rounded-2xl object-cover"
               />
               <img
-                src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800"
-                alt="People enjoying time together"
+                src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800"
+                alt="People working together"
                 className="mt-10 h-64 w-full rounded-2xl object-cover"
               />
             </div>
@@ -791,185 +990,185 @@ const languageCopy: Record<string, {
         </div>
       </section>
 
-      <section id="safety" className="bg-slate-50 px-6 py-24 md:px-12">
-        <div className="mx-auto max-w-7xl">
-          <div className="mx-auto max-w-3xl text-center">
-            <ShieldCheck className="mx-auto text-emerald-800" size={42} />
-            <p className="mt-5 font-bold uppercase tracking-widest text-emerald-700">
-              Safety matters
-            </p>
-            <h2 className="mt-3 text-3xl font-extrabold md:text-5xl">
-              Build connections with care.
-            </h2>
-            <p className="mt-5 leading-relaxed text-slate-600">
-              Good experiences begin with informed decisions. Take time to
-              communicate, understand exchange arrangements and make choices
-              that feel right for you.
-            </p>
+      {/* SAFETY */}
+      <section className="mx-auto max-w-7xl px-5 py-20 md:px-8">
+        <div className="rounded-3xl bg-gray-900 p-8 text-white md:p-12">
+          <div className="grid items-center gap-8 md:grid-cols-[1fr_auto]">
+            <div>
+              <div className="flex items-center gap-3">
+                <ShieldCheck className="text-amber-400" size={32} />
+                <span className="font-semibold uppercase tracking-widest text-amber-300">
+                  Safety matters
+                </span>
+              </div>
+              <h2 className="mt-5 text-3xl font-bold md:text-4xl">
+                Travel with awareness. Connect with confidence.
+              </h2>
+              <p className="mt-5 max-w-2xl leading-relaxed text-gray-300">
+                Take time to communicate with hosts, understand exchange
+                arrangements, research destinations and make informed travel
+                decisions. Always follow local laws and trust your judgement.
+              </p>
+            </div>
+
+            <a
+              href="/safety"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-amber-600 px-7 py-4 font-bold text-white hover:bg-amber-700"
+            >
+              Visit safety centre <ArrowRight size={18} />
+            </a>
           </div>
-
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            <div className="rounded-2xl bg-white p-7">
-              <ShieldCheck className="text-emerald-800" size={30} />
-              <h3 className="mt-4 text-lg font-bold">Know who you connect with</h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                Read profiles carefully, ask questions and confirm important
-                details directly before making arrangements.
-              </p>
-            </div>
-
-            <div className="rounded-2xl bg-white p-7">
-              <MessageCircle className="text-emerald-800" size={30} />
-              <h3 className="mt-4 text-lg font-bold">Communicate clearly</h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                Discuss expectations, duties, accommodation, meals, dates
-                and any costs before agreeing to an exchange.
-              </p>
-            </div>
-
-            <div className="rounded-2xl bg-white p-7">
-              <Heart className="text-emerald-800" size={30} />
-              <h3 className="mt-4 text-lg font-bold">Respect each other</h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                Respect boundaries, local laws, cultural differences and
-                the right of every person to feel safe.
-              </p>
-            </div>
-          </div>
-
-          <p className="mx-auto mt-8 max-w-3xl text-center text-xs leading-relaxed text-slate-500">
-            Travailaway is developing its community and safety features.
-            These general guidelines are not a guarantee of identity,
-            accommodation quality, personal safety or travel arrangements.
-            Always make independent checks before travelling.
-          </p>
         </div>
       </section>
 
-      <section id="faq" className="px-6 py-24 md:px-12">
-        <div className="mx-auto max-w-4xl">
-          <div className="text-center">
-            <p className="font-bold uppercase tracking-widest text-emerald-700">
-              Need to know more?
-            </p>
-            <h2 className="mt-3 text-3xl font-extrabold md:text-5xl">
+      {/* FAQ */}
+      <section className="bg-gray-50 py-20">
+        <div className="mx-auto max-w-4xl px-5 md:px-8">
+          <div className="mb-10 text-center">
+            <span className="font-semibold uppercase tracking-widest text-amber-700">
+              Need to know?
+            </span>
+            <h2 className="mt-3 text-3xl font-bold md:text-4xl">
               Frequently asked questions
             </h2>
           </div>
 
-          <div className="mt-12 space-y-4">
+          <div className="space-y-4">
             {[
               {
-                question: "What is Travailaway?",
-                answer: "Travailaway is a platform designed to connect travellers and hosts for cultural exchange, shared experiences and opportunities to learn from one another.",
+                q: "What is Travailaway?",
+                a: "Travailaway is a platform designed to connect travellers and hosts through cultural exchange, shared experiences and opportunities to learn.",
               },
               {
-                question: "Who can become a host?",
-                answer: "Individuals, families, farms, guesthouses, lodges, organisations and community projects can explore joining as hosts, subject to the platform's registration and policies.",
+                q: "Who can become a host?",
+                a: "Families, farms, hostels, lodges, NGOs, community projects and other suitable hosts can apply to create a profile.",
               },
               {
-                question: "How do I find an opportunity?",
-                answer: "Explore the destinations and experience categories, create an account and look for opportunities that match your interests.",
+                q: "Can I travel to another country?",
+                a: "You can explore opportunities internationally, but you are responsible for checking visa, immigration and entry requirements before travelling.",
               },
               {
-                question: "Are Travel Mates available now?",
-                answer: "The Travel Mates feature is planned for a future release. It is not yet available for creating profiles or sending connection requests.",
+                q: "Do I need experience to join?",
+                a: "Requirements depend on each host and opportunity. Read each listing carefully before making contact.",
               },
               {
-                question: "Does Travailaway guarantee an exchange?",
-                answer: "No. Travellers and hosts must communicate directly and agree on the details. Always check arrangements carefully before making travel plans.",
+                q: "How do I contact a host?",
+                a: "Create an account, explore available opportunities and follow the contact instructions provided on the platform.",
               },
               {
-                question: "Can I use Travailaway in another language?",
-                answer: "The homepage includes a language selector. More translated pages and platform features are planned as the service develops.",
+                q: "Is Travailaway a travel agency?",
+                a: "Travailaway is a connection platform. Travellers and hosts must discuss and agree on their own exchange arrangements.",
               },
-            ].map((item) => (
-              <details key={item.question} className="group rounded-xl border border-slate-200 bg-white p-5">
+            ].map((faq) => (
+              <details
+                key={faq.q}
+                className="group rounded-xl border border-gray-200 bg-white p-5"
+              >
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold">
-                  {item.question}
-                  <ChevronDown className="shrink-0 text-emerald-800 transition group-open:rotate-180" />
+                  {faq.q}
+                  <ChevronDown className="shrink-0 text-amber-700 transition group-open:rotate-180" />
                 </summary>
-                <p className="mt-4 leading-relaxed text-slate-600">
-                  {item.answer}
-                </p>
+                <p className="mt-4 leading-relaxed text-gray-600">{faq.a}</p>
               </details>
             ))}
+          </div>
+
+          <div className="mt-8 text-center">
+            <a
+              href="/faq"
+              className="font-bold text-amber-800 hover:text-amber-900"
+            >
+              Visit our information centre →
+            </a>
           </div>
         </div>
       </section>
 
-      <section className="bg-emerald-900 px-6 py-20 text-center text-white md:px-12">
-        <Globe2 className="mx-auto text-yellow-300" size={42} />
-        <h2 className="mx-auto mt-6 max-w-3xl text-3xl font-extrabold md:text-5xl">
-          Your next meaningful journey starts here.
-        </h2>
-        <p className="mx-auto mt-5 max-w-2xl leading-relaxed text-emerald-100">
-          Meet people, exchange experiences and discover a world of
-          possibilities with Travailaway.
-        </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-4">
-          <a
-            href="/register"
-            className="rounded-full bg-yellow-400 px-8 py-4 font-bold text-slate-900 hover:bg-yellow-300"
-          >
-            Join Travailaway <ArrowRight className="ml-2 inline" size={18} />
-          </a>
-          <a
-            href="/login"
-            className="rounded-full border border-white/70 px-8 py-4 font-bold text-white hover:bg-white/10"
-          >
-            Log in
-          </a>
+      {/* FINAL CTA */}
+      <section className="relative overflow-hidden bg-amber-800 py-20 text-center text-white">
+        <div className="relative z-10 mx-auto max-w-4xl px-5">
+          <Star className="mx-auto text-amber-300" size={38} />
+          <h2 className="mt-6 text-3xl font-bold md:text-5xl">
+            Your next great experience starts here.
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-lg text-white/90">
+            Join a growing world of travellers and hosts discovering the value
+            of meaningful connections.
+          </p>
+
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <a
+              href="/register"
+              className="rounded-full bg-white px-8 py-4 font-bold text-amber-900 hover:bg-amber-50"
+            >
+              Join Travailaway
+            </a>
+            <a
+              href="/explore"
+              className="rounded-full border-2 border-white px-8 py-4 font-bold text-white hover:bg-white hover:text-amber-900"
+            >
+              Explore opportunities
+            </a>
+          </div>
         </div>
       </section>
 
-      <footer className="bg-slate-950 px-6 py-14 text-white md:px-12">
-        <div className="mx-auto grid max-w-7xl gap-12 sm:grid-cols-2 lg:grid-cols-4">
+      {/* FOOTER */}
+      <footer className="bg-gray-950 py-14 text-gray-300">
+        <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:grid-cols-2 lg:grid-cols-4 md:px-8">
           <div>
-            <img src={logo} alt="Travailaway" className="h-12 w-auto" />
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-400">
-              Travel. Connect. Experience. Discover a world of cultural
-              exchange and meaningful connections.
+            <a href="/">
+              <img
+                src={logo}
+                alt="Travailaway"
+                className="mb-5 h-20 w-auto max-w-[240px] object-contain"
+              />
+            </a>
+            <p className="max-w-xs leading-relaxed text-gray-400">
+              Travel. Connect. Experience. Discover the world through
+              meaningful cultural exchange.
             </p>
           </div>
 
           <div>
-            <h3 className="font-bold">Discover</h3>
-            <div className="mt-5 flex flex-col gap-3 text-sm text-slate-400">
-              <a href="#explore" className="hover:text-yellow-300">Explore destinations</a>
-              <a href="#explore" className="hover:text-yellow-300">Exchange categories</a>
-              <a href="#community" className="hover:text-yellow-300">Community</a>
-              <a href="#how-it-works" className="hover:text-yellow-300">How it works</a>
-            </div>
+            <h3 className="mb-5 font-bold text-white">Discover</h3>
+            <ul className="space-y-3">
+              <li><a href="/explore" className="hover:text-amber-400">Explore opportunities</a></li>
+              <li><a href="#destinations" className="hover:text-amber-400">Destinations</a></li>
+              <li><a href="#categories" className="hover:text-amber-400">Exchange categories</a></li>
+              <li><a href="#community" className="hover:text-amber-400">Community</a></li>
+            </ul>
           </div>
 
           <div>
-            <h3 className="font-bold">Join Travailaway</h3>
-            <div className="mt-5 flex flex-col gap-3 text-sm text-slate-400">
-              <a href="/register" className="hover:text-yellow-300">Join as a traveller</a>
-              <a href="/register" className="hover:text-yellow-300">Become a host</a>
-              <a href="/login" className="hover:text-yellow-300">Log in</a>
-              <a href="#faq" className="hover:text-yellow-300">FAQs</a>
-            </div>
+            <h3 className="mb-5 font-bold text-white">Join us</h3>
+            <ul className="space-y-3">
+              <li><a href="/register?role=traveller" className="hover:text-amber-400">Become a traveller</a></li>
+              <li><a href="/register?role=host" className="hover:text-amber-400">Become a host</a></li>
+              <li><a href="/login" className="hover:text-amber-400">Log in</a></li>
+              <li><a href="/register" className="hover:text-amber-400">Create an account</a></li>
+            </ul>
           </div>
 
           <div>
-            <h3 className="font-bold">Information</h3>
-            <div className="mt-5 flex flex-col gap-3 text-sm text-slate-400">
-              <a href="#safety" className="hover:text-yellow-300">Safety guidance</a>
-              <a href="#travellers" className="hover:text-yellow-300">For travellers</a>
-              <a href="#hosts" className="hover:text-yellow-300">For hosts</a>
-              <a href="#community" className="hover:text-yellow-300">Our community</a>
-            </div>
+            <h3 className="mb-5 font-bold text-white">Information</h3>
+            <ul className="space-y-3">
+              <li><a href="/about" className="hover:text-amber-400">About us</a></li>
+              <li><a href="/safety" className="hover:text-amber-400">Safety centre</a></li>
+              <li><a href="/faq" className="hover:text-amber-400">FAQs</a></li>
+              <li><a href="/contact" className="hover:text-amber-400">Contact</a></li>
+              <li><a href="/terms" className="hover:text-amber-400">Terms of service</a></li>
+              <li><a href="/privacy" className="hover:text-amber-400">Privacy policy</a></li>
+            </ul>
           </div>
         </div>
 
-        <div className="mx-auto mt-12 flex max-w-7xl flex-col justify-between gap-4 border-t border-white/10 pt-7 text-xs text-slate-500 md:flex-row">
+        <div className="mx-auto mt-12 max-w-7xl border-t border-gray-800 px-5 pt-7 text-center text-sm text-gray-500 md:px-8">
           <p>
             © {new Date().getFullYear()} Travailaway. All rights reserved.
           </p>
-          <p>
-            An initiative by Molongi Investments Company SMC Limited.
+          <p className="mt-2">
+            A project by Molongi Investments Company SMC Limited.
           </p>
         </div>
       </footer>
