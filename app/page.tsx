@@ -27,21 +27,43 @@ const slides = [
 
 const destinations = [
   {
-    name: "Europe",
-    detail: "Discover culture and new experiences",
-    image: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=900",
-  },
-  {
     name: "Africa",
     detail: "Connect with communities and nature",
     image: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=900",
+  },
+  {
+    name: "Europe",
+    detail: "Discover culture and new experiences",
+    image: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=900",
   },
   {
     name: "Asia",
     detail: "Experience traditions and hospitality",
     image: "https://images.unsplash.com/photo-1528181304800-259b08848526?w=900",
   },
+  {
+    name: "North America",
+    detail: "Explore iconic cities and landscapes",
+    image: "https://images.unsplash.com/photo-1556146385-97d8a0b5e66b?w=900",
+  },
+  {
+    name: "South America",
+    detail: "Discover ancient wonders and adventure",
+    image: "https://images.unsplash.com/photo-1578746401323-f997c71f4096?w=900",
+  },
+  {
+    name: "Central America",
+    detail: "Explore colourful towns and cultures",
+    image: "https://images.unsplash.com/photo-1628128594359-25d5e30661dd?w=900",
+  },
+  {
+    name: "Oceania",
+    detail: "Experience islands and coastal beauty",
+    image: "https://images.unsplash.com/photo-1596428025491-662bbaf50351?w=900",
+  },
 ];
+
+
 
 export default function HomePage() {
   const [activeSlide, setActiveSlide] = useState(0);
