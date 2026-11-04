@@ -274,9 +274,7 @@ export default function HomePage() {
 
           <div className="overflow-hidden rounded-3xl">
             <img
-              src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1200"
-              alt="People sharing an experience together"
-              className="h-[400px] w-full object-cover"
+              src="https://images.unsplash.com/photo-1761839256545-4268b03606c0?auto=format&fit=crop&fm=jpg&q=85&w=1200"
             />
           </div>
         </div>
