@@ -58,13 +58,26 @@ export default function NewOpportunityPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const regions = continent ? Object.keys(locations[continent]) : [];
+  const selectedRegions = continent
+    ? locations[continent]
+    : undefined;
+
+  const regions = selectedRegions
+    ? Object.keys(selectedRegions)
+    : [];
+
   const countries =
-    continent && region ? locations[continent][region] || [] : [];
+    selectedRegions && region
+      ? selectedRegions[region] || []
+      : [];
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError("");
+
+    // Read the form before the asynchronous operations.
+    const form = new FormData(event.currentTarget);
+
     setLoading(true);
 
     try {
@@ -88,8 +101,6 @@ export default function NewOpportunityPage() {
         return;
       }
 
-      const form = new FormData(event.currentTarget);
-
       const minStay = Number(form.get("min_stay"));
       const maxStay = Number(form.get("max_stay"));
 
@@ -102,27 +113,27 @@ export default function NewOpportunityPage() {
         .from("listings")
         .insert({
           host_id: user.id,
-          title: String(form.get("title")).trim(),
-          description: String(form.get("description")).trim(),
-          category: String(form.get("category")),
+          title: String(form.get("title") ?? "").trim(),
+          description: String(form.get("description") ?? "").trim(),
+          category: String(form.get("category") ?? ""),
           continent,
           region,
           country,
-          city: String(form.get("city") || "").trim(),
-          accommodation: String(form.get("accommodation") || ""),
-          meals: String(form.get("meals") || ""),
+          city: String(form.get("city") ?? "").trim(),
+          accommodation: String(form.get("accommodation") ?? ""),
+          meals: String(form.get("meals") ?? ""),
           hours_per_week: Number(form.get("hours")) || null,
           min_stay_weeks: minStay || null,
           max_stay_weeks: maxStay || null,
-          skills: String(form.get("skills") || "")
+          skills: String(form.get("skills") ?? "")
             .split(",")
             .map((item) => item.trim())
             .filter(Boolean),
-          benefits: String(form.get("benefits") || "")
+          benefits: String(form.get("benefits") ?? "")
             .split(",")
             .map((item) => item.trim())
             .filter(Boolean),
-          images: String(form.get("images") || "")
+          images: String(form.get("images") ?? "")
             .split("\n")
             .map((item) => item.trim())
             .filter(Boolean),
@@ -136,7 +147,8 @@ export default function NewOpportunityPage() {
 
       router.push("/dashboard");
       router.refresh();
-    } catch {
+    } catch (err) {
+      console.error("Opportunity publishing error:", err);
       setError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
