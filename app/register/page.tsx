@@ -3,12 +3,9 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 export default function RegisterPage() {
-  const searchParams = useSearchParams();
-
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,12 +15,13 @@ export default function RegisterPage() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const type = searchParams.get("type");
+    const params = new URLSearchParams(window.location.search);
+    const type = params.get("type");
 
     if (type === "host" || type === "traveller") {
       setAccountType(type);
     }
-  }, [searchParams]);
+  }, []);
 
   async function handleRegister(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -90,7 +88,10 @@ export default function RegisterPage() {
 
           <form onSubmit={handleRegister} className="mt-7 space-y-5">
             <div>
-              <label htmlFor="fullName" className="mb-2 block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="fullName"
+                className="mb-2 block text-sm font-medium text-gray-700"
+              >
                 Full name
               </label>
               <input
@@ -106,7 +107,10 @@ export default function RegisterPage() {
             </div>
 
             <div>
-              <label htmlFor="email" className="mb-2 block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="email"
+                className="mb-2 block text-sm font-medium text-gray-700"
+              >
                 Email address
               </label>
               <input
@@ -122,7 +126,10 @@ export default function RegisterPage() {
             </div>
 
             <div>
-              <label htmlFor="password" className="mb-2 block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="password"
+                className="mb-2 block text-sm font-medium text-gray-700"
+              >
                 Password
               </label>
               <input
@@ -155,7 +162,9 @@ export default function RegisterPage() {
                   }`}
                 >
                   <span className="block font-semibold">Traveller</span>
-                  <span className="mt-1 block text-xs">Explore opportunities</span>
+                  <span className="mt-1 block text-xs">
+                    Explore opportunities
+                  </span>
                 </button>
 
                 <button
@@ -169,19 +178,27 @@ export default function RegisterPage() {
                   }`}
                 >
                   <span className="block font-semibold">Host</span>
-                  <span className="mt-1 block text-xs">Welcome travellers</span>
+                  <span className="mt-1 block text-xs">
+                    Welcome travellers
+                  </span>
                 </button>
               </div>
             </div>
 
             {error && (
-              <p role="alert" className="rounded-lg bg-red-50 p-3 text-sm text-red-700">
+              <p
+                role="alert"
+                className="rounded-lg bg-red-50 p-3 text-sm text-red-700"
+              >
                 {error}
               </p>
             )}
 
             {message && (
-              <p role="status" className="rounded-lg bg-green-50 p-3 text-sm text-green-800">
+              <p
+                role="status"
+                className="rounded-lg bg-green-50 p-3 text-sm text-green-800"
+              >
                 {message}
               </p>
             )}
@@ -201,7 +218,10 @@ export default function RegisterPage() {
 
           <p className="mt-4 text-center text-sm text-gray-600">
             Already have an account?{" "}
-            <Link href="/login" className="font-semibold text-[#176b50] hover:underline">
+            <Link
+              href="/login"
+              className="font-semibold text-[#176b50] hover:underline"
+            >
               Log in
             </Link>
           </p>
