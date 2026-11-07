@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
@@ -98,6 +97,7 @@ export default function NewOpportunityPage() {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const form = event.currentTarget;
     setError("");
 
     if (!continent || !region || !country) {
@@ -138,7 +138,6 @@ export default function NewOpportunityPage() {
         throw new Error("Only host accounts can publish opportunities.");
       }
 
-      const form = event.currentTarget;
       const formData = new FormData(form);
 
       const title = String(formData.get("title") ?? "").trim();
