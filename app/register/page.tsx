@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
@@ -13,6 +12,7 @@ export default function RegisterPage() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [registeredType, setRegisteredType] = useState<"traveller" | "host" | null>(null);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -27,6 +27,7 @@ export default function RegisterPage() {
     event.preventDefault();
     setMessage("");
     setError("");
+    setRegisteredType(null);
 
     if (password.length < 8) {
       setError("Your password must be at least 8 characters long.");
@@ -55,6 +56,7 @@ export default function RegisterPage() {
         setMessage(
           "Registration submitted! Check your email for a confirmation link if email confirmation is enabled."
         );
+        setRegisteredType(accountType);
         setFullName("");
         setEmail("");
         setPassword("");
@@ -78,12 +80,13 @@ export default function RegisterPage() {
 
         <div className="mt-8 rounded-2xl border border-gray-100 bg-white p-6 shadow-sm sm:p-8">
           <h1 className="text-3xl font-bold text-[#17231f]">
-            Join Travailaway
+            {accountType === "host" ? "Join as a host" : "Join as a traveller"}
           </h1>
 
           <p className="mt-2 text-sm text-gray-600">
-            Create an account and start discovering meaningful connections
-            around the world.
+            {accountType === "host"
+              ? "Create your host account to share your place or project and welcome travellers from around the world."
+              : "Create your traveller account to discover opportunities and connect with hosts around the world."}
           </p>
 
           <form onSubmit={handleRegister} className="mt-7 space-y-5">
@@ -201,6 +204,34 @@ export default function RegisterPage() {
               >
                 {message}
               </p>
+            )}
+
+            {registeredType && (
+              <div className="rounded-lg border border-[#176b50]/20 bg-[#eaf4ef] p-4 text-sm text-[#104c3a]">
+                <p className="font-semibold">What happens next</p>
+                <ol className="mt-2 list-decimal space-y-1 pl-5">
+                  <li>Confirm your email if you receive a confirmation link.</li>
+                  <li>Log in to your account.</li>
+                  {registeredType === "host" ? (
+                    <li>Open your dashboard and create your first opportunity.</li>
+                  ) : (
+                    <>
+                      <li>Complete your profile from your dashboard.</li>
+                      <li>Explore opportunities and find a host.</li>
+                    </>
+                  )}
+                </ol>
+                <div className="mt-3 flex flex-wrap gap-4 font-semibold">
+                  <Link href="/login" className="underline">
+                    Log in
+                  </Link>
+                  {registeredType === "traveller" && (
+                    <Link href="/explore" className="underline">
+                      Explore opportunities
+                    </Link>
+                  )}
+                </div>
+              </div>
             )}
 
             <button
