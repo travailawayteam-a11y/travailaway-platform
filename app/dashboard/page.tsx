@@ -1,8 +1,29 @@
-
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import LogoutButton from "./logout-button";
+
+type MyListing = {
+  id: string;
+  title: string;
+  status: string;
+  country: string;
+  city: string | null;
+  created_at: string;
+};
+
+function statusLabel(status: string) {
+  if (status === "published") return "Live";
+  if (status === "draft") return "Draft";
+  if (status === "paused") return "Paused";
+  return status;
+}
+
+function statusClass(status: string) {
+  if (status === "published") return "bg-[#e8f3ed] text-[#176b50]";
+  if (status === "paused") return "bg-amber-50 text-amber-700";
+  return "bg-gray-100 text-gray-600";
+}
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -25,6 +46,23 @@ export default async function DashboardPage() {
     user.user_metadata?.account_type || "traveller";
 
   const isHost = accountType === "host";
+
+  let myListings: MyListing[] = [];
+  let listingsError = "";
+
+  if (isHost) {
+    const { data: listingsData, error: listingsQueryError } = await supabase
+      .from("listings")
+      .select("id, title, status, country, city, created_at")
+      .eq("host_id", user.id)
+      .order("created_at", { ascending: false });
+
+    if (listingsQueryError) {
+      listingsError = "We could not load your opportunities right now. Please refresh the page.";
+    } else {
+      myListings = (listingsData ?? []) as MyListing[];
+    }
+  }
 
   return (
     <main className="min-h-screen bg-[#f7faf8]">
@@ -67,10 +105,12 @@ export default async function DashboardPage() {
               <DashboardCard
                 title="Create an opportunity"
                 description="Share your project and welcome travellers."
+                href="/opportunities/new"
               />
               <DashboardCard
                 title="My opportunities"
                 description="Manage the opportunities you offer."
+                href="#my-opportunities"
               />
               <DashboardCard
                 title="Traveller applications"
@@ -82,6 +122,7 @@ export default async function DashboardPage() {
               <DashboardCard
                 title="Explore opportunities"
                 description="Discover hosts and experiences around the world."
+                href="/explore"
               />
               <DashboardCard
                 title="Saved opportunities"
@@ -93,7 +134,75 @@ export default async function DashboardPage() {
               />
             </>
           )}
+          <DashboardCard
+            title="Your profile"
+            description="Tell the community a little about yourself."
+            href="/dashboard/profile"
+          />
         </div>
+
+        {isHost && (
+          <div
+            id="my-opportunities"
+            className="mt-10 scroll-mt-6 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm"
+          >
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h2 className="text-xl font-bold text-[#17231f]">
+                Your opportunities
+              </h2>
+              <Link
+                href="/opportunities/new"
+                className="rounded-lg bg-[#176b50] px-4 py-2 text-sm font-semibold text-white hover:bg-[#104c3a]"
+              >
+                + Create an opportunity
+              </Link>
+            </div>
+
+            {listingsError ? (
+              <p className="mt-5 rounded-lg bg-red-50 p-3 text-sm text-red-700">
+                {listingsError}
+              </p>
+            ) : myListings.length === 0 ? (
+              <p className="mt-5 text-sm leading-6 text-gray-600">
+                You have not created any opportunities yet. Tap the button above
+                to share your first one with travellers.
+              </p>
+            ) : (
+              <ul className="mt-5 divide-y divide-gray-100">
+                {myListings.map((listing) => (
+                  <li
+                    key={listing.id}
+                    className="flex flex-wrap items-center justify-between gap-3 py-4"
+                  >
+                    <div>
+                      <p className="font-semibold text-[#17231f]">
+                        {listing.title}
+                      </p>
+                      <p className="mt-1 text-sm text-gray-600">
+                        {[listing.city, listing.country]
+                          .filter(Boolean)
+                          .join(", ")}
+                        {" · "}
+                        Created{" "}
+                        {new Date(listing.created_at).toLocaleDateString(
+                          "en-GB",
+                          { day: "numeric", month: "short", year: "numeric" }
+                        )}
+                      </p>
+                    </div>
+                    <span
+                      className={`rounded-full px-3 py-1 text-xs font-semibold ${statusClass(
+                        listing.status
+                      )}`}
+                    >
+                      {statusLabel(listing.status)}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
 
         <div className="mt-10 rounded-2xl bg-[#176b50] p-8 text-white">
           <h2 className="text-2xl font-bold">
@@ -118,19 +227,38 @@ export default async function DashboardPage() {
 function DashboardCard({
   title,
   description,
+  href,
 }: {
   title: string;
   description: string;
+  href?: string;
 }) {
-  return (
-    <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+  const content = (
+    <>
       <h2 className="text-lg font-bold text-[#17231f]">{title}</h2>
       <p className="mt-2 text-sm leading-6 text-gray-600">
         {description}
       </p>
       <p className="mt-5 text-sm font-medium text-[#176b50]">
-        Coming soon
+        {href ? "Open →" : "Coming soon"}
       </p>
+    </>
+  );
+
+  if (href) {
+    return (
+      <Link
+        href={href}
+        className="block rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:border-[#176b50] hover:shadow-md"
+      >
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+      {content}
     </div>
   );
 }
