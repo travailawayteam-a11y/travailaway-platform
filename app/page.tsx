@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -152,9 +151,10 @@ export default function HomePage() {
             <h1 className="text-4xl font-extrabold leading-tight md:text-6xl lg:text-7xl">{slides[slide].title}</h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-white/90 md:text-xl">{slides[slide].subtitle}</p>
             <div className="mt-9 flex flex-wrap gap-4">
-              <a href="/explore" className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-7 py-4 font-bold text-white hover:bg-emerald-700">Explore opportunities <ArrowRight size={19} /></a>
-              <a href="/register" className="rounded-full border border-white px-7 py-4 font-bold text-white hover:bg-white hover:text-slate-900">Become a host</a>
+              <a href="/register?type=traveller" className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-7 py-4 font-bold text-white hover:bg-emerald-700">Join as a traveller <ArrowRight size={19} /></a>
+              <a href="/register?type=host" className="rounded-full border border-white px-7 py-4 font-bold text-white hover:bg-white hover:text-slate-900">Join as a host</a>
             </div>
+            <a href="/explore" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white/90 underline underline-offset-4 hover:text-white">Or browse opportunities first <ArrowRight size={16} /></a>
           </div>
           <div className="mt-14 flex gap-2">
             {slides.map((item, index) => (
@@ -308,7 +308,7 @@ export default function HomePage() {
               <li key={item} className="flex items-center gap-3"><CheckCircle2 className="shrink-0 text-emerald-700" size={20} /><span className="text-gray-700">{item}</span></li>
             ))}
           </ul>
-          <a href="/register" className="mt-9 inline-flex items-center gap-2 rounded-full bg-emerald-700 px-7 py-4 font-bold text-white hover:bg-emerald-800">Start exploring <ArrowRight size={18} /></a>
+          <a href="/register?type=traveller" className="mt-9 inline-flex items-center gap-2 rounded-full bg-emerald-700 px-7 py-4 font-bold text-white hover:bg-emerald-800">Start exploring <ArrowRight size={18} /></a>
         </div>
       </section>
 
@@ -324,7 +324,7 @@ export default function HomePage() {
                 <li key={item} className="flex items-center gap-3"><CheckCircle2 className="shrink-0 text-amber-700" size={20} /><span className="text-gray-700">{item}</span></li>
               ))}
             </ul>
-            <a href="/register" className="mt-9 inline-flex items-center gap-2 rounded-full bg-amber-600 px-7 py-4 font-bold text-white hover:bg-amber-700">Become a host <ArrowRight size={18} /></a>
+            <a href="/register?type=host" className="mt-9 inline-flex items-center gap-2 rounded-full bg-amber-600 px-7 py-4 font-bold text-white hover:bg-amber-700">Become a host <ArrowRight size={18} /></a>
           </div>
           <div className="order-1 overflow-hidden rounded-3xl md:order-2">
             <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1200&q=85" alt="People sharing an experience together" className="h-[420px] w-full object-cover" />
@@ -401,13 +401,13 @@ export default function HomePage() {
               <a className="block hover:text-emerald-300" href="/explore">Find opportunities</a>
               <a className="block hover:text-emerald-300" href="/explore">Destinations</a>
               <a className="block hover:text-emerald-300" href="/how-it-works">How it works</a>
-              <a className="block hover:text-emerald-300" href="/register">Join as a traveller</a>
+              <a className="block hover:text-emerald-300" href="/register?type=traveller">Join as a traveller</a>
             </div>
           </div>
           <div>
             <h3 className="mb-5 font-bold text-white">For hosts</h3>
             <div className="space-y-3 text-sm">
-              <a className="block hover:text-emerald-300" href="/register">Become a host</a>
+              <a className="block hover:text-emerald-300" href="/register?type=host">Become a host</a>
               <a className="block hover:text-emerald-300" href="/login">Host login</a>
               <a className="block hover:text-emerald-300" href="/safety">Safety guide</a>
               <a className="block hover:text-emerald-300" href="/contact">Contact us</a>
