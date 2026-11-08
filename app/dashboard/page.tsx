@@ -14,14 +14,14 @@ type MyListing = {
 
 function statusLabel(status: string) {
   if (status === "published") return "Live";
-  if (status === "draft") return "Draft";
+  if (status === "draft") return "Awaiting review";
   if (status === "paused") return "Paused";
   return status;
 }
 
 function statusClass(status: string) {
   if (status === "published") return "bg-[#e8f3ed] text-[#176b50]";
-  if (status === "paused") return "bg-amber-50 text-amber-700";
+  if (status === "paused" || status === "draft") return "bg-amber-50 text-amber-700";
   return "bg-gray-100 text-gray-600";
 }
 
