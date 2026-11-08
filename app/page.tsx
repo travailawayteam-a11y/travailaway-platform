@@ -345,6 +345,16 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* AMBASSADOR */}
+      <section className="mx-auto max-w-7xl px-5 pb-24 md:px-8">
+        <a href="/ambassador" className="group block rounded-3xl bg-emerald-50 px-7 py-14 text-center transition hover:bg-emerald-100 md:px-16">
+          <span className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-700">Be the face of the community</span>
+          <h2 className="mt-4 text-4xl font-extrabold text-slate-900 md:text-6xl">Become a Travailaway Ambassador</h2>
+          <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-gray-600">Share your story, inspire other travellers and help grow a community built on cultural exchange.</p>
+          <span className="mt-8 inline-flex items-center gap-2 font-bold text-emerald-800">Learn more <ArrowRight size={18} className="transition group-hover:translate-x-1" /></span>
+        </a>
+      </section>
+
       {/* SAFETY */}
       <section className="bg-gray-50 py-20">
         <div className="mx-auto flex max-w-5xl flex-col items-center gap-7 px-5 text-center">
