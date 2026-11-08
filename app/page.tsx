@@ -5,7 +5,8 @@ import {
   ArrowRight, Globe2, Heart, MapPin, Menu, Search, ShieldCheck,
   Users, X, Home, PawPrint, GraduationCap, Palette, Sailboat,
   Leaf, HandHeart, Languages, Compass, Utensils, Camera,
-  Mountain, Music, BookOpen, MessageCircle, Plane, CheckCircle2
+  Mountain, Music, BookOpen, MessageCircle, Plane, CheckCircle2,
+  Facebook, Linkedin, Twitter, Send, Mail, Link2
 } from "lucide-react";
 
 const logo = "https://sbgfaplqdxejirqfqfpn.supabase.co/storage/v1/object/public/brand-assets/1000296575-removebg-preview.png";
@@ -79,6 +80,33 @@ export default function HomePage() {
   const [destination, setDestination] = useState("");
   const [category, setCategory] = useState("");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [shareUrl, setShareUrl] = useState("https://travailaway-platform.hostless.app");
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    setShareUrl(window.location.origin);
+  }, []);
+
+  const shareText = "Travailaway: travel, connect and experience. Join a community built on cultural exchange.";
+
+  const shareLinks = [
+    { name: "WhatsApp", icon: MessageCircle, color: "bg-green-600 hover:bg-green-700", href: `https://wa.me/?text=${encodeURIComponent(`${shareText} ${shareUrl}`)}` },
+    { name: "Facebook", icon: Facebook, color: "bg-blue-600 hover:bg-blue-700", href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}` },
+    { name: "X", icon: Twitter, color: "bg-slate-900 hover:bg-black", href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}` },
+    { name: "LinkedIn", icon: Linkedin, color: "bg-sky-700 hover:bg-sky-800", href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}` },
+    { name: "Telegram", icon: Send, color: "bg-sky-500 hover:bg-sky-600", href: `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}` },
+    { name: "Email", icon: Mail, color: "bg-gray-600 hover:bg-gray-700", href: `mailto:?subject=${encodeURIComponent("Have a look at Travailaway")}&body=${encodeURIComponent(`${shareText} ${shareUrl}`)}` }
+  ];
+
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      window.prompt("Copy this link:", shareUrl);
+    }
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -347,11 +375,16 @@ export default function HomePage() {
 
       {/* AMBASSADOR */}
       <section className="mx-auto max-w-7xl px-5 pb-24 md:px-8">
-        <a href="/ambassador" className="group block rounded-3xl bg-emerald-50 px-7 py-14 text-center transition hover:bg-emerald-100 md:px-16">
-          <span className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-700">Be the face of the community</span>
-          <h2 className="mt-4 text-4xl font-extrabold text-slate-900 md:text-6xl">Become a Travailaway Ambassador</h2>
-          <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-gray-600">Share your story, inspire other travellers and help grow a community built on cultural exchange.</p>
-          <span className="mt-8 inline-flex items-center gap-2 font-bold text-emerald-800">Learn more <ArrowRight size={18} className="transition group-hover:translate-x-1" /></span>
+        <a href="/ambassador" className="group grid overflow-hidden rounded-3xl bg-emerald-50 transition hover:bg-emerald-100 md:grid-cols-2">
+          <div className="relative h-72 md:h-auto">
+            <img src="https://images.unsplash.com/photo-1758599668294-8d13c0942601?auto=format&fit=crop&w=1200&q=70" alt="Smiling volunteers sharing a moment together" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+          </div>
+          <div className="flex flex-col justify-center px-7 py-12 text-center md:px-12 md:text-left">
+            <span className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-700">Be the face of the community</span>
+            <h2 className="mt-4 text-3xl font-extrabold text-slate-900 md:text-5xl">Become a Travailaway Ambassador</h2>
+            <p className="mt-5 text-lg leading-8 text-gray-600">Share your story, inspire other travellers and help grow a community built on cultural exchange.</p>
+            <span className="mt-8 inline-flex items-center justify-center gap-2 font-bold text-emerald-800 md:justify-start">Learn more <ArrowRight size={18} className="transition group-hover:translate-x-1" /></span>
+          </div>
         </a>
       </section>
 
@@ -365,6 +398,26 @@ export default function HomePage() {
             <p className="mx-auto mt-5 max-w-2xl leading-8 text-gray-600">Good experiences begin with clear communication and informed decisions. Learn how to evaluate opportunities, communicate with hosts and prepare for your journey.</p>
           </div>
           <a href="/safety" className="inline-flex items-center gap-2 rounded-full border-2 border-emerald-700 px-7 py-3 font-bold text-emerald-800 hover:bg-emerald-700 hover:text-white">Visit our safety guide <ArrowRight size={18} /></a>
+        </div>
+      </section>
+
+      {/* SHARE */}
+      <section className="mx-auto max-w-4xl px-5 pt-24 text-center">
+        <span className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-700">Spread the word</span>
+        <h2 className="mt-3 text-3xl font-extrabold text-slate-900 md:text-5xl">Share the Travailaway idea</h2>
+        <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-gray-600">Know someone who would love to travel differently? Share Travailaway with your friends and followers on your favourite social networks.</p>
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          {shareLinks.map(item => {
+            const Icon = item.icon;
+            return (
+              <a key={item.name} href={item.href} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-bold text-white ${item.color}`}>
+                <Icon size={18} /> {item.name}
+              </a>
+            );
+          })}
+          <button onClick={copyLink} className="inline-flex items-center gap-2 rounded-full border-2 border-emerald-700 px-5 py-3 text-sm font-bold text-emerald-800 hover:bg-emerald-50">
+            <Link2 size={18} /> {copied ? "Link copied!" : "Copy link"}
+          </button>
         </div>
       </section>
 
