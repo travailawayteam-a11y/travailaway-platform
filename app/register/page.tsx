@@ -2,7 +2,11 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
+import { Menu, X } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+
+const logo =
+  "https://sbgfaplqdxejirqfqfpn.supabase.co/storage/v1/object/public/brand-assets/1000296575-removebg-preview.png";
 
 export default function RegisterPage() {
   const [fullName, setFullName] = useState("");
@@ -13,6 +17,7 @@ export default function RegisterPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [registeredType, setRegisteredType] = useState<"traveller" | "host" | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -69,16 +74,54 @@ export default function RegisterPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#f7faf8] px-4 py-10">
-      <div className="mx-auto max-w-md">
-        <Link
-          href="/"
-          className="text-2xl font-bold tracking-tight text-[#176b50]"
-        >
-          travailaway
-        </Link>
+    <main className="min-h-screen bg-[#f7faf8]">
+      <header className="sticky top-0 z-50 border-b bg-white/95 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-8">
+          <Link href="/" className="shrink-0">
+            <img
+              src={logo}
+              alt="Travailaway"
+              className="h-16 w-auto object-contain md:h-20"
+            />
+          </Link>
 
-        <div className="mt-8 rounded-2xl border border-gray-100 bg-white p-6 shadow-sm sm:p-8">
+          <nav className="hidden items-center gap-7 text-sm font-semibold lg:flex">
+            <Link href="/" className="hover:text-emerald-700">Home</Link>
+            <Link href="/explore" className="hover:text-emerald-700">Explore</Link>
+          </nav>
+
+          <div className="hidden items-center gap-3 lg:flex">
+            <Link href="/login" className="px-4 py-2 text-sm font-semibold">
+              Log in
+            </Link>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="rounded-lg p-2 lg:hidden"
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? <X size={27} /> : <Menu size={27} />}
+          </button>
+        </div>
+
+        {menuOpen && (
+          <div className="border-t bg-white px-6 py-5 lg:hidden">
+            <nav className="flex flex-col gap-5 font-semibold">
+              <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
+              <Link href="/explore" onClick={() => setMenuOpen(false)}>
+                Explore opportunities
+              </Link>
+              <Link href="/login" onClick={() => setMenuOpen(false)}>Log in</Link>
+            </nav>
+          </div>
+        )}
+      </header>
+
+      <div className="px-4 py-10">
+      <div className="mx-auto max-w-md">
+        <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm sm:p-8">
           <h1 className="text-3xl font-bold text-[#17231f]">
             {accountType === "host" ? "Join as a host" : "Join as a traveller"}
           </h1>
@@ -261,6 +304,7 @@ export default function RegisterPage() {
         <p className="mt-6 text-center text-xs text-gray-500">
           Travel. Connect. Experience.
         </p>
+      </div>
       </div>
     </main>
   );
