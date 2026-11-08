@@ -229,7 +229,8 @@ export default function NewOpportunityPage() {
         skills,
         benefits,
         images: orderedImages,
-        status: "published",
+        // New opportunities wait for review by our team before they are listed.
+        status: "draft",
       });
 
       if (insertError) {
@@ -445,12 +446,18 @@ export default function NewOpportunityPage() {
             </div>
           )}
 
+          <p className="rounded-xl bg-emerald-50 p-4 text-sm text-emerald-900">
+            Our team reviews every new opportunity before it is listed. You will
+            see it on your dashboard as &ldquo;Awaiting review&rdquo; until it
+            is approved.
+          </p>
+
           <button
             type="submit"
             disabled={loading}
             className="w-full rounded-xl bg-emerald-700 px-6 py-4 font-bold text-white transition hover:bg-emerald-800 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {loading ? "Publishing opportunity..." : "Publish opportunity"}
+            {loading ? "Submitting for review..." : "Submit for review"}
           </button>
         </form>
       </div>
