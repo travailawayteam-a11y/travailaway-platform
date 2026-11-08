@@ -10,41 +10,49 @@ const logo =
 export const MENU_ITEMS = [
   {
     label: "Discover hosts",
+    short: "Discover hosts",
     description: "Browse welcoming hosts and projects around the world.",
     href: "/explore",
   },
   {
     label: "Meet a travel companion",
+    short: "Travel companions",
     description: "Planning a trip? Find someone to share the road with.",
     href: "/travel-buddies",
   },
   {
     label: "How Travailaway works",
+    short: "How it works",
     description: "A simple guide for travellers and hosts.",
     href: "/how-it-works",
   },
   {
     label: "Gatherings & events",
+    short: "Events",
     description: "Meet fellow travellers and hosts in person.",
     href: "/meetups",
   },
   {
     label: "Learn on the road",
+    short: "Learn on the road",
     description: "Pick up new skills, languages and traditions as you travel.",
     href: "/travel-and-learn",
   },
   {
     label: "Our community",
+    short: "Community",
     description: "The people who make Travailaway what it is.",
     href: "/community",
   },
   {
     label: "Making a difference",
+    short: "Our impact",
     description: "How cultural exchange can leave a place better than you found it.",
     href: "/giving-back",
   },
   {
     label: "Safety & trust",
+    short: "Safety",
     description: "How we help everyone feel secure and respected.",
     href: "/safety",
   },
@@ -64,6 +72,18 @@ export default function SiteHeader() {
           />
         </Link>
 
+        <nav className="hidden items-center gap-5 text-[13px] font-semibold xl:flex">
+          {MENU_ITEMS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="whitespace-nowrap hover:text-emerald-700"
+            >
+              {item.short}
+            </Link>
+          ))}
+        </nav>
+
         <div className="flex items-center gap-2 md:gap-3">
           <Link
             href="/login"
@@ -82,7 +102,7 @@ export default function SiteHeader() {
             onClick={() => setOpen(!open)}
             aria-expanded={open}
             aria-label="Toggle menu"
-            className="rounded-lg p-2"
+            className="rounded-lg p-2 xl:hidden"
           >
             {open ? <X size={27} /> : <Menu size={27} />}
           </button>
@@ -90,7 +110,7 @@ export default function SiteHeader() {
       </div>
 
       {open && (
-        <div className="max-h-[80vh] overflow-y-auto border-t bg-white px-4 py-5 md:px-8">
+        <div className="max-h-[80vh] overflow-y-auto border-t bg-white px-4 py-5 md:px-8 xl:hidden">
           <nav className="mx-auto grid max-w-7xl gap-1 sm:grid-cols-2 lg:grid-cols-4">
             {MENU_ITEMS.map((item) => (
               <Link
