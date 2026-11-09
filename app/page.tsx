@@ -373,6 +373,21 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* TRAVEL COMPANION */}
+      <section className="mx-auto max-w-7xl px-5 pb-24 md:px-8">
+        <a href="/travel-buddies" className="group grid overflow-hidden rounded-3xl bg-amber-50 transition hover:bg-amber-100 md:grid-cols-2">
+          <div className="relative h-72 md:order-2 md:h-auto">
+            <img src="https://images.unsplash.com/photo-1758599668974-6da5d7cc6cc4?auto=format&fit=crop&w=1200&q=70" alt="Two smiling friends with backpacks setting out together" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+          </div>
+          <div className="flex flex-col justify-center px-7 py-12 text-center md:order-1 md:px-12 md:text-left">
+            <span className="text-sm font-bold uppercase tracking-[0.2em] text-amber-700">Travel better together</span>
+            <h2 className="mt-4 text-3xl font-extrabold text-slate-900 md:text-5xl">Find a travel companion</h2>
+            <p className="mt-5 text-lg leading-8 text-gray-600">Heading somewhere soon? Share your plans and meet other travellers who would love to walk the road with you.</p>
+            <span className="mt-8 inline-flex items-center justify-center gap-2 font-bold text-amber-800 md:justify-start">Post a listing to connect with your travel companion <ArrowRight size={18} className="shrink-0 transition group-hover:translate-x-1" /></span>
+          </div>
+        </a>
+      </section>
+
       {/* AMBASSADOR */}
       <section className="mx-auto max-w-7xl px-5 pb-24 md:px-8">
         <a href="/ambassador" className="group grid overflow-hidden rounded-3xl bg-emerald-50 transition hover:bg-emerald-100 md:grid-cols-2">
