@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
-import VolunteerApplicationForm, {
-  CONTRIBUTION_AREAS,
-} from "@/components/volunteer-application-form";
+import VolunteerApplicationForm from "@/components/volunteer-application-form";
 
 export const metadata: Metadata = {
   title: "Work with us | Travailaway",
@@ -11,15 +9,36 @@ export const metadata: Metadata = {
     "Volunteer your skills and help us build Travailaway. Different skills, different countries, one shared vision.",
 };
 
-const areaDescriptions: Record<string, string> = {
-  technology: "Help us shape and improve the platform people use every day.",
-  design: "Bring our brand, our pages and our stories to life visually.",
-  marketing: "Help us reach travellers and hosts across the world.",
-  travel_hospitality: "Share what you know about hosting, travel and welcoming guests.",
-  business_partnerships: "Open doors to organisations that share our values.",
-  community_impact: "Help us build a community that gives something back.",
-  writing: "Tell the stories that make cultural exchange come alive.",
-};
+const AREAS = [
+  {
+    label: "Technology and website development",
+    text: "Help us shape and improve the platform people use every day.",
+  },
+  {
+    label: "Graphic design and creativity",
+    text: "Bring our brand, our pages and our stories to life visually.",
+  },
+  {
+    label: "Marketing and communications",
+    text: "Help us reach travellers and hosts across the world.",
+  },
+  {
+    label: "Travel and hospitality",
+    text: "Share what you know about hosting, travel and welcoming guests.",
+  },
+  {
+    label: "Business development and partnerships",
+    text: "Open doors to organisations that share our values.",
+  },
+  {
+    label: "Community development and social impact",
+    text: "Help us build a community that gives something back.",
+  },
+  {
+    label: "Writing, blogging and storytelling",
+    text: "Tell the stories that make cultural exchange come alive.",
+  },
+];
 
 export default function WorkWithUsPage() {
   return (
@@ -76,14 +95,14 @@ export default function WorkWithUsPage() {
             tell us in your application.
           </p>
           <ul className="mt-6 grid gap-4 sm:grid-cols-2">
-            {CONTRIBUTION_AREAS.map((area) => (
+            {AREAS.map((area) => (
               <li
-                key={area.value}
+                key={area.label}
                 className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm"
               >
                 <h3 className="font-semibold text-[#17231f]">{area.label}</h3>
                 <p className="mt-1 text-sm leading-6 text-gray-600">
-                  {areaDescriptions[area.value]}
+                  {area.text}
                 </p>
               </li>
             ))}
