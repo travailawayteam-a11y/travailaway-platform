@@ -154,7 +154,7 @@ export default function HomePage() {
             <a href="/" className="text-emerald-700">Home</a>
             <a href="/explore" className="hover:text-emerald-700">Explore</a>
             <a href="/how-it-works" className="hover:text-emerald-700">How it works</a>
-            <a href="/about" className="hover:text-emerald-700">About us</a>
+            <a href="/about" className="hover:text-emerald-700">Our mission</a>
             <a href="/safety" className="hover:text-emerald-700">Safety</a>
           </nav>
 
@@ -174,7 +174,7 @@ export default function HomePage() {
               <a href="/" onClick={() => setMobileMenu(false)}>Home</a>
               <a href="/explore" onClick={() => setMobileMenu(false)}>Explore opportunities</a>
               <a href="/how-it-works" onClick={() => setMobileMenu(false)}>How it works</a>
-              <a href="/about" onClick={() => setMobileMenu(false)}>About us</a>
+              <a href="/about" onClick={() => setMobileMenu(false)}>Our mission</a>
               <a href="/safety" onClick={() => setMobileMenu(false)}>Safety</a>
               <a href="/login" onClick={() => setMobileMenu(false)}>Log in</a>
               <a href="/register" onClick={() => setMobileMenu(false)} className="text-emerald-700">Join Travailaway</a>
@@ -508,9 +508,9 @@ export default function HomePage() {
             </div>
           </div>
           <div>
-            <h3 className="mb-5 font-bold text-white">About Travailaway</h3>
+            <h3 className="mb-5 font-bold text-white">Travailaway</h3>
             <div className="space-y-3 text-sm">
-              <a className="block hover:text-emerald-300" href="/about">About us</a>
+              <a className="block hover:text-emerald-300" href="/about">Our mission</a>
               <a className="block hover:text-emerald-300" href="/safety">Safety</a>
               <a className="block hover:text-emerald-300" href="/privacy">Privacy policy</a>
               <a className="block hover:text-emerald-300" href="/terms">Terms of service</a>
