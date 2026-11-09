@@ -24,6 +24,7 @@ const columns = [
   {
     title: "Our world",
     links: [
+      { label: "Our mission", href: "/about" },
       { label: "Learn on the road", href: "/travel-and-learn" },
       { label: "Our community", href: "/community" },
       { label: "Our impact", href: "/giving-back" },
