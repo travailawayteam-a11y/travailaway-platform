@@ -51,6 +51,12 @@ export const MENU_ITEMS = [
     href: "/giving-back",
   },
   {
+    label: "Work with us",
+    short: "Work with us",
+    description: "Volunteer your skills and help us build Travailaway.",
+    href: "/work-with-us",
+  },
+  {
     label: "Safety & trust",
     short: "Safety",
     description: "How we help everyone feel secure and respected.",
@@ -72,7 +78,7 @@ export default function SiteHeader() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-5 text-[13px] font-semibold xl:flex">
+        <nav className="hidden items-center gap-4 text-[13px] font-semibold xl:flex">
           {MENU_ITEMS.map((item) => (
             <Link
               key={item.href}
