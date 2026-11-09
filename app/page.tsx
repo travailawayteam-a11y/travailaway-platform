@@ -441,11 +441,11 @@ export default function HomePage() {
         <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-gray-600">Know someone who would love to travel differently? Share Travailaway with your friends and followers on your favourite social networks.</p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           {shareLinks.map(item => (
-            <a key={item.name} href={item.href} target="_blank" rel="noopener noreferrer" aria-label={`Share on ${item.name}`} title={`Share on ${item.name}`} className={`flex h-[52px] w-[52px] items-center justify-center rounded-full text-white shadow-sm transition hover:-translate-y-1 hover:shadow-md ${item.color}`}>
-              <BrandIcon name={item.icon} size={22} />
+            <a key={item.name} href={item.href} target="_blank" rel="noopener noreferrer" aria-label={`Share on ${item.name}`} title={`Share on ${item.name}`} className={`flex h-14 w-14 items-center justify-center rounded-2xl text-white shadow-sm transition hover:-translate-y-1 hover:shadow-md ${item.color}`}>
+              <BrandIcon name={item.icon} size={26} />
             </a>
           ))}
-          <button onClick={copyLink} aria-label="Copy link" title="Copy link" className="flex h-[52px] w-[52px] items-center justify-center rounded-full border-2 border-emerald-700 text-emerald-700 transition hover:-translate-y-1 hover:bg-emerald-50">
+          <button onClick={copyLink} aria-label="Copy link" title="Copy link" className="flex h-14 w-14 items-center justify-center rounded-2xl border-2 border-emerald-700 text-emerald-700 transition hover:-translate-y-1 hover:bg-emerald-50">
             <Link2 size={22} />
           </button>
         </div>
