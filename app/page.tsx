@@ -108,12 +108,12 @@ export default function HomePage() {
   const shareText = "Travailaway: travel, connect and experience. Join a community built on cultural exchange.";
 
   const shareLinks = [
-    { name: "WhatsApp", icon: "whatsapp", color: "bg-green-600 hover:bg-green-700", href: `https://wa.me/?text=${encodeURIComponent(`${shareText} ${shareUrl}`)}` },
-    { name: "Facebook", icon: "facebook", color: "bg-blue-600 hover:bg-blue-700", href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}` },
-    { name: "X", icon: "x", color: "bg-slate-900 hover:bg-black", href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}` },
-    { name: "LinkedIn", icon: "linkedin", color: "bg-sky-700 hover:bg-sky-800", href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}` },
-    { name: "Telegram", icon: "telegram", color: "bg-sky-500 hover:bg-sky-600", href: `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}` },
-    { name: "Email", icon: "email", color: "bg-gray-600 hover:bg-gray-700", href: `mailto:?subject=${encodeURIComponent("Have a look at Travailaway")}&body=${encodeURIComponent(`${shareText} ${shareUrl}`)}` }
+    { name: "WhatsApp", icon: "whatsapp", color: "bg-[#25D366] hover:bg-[#1ebe5b]", href: `https://wa.me/?text=${encodeURIComponent(`${shareText} ${shareUrl}`)}` },
+    { name: "Facebook", icon: "facebook", color: "bg-[#1877F2] hover:bg-[#1464cc]", href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}` },
+    { name: "X", icon: "x", color: "bg-black hover:bg-neutral-800", href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}` },
+    { name: "LinkedIn", icon: "linkedin", color: "bg-[#0A66C2] hover:bg-[#08529b]", href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}` },
+    { name: "Telegram", icon: "telegram", color: "bg-[#26A5E4] hover:bg-[#1d8ac0]", href: `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}` },
+    { name: "Email", icon: "email", color: "bg-gray-500 hover:bg-gray-600", href: `mailto:?subject=${encodeURIComponent("Have a look at Travailaway")}&body=${encodeURIComponent(`${shareText} ${shareUrl}`)}` }
   ];
 
   const copyLink = async () => {
@@ -441,14 +441,15 @@ export default function HomePage() {
         <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-gray-600">Know someone who would love to travel differently? Share Travailaway with your friends and followers on your favourite social networks.</p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           {shareLinks.map(item => (
-            <a key={item.name} href={item.href} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-bold text-white ${item.color}`}>
-              <BrandIcon name={item.icon} /> {item.name}
+            <a key={item.name} href={item.href} target="_blank" rel="noopener noreferrer" aria-label={`Share on ${item.name}`} title={`Share on ${item.name}`} className={`flex h-[52px] w-[52px] items-center justify-center rounded-full text-white shadow-sm transition hover:-translate-y-1 hover:shadow-md ${item.color}`}>
+              <BrandIcon name={item.icon} size={22} />
             </a>
           ))}
-          <button onClick={copyLink} className="inline-flex items-center gap-2 rounded-full border-2 border-emerald-700 px-5 py-3 text-sm font-bold text-emerald-800 hover:bg-emerald-50">
-            <Link2 size={18} /> {copied ? "Link copied!" : "Copy link"}
+          <button onClick={copyLink} aria-label="Copy link" title="Copy link" className="flex h-[52px] w-[52px] items-center justify-center rounded-full border-2 border-emerald-700 text-emerald-700 transition hover:-translate-y-1 hover:bg-emerald-50">
+            <Link2 size={22} />
           </button>
         </div>
+        <p className="mt-4 h-5 text-sm font-semibold text-emerald-700">{copied ? "Link copied!" : ""}</p>
       </section>
 
       {/* FAQ */}
