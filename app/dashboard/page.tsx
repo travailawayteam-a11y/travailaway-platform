@@ -182,8 +182,9 @@ export default async function DashboardPage() {
                 href="#my-opportunities"
               />
               <DashboardCard
-                title="Traveller applications"
-                description="Connect with people interested in your project."
+                title="Messages"
+                description="Read and reply to travellers interested in your project."
+                href="/messages"
               />
             </>
           ) : (
@@ -194,12 +195,14 @@ export default async function DashboardPage() {
                 href="/explore"
               />
               <DashboardCard
-                title="Saved opportunities"
-                description="Keep track of places you would love to visit."
+                title="Travel companions"
+                description="Find a travel companion or share your own travel plans."
+                href="/travel-buddies"
               />
               <DashboardCard
-                title="My applications"
-                description="Follow your applications to host opportunities."
+                title="Messages"
+                description="Your conversations with hosts."
+                href="/messages"
               />
             </>
           )}
