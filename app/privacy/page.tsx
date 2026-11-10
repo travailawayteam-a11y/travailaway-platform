@@ -38,3 +38,69 @@ const SECTIONS: LegalSection[] = [
   },
   {
     heading: "Who can see your information",
+    paragraphs: [
+      "Your public profile details and your listings can be seen by other members, depending on the page. Travel plans and events are shown to logged-in members. Your messages are visible only to you and the person you are writing to, and to our team where needed to keep the platform safe or to help with a problem.",
+      "We do not sell your personal information.",
+    ],
+  },
+  {
+    heading: "Services that help us run Travailaway",
+    paragraphs: [
+      "We use trusted providers to run the platform. Your information is stored and processed with them only so that Travailaway can work:",
+    ],
+    bullets: [
+      "Supabase, which stores our database, accounts and uploaded photos.",
+      "Our website hosting providers, which deliver the site to your browser.",
+      "Google Translate, only if you choose a language other than English. The text of the page is then sent to Google so it can be translated.",
+      "A payment provider, once card payments are available.",
+      "Photo websites such as Unsplash and Pexels, from which some pictures on our pages are loaded. Their servers may see your IP address when a picture loads.",
+    ],
+  },
+  {
+    heading: "Cookies and similar storage",
+    paragraphs: [
+      "We use cookies and browser storage that are needed for the site to work: to keep you logged in, and to remember the language you choose. If you pick a language other than English, the translation service also sets a cookie. You can clear these in your browser settings, but you may then need to log in or choose your language again.",
+    ],
+  },
+  {
+    heading: "How long we keep information",
+    paragraphs: [
+      "We keep your information while your account is open and for as long as needed to run Travailaway, resolve disputes and meet legal duties. When you ask us to close your account, we will delete or anonymise your personal information, except where we must keep some of it by law.",
+    ],
+  },
+  {
+    heading: "Keeping your information safe",
+    paragraphs: [
+      "We use reasonable technical and organisational measures to protect your information, including access rules in our database so people can only see what they are meant to see. No online service can be completely secure, so please use a strong password and keep it private.",
+    ],
+  },
+  {
+    heading: "Your rights",
+    paragraphs: [
+      "Under the Data Protection and Privacy Act, 2019 of Uganda, and similar laws that may apply to you, you can ask to see the personal information we hold about you, to correct it, or to have it deleted. You can edit your profile at any time from your dashboard. For anything else, contact us through our Contact page and we will respond as soon as we can.",
+    ],
+  },
+  {
+    heading: "Children",
+    paragraphs: [
+      "Travailaway is for people aged 18 and over. We do not knowingly collect information from children. If you believe a child has given us information, please tell us so that we can remove it.",
+    ],
+  },
+  {
+    heading: "Changes to this policy",
+    paragraphs: [
+      "We may update this policy from time to time. When we do, we will change the date at the top of this page.",
+    ],
+  },
+];
+
+export default function PrivacyPage() {
+  return (
+    <LegalPage
+      title="Privacy Policy"
+      updated="10 November 2026"
+      intro="Your privacy matters to us. This policy explains what personal information Travailaway collects, why we collect it, and the choices you have."
+      sections={SECTIONS}
+    />
+  );
+}
