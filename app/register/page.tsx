@@ -46,6 +46,7 @@ export default function RegisterPage() {
         email: email.trim(),
         password,
         options: {
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
           data: {
             full_name: fullName.trim(),
             account_type: accountType,
@@ -57,7 +58,7 @@ export default function RegisterPage() {
         setError(signUpError.message);
       } else {
         setMessage(
-          "Registration submitted! Check your email for a confirmation link if email confirmation is enabled."
+          "Your account has been created! We have sent a confirmation link to your email. Tap it to confirm your address, and check your spam or junk folder if you cannot see it."
         );
         setRegisteredType(accountType);
         setFullName("");
@@ -77,17 +78,15 @@ export default function RegisterPage() {
 
       {accountType === "host" ? (
         <PageBanner
-          image="https://images.unsplash.com/photo-1686574086026-9f02b82f4765?auto=format&fit=crop&w=1600&q=70"
+          image="https://images.unsplash.com/photo-1758599668294-8d13c0942601?auto=format&fit=crop&w=1600&q=70"
           message="Open your door to the world."
           subtitle="Share your place and welcome travellers."
-          credit="Tobias Tullius"
         />
       ) : (
         <PageBanner
-          image="https://images.unsplash.com/photo-1697222564107-2ea14363f70d?auto=format&fit=crop&w=1600&q=70"
+          image="https://images.unsplash.com/photo-1758599667717-27c61bcdd14b?auto=format&fit=crop&w=1600&q=70"
           message="Your next adventure starts here."
           subtitle="Join a community that travels to connect."
-          credit="Adrià Sánchez Roqué"
         />
       )}
 
@@ -225,8 +224,8 @@ export default function RegisterPage() {
               <div className="rounded-lg border border-[#176b50]/20 bg-[#eaf4ef] p-4 text-sm text-[#104c3a]">
                 <p className="font-semibold">What happens next</p>
                 <ol className="mt-2 list-decimal space-y-1 pl-5">
-                  <li>Confirm your email if you receive a confirmation link.</li>
-                  <li>Log in to your account.</li>
+                  <li>Open the email from us and tap the confirmation link.</li>
+                  <li>You will be taken straight to your account.</li>
                   {registeredType === "host" ? (
                     <li>Open your dashboard and create your first opportunity.</li>
                   ) : (
