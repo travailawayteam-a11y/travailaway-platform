@@ -4,9 +4,11 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Clock, Compass, MapPin, Menu, Search, X } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import ContactHost from "@/components/contact-host";
 
 type Listing = {
   id: string;
+  host_id: string | null;
   title: string;
   description: string;
   category: string;
@@ -175,7 +177,7 @@ export default function ExplorePage() {
         const { data, error: queryError } = await supabase
           .from("listings")
           .select(
-            "id, title, description, category, country, city, accommodation, meals, hours_per_week, min_stay_weeks, max_stay_weeks, skills, benefits, images, created_at"
+            "id, host_id, title, description, category, country, city, accommodation, meals, hours_per_week, min_stay_weeks, max_stay_weeks, skills, benefits, images, created_at"
           )
           .eq("status", "published")
           .order("created_at", { ascending: false })
@@ -551,18 +553,11 @@ export default function ExplorePage() {
                           </div>
                         )}
 
-                        <div className="rounded-xl bg-emerald-50 p-4 text-sm leading-6 text-emerald-900">
-                          Interested in this opportunity? Create a traveller account
-                          or log in to get started.
-                          <div className="mt-3 flex flex-wrap gap-3 font-bold">
-                            <Link href="/register?type=traveller" className="underline">
-                              Create account
-                            </Link>
-                            <Link href="/login" className="underline">
-                              Log in
-                            </Link>
-                          </div>
-                        </div>
+                        <ContactHost
+                          listingId={listing.id}
+                          hostId={listing.host_id}
+                          title={listing.title}
+                        />
                       </div>
                     )}
 
