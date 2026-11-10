@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
+import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 const locations: Record<string, Record<string, string[]>> = {
@@ -48,7 +47,6 @@ const MAX_PHOTOS = 8;
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
 export default function NewOpportunityPage() {
-  const router = useRouter();
   const supabase = createClient();
 
   const [continent, setContinent] = useState("");
@@ -56,9 +54,23 @@ export default function NewOpportunityPage() {
   const [country, setCountry] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const errorRef = useRef<HTMLDivElement | null>(null);
   const [selectedPhotos, setSelectedPhotos] = useState<File[]>([]);
   const [photoPreviews, setPhotoPreviews] = useState<string[]>([]);
   const [coverIndex, setCoverIndex] = useState(0);
+
+  useEffect(() => {
+    if (error && errorRef.current) {
+      errorRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (submitted) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [submitted]);
 
   useEffect(() => {
     return () => {
@@ -237,8 +249,8 @@ export default function NewOpportunityPage() {
         throw new Error(insertError.message);
       }
 
-      router.push("/dashboard");
-      router.refresh();
+      setLoading(false);
+      setSubmitted(true);
     } catch (err) {
       if (uploadedPaths.length > 0) {
         await supabase.storage.from("opportunity-photos").remove(uploadedPaths);
@@ -256,6 +268,40 @@ export default function NewOpportunityPage() {
   const regions = continent ? Object.keys(locations[continent] ?? {}) : [];
   const countries = continent && region ? locations[continent]?.[region] ?? [] : [];
 
+  if (submitted) {
+    return (
+      <main className="min-h-screen bg-gray-50 px-4 py-10">
+        <div className="mx-auto max-w-xl rounded-2xl border border-emerald-200 bg-white p-6 text-center shadow-sm sm:p-10">
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-2xl text-emerald-700">
+            ✓
+          </div>
+          <h1 className="mt-5 text-2xl font-bold text-gray-900">
+            Your opportunity has been submitted
+          </h1>
+          <p className="mt-3 text-gray-600">
+            Thank you! Our team reviews every new opportunity before it is
+            listed. You will see it on your dashboard as &ldquo;Awaiting
+            review&rdquo; until it is approved.
+          </p>
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
+            <Link
+              href="/dashboard"
+              className="rounded-xl bg-emerald-700 px-6 py-3 font-bold text-white hover:bg-emerald-800"
+            >
+              Go to my dashboard
+            </Link>
+            <a
+              href="/opportunities/new"
+              className="rounded-xl border border-emerald-700 px-6 py-3 font-bold text-emerald-700 hover:bg-emerald-50"
+            >
+              Add another opportunity
+            </a>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main className="min-h-screen bg-gray-50 px-4 py-10">
       <div className="mx-auto max-w-3xl">
@@ -271,6 +317,16 @@ export default function NewOpportunityPage() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-7 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm sm:p-8">
+          {error && (
+            <div
+              ref={errorRef}
+              role="alert"
+              className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm font-medium text-red-700"
+            >
+              {error}
+            </div>
+          )}
+
           <section>
             <h2 className="mb-5 text-lg font-bold text-gray-900">Opportunity details</h2>
 
@@ -440,17 +496,17 @@ export default function NewOpportunityPage() {
             </p>
           </section>
 
-          {error && (
-            <div role="alert" className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-              {error}
-            </div>
-          )}
-
           <p className="rounded-xl bg-emerald-50 p-4 text-sm text-emerald-900">
             Our team reviews every new opportunity before it is listed. You will
             see it on your dashboard as &ldquo;Awaiting review&rdquo; until it
             is approved.
           </p>
+
+          {error && (
+            <p className="text-center text-sm font-medium text-red-700">
+              Something needs your attention. See the message at the top of the form.
+            </p>
+          )}
 
           <button
             type="submit"
