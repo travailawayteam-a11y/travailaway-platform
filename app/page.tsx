@@ -155,6 +155,7 @@ export default function HomePage() {
             <a href="/explore" className="hover:text-emerald-700">Explore</a>
             <a href="/how-it-works" className="hover:text-emerald-700">How it works</a>
             <a href="/about" className="hover:text-emerald-700">Our mission</a>
+            <a href="/membership" className="hover:text-emerald-700">Membership</a>
             <a href="/work-with-us" className="hover:text-emerald-700">Work with us</a>
             <a href="/safety" className="hover:text-emerald-700">Safety</a>
           </nav>
@@ -176,6 +177,7 @@ export default function HomePage() {
               <a href="/explore" onClick={() => setMobileMenu(false)}>Explore opportunities</a>
               <a href="/how-it-works" onClick={() => setMobileMenu(false)}>How it works</a>
               <a href="/about" onClick={() => setMobileMenu(false)}>Our mission</a>
+              <a href="/membership" onClick={() => setMobileMenu(false)}>Membership</a>
               <a href="/work-with-us" onClick={() => setMobileMenu(false)}>Work with us</a>
               <a href="/safety" onClick={() => setMobileMenu(false)}>Safety</a>
               <a href="/login" onClick={() => setMobileMenu(false)}>Log in</a>
@@ -423,6 +425,33 @@ export default function HomePage() {
         </a>
       </section>
 
+      {/* MEMBERSHIP */}
+      <section className="bg-emerald-950 py-20 text-white">
+        <div className="mx-auto max-w-5xl px-5 text-center md:px-8">
+          <span className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-300">Traveller membership</span>
+          <h2 className="mt-3 text-3xl font-extrabold md:text-4xl">One simple membership for travellers</h2>
+          <p className="mx-auto mt-5 max-w-2xl leading-8 text-emerald-100">Choose the plan that fits how you travel. Your yearly fee helps us run Travailaway.</p>
+          <div className="mt-10 grid gap-5 sm:grid-cols-3">
+            <div className="rounded-3xl bg-white/10 p-7">
+              <h3 className="text-lg font-bold">Solo</h3>
+              <p className="mt-3 text-4xl font-extrabold">$49</p>
+              <p className="mt-1 text-sm text-emerald-200">for one year</p>
+            </div>
+            <div className="rounded-3xl bg-white/10 p-7 ring-2 ring-emerald-300">
+              <h3 className="text-lg font-bold">Couple</h3>
+              <p className="mt-3 text-4xl font-extrabold">$59</p>
+              <p className="mt-1 text-sm text-emerald-200">for one year</p>
+            </div>
+            <div className="rounded-3xl bg-white/10 p-7">
+              <h3 className="text-lg font-bold">Family</h3>
+              <p className="mt-3 text-4xl font-extrabold">$69</p>
+              <p className="mt-1 text-sm text-emerald-200">for one year</p>
+            </div>
+          </div>
+          <a href="/membership" className="mt-10 inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 font-bold text-emerald-900 hover:bg-emerald-50">See what your membership is for <ArrowRight size={18} /></a>
+        </div>
+      </section>
+
       {/* SAFETY */}
       <section className="bg-gray-50 py-20">
         <div className="mx-auto flex max-w-5xl flex-col items-center gap-7 px-5 text-center">
@@ -513,6 +542,7 @@ export default function HomePage() {
             <h3 className="mb-5 font-bold text-white">Travailaway</h3>
             <div className="space-y-3 text-sm">
               <a className="block hover:text-emerald-300" href="/about">Our mission</a>
+              <a className="block hover:text-emerald-300" href="/membership">Membership</a>
               <a className="block hover:text-emerald-300" href="/work-with-us">Work with us</a>
               <a className="block hover:text-emerald-300" href="/safety">Safety</a>
               <a className="block hover:text-emerald-300" href="/privacy">Privacy policy</a>
