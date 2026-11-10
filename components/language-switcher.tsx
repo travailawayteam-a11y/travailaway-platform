@@ -34,21 +34,47 @@ declare global {
   }
 }
 
+const STORAGE_KEY = "travailaway-language";
+
+// The visitor's choice is remembered in the browser. This is the main record;
+// the translation cookie below is only there for the translation service.
 function readLanguage(): string {
+  try {
+    const saved = window.localStorage.getItem(STORAGE_KEY);
+    if (saved) return saved;
+  } catch {
+    // Browser storage is blocked, so fall back to the cookie.
+  }
   const match = document.cookie.match(/(?:^|;\s*)googtrans=([^;]*)/);
   if (!match) return "en";
   const parts = decodeURIComponent(match[1]).split("/");
   return parts[2] || "en";
 }
 
-function chooseLanguage(code: string) {
+// Removes the translation cookie everywhere it might have been saved.
+function clearTranslationCookie() {
   const expired = "Thu, 01 Jan 1970 00:00:00 GMT";
   const host = window.location.hostname;
-
-  // Clear any earlier choice first (with and without the domain).
+  const pieces = host.split(".");
+  const domains: string[] = [host];
+  for (let i = 0; i < pieces.length - 1; i++) {
+    const part = pieces.slice(i).join(".");
+    domains.push(part, "." + part);
+  }
   document.cookie = `googtrans=; expires=${expired}; path=/`;
-  document.cookie = `googtrans=; expires=${expired}; path=/; domain=${host}`;
-  document.cookie = `googtrans=; expires=${expired}; path=/; domain=.${host}`;
+  for (const domain of domains) {
+    document.cookie = `googtrans=; expires=${expired}; path=/; domain=${domain}`;
+  }
+}
+
+function chooseLanguage(code: string) {
+  clearTranslationCookie();
+
+  try {
+    window.localStorage.setItem(STORAGE_KEY, code);
+  } catch {
+    // Ignore: the cookie still works for this visit.
+  }
 
   if (code !== "en") {
     document.cookie = `googtrans=/en/${code}; path=/; max-age=31536000`;
