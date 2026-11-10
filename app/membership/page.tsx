@@ -7,7 +7,7 @@ import PageBanner from "@/components/page-banner";
 export const metadata: Metadata = {
   title: "Membership | Travailaway",
   description:
-    "Travailaway traveller membership: Solo $49, Couple $59 or Family $69 for a full year. Your fee helps us run Travailaway.",
+    "Travailaway traveller membership: Solo, Couple or Family, each for a full year. Your fee helps us run Travailaway.",
 };
 
 // Banner photo: Unsplash (Unsplash License), same free photo used on the
@@ -17,17 +17,19 @@ const BANNER =
 
 const PLANS = [
   {
+    id: "solo",
     name: "Solo",
     price: "$49",
     who: "For one traveller exploring on their own.",
   },
   {
+    id: "couple",
     name: "Couple",
     price: "$59",
     who: "For two people travelling and sharing the experience together.",
-    highlight: true,
   },
   {
+    id: "family",
     name: "Family",
     price: "$69",
     who: "For a family travelling and learning together.",
@@ -68,7 +70,14 @@ const FAQ = [
   },
 ];
 
-export default function MembershipPage() {
+export default async function MembershipPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ plan?: string }>;
+}) {
+  const { plan } = await searchParams;
+  const selected = PLANS.find((item) => item.id === plan) ?? null;
+
   return (
     <main className="min-h-screen bg-[#f7faf8]">
       <SiteHeader />
@@ -85,37 +94,60 @@ export default function MembershipPage() {
             Choose your plan
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-center text-gray-600">
-            Every plan is a one-year membership for travellers.
+            Every plan is a one-year membership for travellers. Tap a plan to
+            select it.
           </p>
 
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {PLANS.map((plan) => (
-              <div
-                key={plan.name}
-                className={`rounded-3xl border bg-white p-8 text-center shadow-sm ${
-                  plan.highlight
-                    ? "border-emerald-600 ring-2 ring-emerald-600"
-                    : "border-gray-100"
-                }`}
-              >
-                <h3 className="text-xl font-bold text-[#17231f]">{plan.name}</h3>
-                <p className="mt-4 text-5xl font-extrabold text-[#104c3a]">
-                  {plan.price}
-                </p>
-                <p className="mt-1 text-sm font-semibold text-gray-500">
-                  for one year
-                </p>
-                <p className="mt-5 leading-7 text-gray-600">{plan.who}</p>
-              </div>
-            ))}
+            {PLANS.map((item) => {
+              const isSelected = selected?.id === item.id;
+              return (
+                <Link
+                  key={item.id}
+                  href={`/membership?plan=${item.id}`}
+                  scroll={false}
+                  aria-current={isSelected ? "true" : undefined}
+                  className={`block rounded-3xl border bg-white p-8 text-center shadow-sm transition hover:-translate-y-1 hover:shadow-md ${
+                    isSelected
+                      ? "border-emerald-600 ring-2 ring-emerald-600"
+                      : "border-gray-100"
+                  }`}
+                >
+                  <span
+                    className={`mx-auto flex h-7 w-7 items-center justify-center rounded-full border-2 ${
+                      isSelected
+                        ? "border-emerald-600 bg-emerald-600"
+                        : "border-gray-300"
+                    }`}
+                    aria-hidden="true"
+                  >
+                    {isSelected && (
+                      <span className="h-2.5 w-2.5 rounded-full bg-white" />
+                    )}
+                  </span>
+                  <h3 className="mt-4 text-xl font-bold text-[#17231f]">
+                    {item.name}
+                  </h3>
+                  <p className="mt-4 text-5xl font-extrabold text-[#104c3a]">
+                    {item.price}
+                  </p>
+                  <p className="mt-1 text-sm font-semibold text-gray-500">
+                    for one year
+                  </p>
+                  <p className="mt-5 leading-7 text-gray-600">{item.who}</p>
+                </Link>
+              );
+            })}
           </div>
 
           <div className="mt-10 text-center">
             <Link
-              href="/register"
+              href="/register?type=traveller"
               className="inline-block rounded-full bg-emerald-700 px-8 py-4 font-bold text-white hover:bg-emerald-800"
             >
-              Join Travailaway
+              {selected
+                ? `Join Travailaway with the ${selected.name} plan`
+                : "Join Travailaway"}
             </Link>
             <p className="mt-3 text-sm text-gray-500">
               Create your account to get started.
