@@ -9,6 +9,11 @@ export const metadata: Metadata = {
     "Volunteer your skills and help us build Travailaway. Different skills, different countries, one shared vision.",
 };
 
+// Photo: Vitaly Gariev, Unsplash (Unsplash License)
+// https://unsplash.com/photos/diverse-volunteers-holding-trash-bags-in-a-forest-OwLmtn2_Cmw
+const HERO_PHOTO =
+  "https://images.unsplash.com/photo-1758599667717-27c61bcdd14b?auto=format&fit=crop&w=1800&q=70";
+
 const AREAS = [
   {
     label: "Technology and website development",
@@ -45,8 +50,15 @@ export default function WorkWithUsPage() {
     <main className="min-h-screen bg-[#f7faf8]">
       <SiteHeader />
 
-      <section className="bg-[#104c3a] px-4 py-16 text-white md:py-24">
-        <div className="mx-auto max-w-4xl">
+      <section className="relative overflow-hidden bg-[#104c3a] px-4 py-20 text-white md:py-28">
+        <img
+          src={HERO_PHOTO}
+          alt="A smiling team of volunteers from different backgrounds standing together outdoors"
+          className="absolute inset-0 h-full w-full object-cover"
+          loading="eager"
+        />
+        <div className="absolute inset-0 bg-[#0b3a2c]/70" />
+        <div className="relative z-10 mx-auto max-w-4xl">
           <h1 className="text-3xl font-bold leading-tight md:text-5xl">
             Different Skills. Different Countries. One Shared Vision.
             <span className="mt-2 block">
