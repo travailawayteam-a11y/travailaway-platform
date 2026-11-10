@@ -277,7 +277,7 @@ export default function MissionPage() {
           </Link>
           <Link
             href="/register?type=host"
-            className="rounded-full border border-white px-8 py-4 font-bold text-emerald-800 hover:bg-white/10"
+            className="rounded-full border border-white px-8 py-4 font-bold text-white hover:bg-white/10"
           >
             Become a host
           </Link>
