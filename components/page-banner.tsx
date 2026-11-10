@@ -5,11 +5,12 @@ type PageBannerProps = {
   credit?: string;
 };
 
+// The photo credit is still accepted (so existing pages keep working) but it
+// is no longer shown on the banner.
 export default function PageBanner({
   image,
   message,
   subtitle,
-  credit,
 }: PageBannerProps) {
   return (
     <section className="relative flex h-64 items-center justify-center overflow-hidden bg-emerald-900 md:h-80">
@@ -29,12 +30,6 @@ export default function PageBanner({
           <p className="mt-3 text-base text-white/90 md:text-lg">{subtitle}</p>
         )}
       </div>
-
-      {credit && (
-        <p className="absolute bottom-2 right-3 z-10 text-[11px] text-white/70">
-          Photo: {credit} on Unsplash
-        </p>
-      )}
     </section>
   );
 }
