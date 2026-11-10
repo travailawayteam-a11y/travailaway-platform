@@ -426,30 +426,18 @@ export default function HomePage() {
       </section>
 
       {/* MEMBERSHIP */}
-      <section className="bg-emerald-950 py-20 text-white">
-        <div className="mx-auto max-w-5xl px-5 text-center md:px-8">
-          <span className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-300">Traveller membership</span>
-          <h2 className="mt-3 text-3xl font-extrabold md:text-4xl">One simple membership for travellers</h2>
-          <p className="mx-auto mt-5 max-w-2xl leading-8 text-emerald-100">Choose the plan that fits how you travel. Your yearly fee helps us run Travailaway.</p>
-          <div className="mt-10 grid gap-5 sm:grid-cols-3">
-            <div className="rounded-3xl bg-white/10 p-7">
-              <h3 className="text-lg font-bold">Solo</h3>
-              <p className="mt-3 text-4xl font-extrabold">$49</p>
-              <p className="mt-1 text-sm text-emerald-200">for one year</p>
-            </div>
-            <div className="rounded-3xl bg-white/10 p-7 ring-2 ring-emerald-300">
-              <h3 className="text-lg font-bold">Couple</h3>
-              <p className="mt-3 text-4xl font-extrabold">$59</p>
-              <p className="mt-1 text-sm text-emerald-200">for one year</p>
-            </div>
-            <div className="rounded-3xl bg-white/10 p-7">
-              <h3 className="text-lg font-bold">Family</h3>
-              <p className="mt-3 text-4xl font-extrabold">$69</p>
-              <p className="mt-1 text-sm text-emerald-200">for one year</p>
-            </div>
+      <section className="mx-auto max-w-7xl px-5 pb-24 md:px-8">
+        <a href="/membership" className="group grid overflow-hidden rounded-3xl bg-emerald-950 text-white transition hover:bg-emerald-900 md:grid-cols-2">
+          <div className="relative h-72 md:order-2 md:h-auto">
+            <img src="https://images.unsplash.com/photo-1565793244233-3d09028aad47?auto=format&fit=crop&w=1200&q=70" alt="A smiling woman" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
           </div>
-          <a href="/membership" className="mt-10 inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 font-bold text-emerald-900 hover:bg-emerald-50">See what your membership is for <ArrowRight size={18} /></a>
-        </div>
+          <div className="flex flex-col justify-center px-7 py-12 text-center md:order-1 md:px-12 md:text-left">
+            <span className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-300">Traveller membership</span>
+            <h2 className="mt-4 text-3xl font-extrabold md:text-5xl">Join the Travailaway community</h2>
+            <p className="mt-5 text-lg leading-8 text-emerald-100">A traveller membership lets you message hosts, apply to opportunities and be part of a community built on cultural exchange. Your yearly fee helps us run Travailaway.</p>
+            <span className="mt-8 inline-flex items-center justify-center gap-2 font-bold text-emerald-300 md:justify-start">Learn about membership <ArrowRight size={18} className="transition group-hover:translate-x-1" /></span>
+          </div>
+        </a>
       </section>
 
       {/* SAFETY */}
