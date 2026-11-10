@@ -3,7 +3,7 @@ import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 
 /*
-  PHOTO CREDITS (real photographs, free licences)
+  PHOTO SOURCES (real photographs, free licences; credits are kept here, not shown on the page)
   1. Hero: "a multicultural lunch or dinner with friends around a welcome table"
      DJ Paine, Unsplash (Unsplash License)
      https://unsplash.com/photos/a-group-of-people-sitting-around-a-table-eating-food-G4QFpOsoS7w
@@ -70,22 +70,6 @@ const BELIEFS = [
   },
 ];
 
-function Credit({ photo }: { photo: { credit: string; source: string; href: string } }) {
-  return (
-    <p className="mt-2 text-xs text-gray-500">
-      Photo:{" "}
-      <a
-        href={photo.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="underline hover:text-emerald-700"
-      >
-        {photo.credit} on {photo.source}
-      </a>
-    </p>
-  );
-}
-
 export default function MissionPage() {
   return (
     <main className="min-h-screen bg-white text-slate-800">
@@ -110,17 +94,6 @@ export default function MissionPage() {
           <p className="mt-6 max-w-3xl text-lg leading-8 text-white/90 md:text-xl">
             Our mission is to bring people, cultures and communities closer
             together through meaningful travel and cultural exchange.
-          </p>
-          <p className="mt-6 text-[11px] text-white/70">
-            Photo:{" "}
-            <a
-              href={PHOTOS.hero.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline"
-            >
-              {PHOTOS.hero.credit} on {PHOTOS.hero.source}
-            </a>
           </p>
         </div>
       </section>
@@ -203,9 +176,6 @@ export default function MissionPage() {
             loading="lazy"
             className="h-[380px] w-full rounded-3xl object-cover md:h-[480px]"
           />
-          <figcaption>
-            <Credit photo={PHOTOS.farm} />
-          </figcaption>
         </figure>
       </section>
 
@@ -267,9 +237,6 @@ export default function MissionPage() {
             loading="lazy"
             className="h-[380px] w-full rounded-3xl object-cover md:h-[480px]"
           />
-          <figcaption>
-            <Credit photo={PHOTOS.field} />
-          </figcaption>
         </figure>
         <div className="order-1 md:order-2">
           <span className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-700">
@@ -310,7 +277,7 @@ export default function MissionPage() {
           </Link>
           <Link
             href="/register?type=host"
-            className="rounded-full border border-white px-8 py-4 font-bold text-white hover:bg-white/10"
+            className="rounded-full border border-white px-8 py-4 font-bold text-emerald-800 hover:bg-white/10"
           >
             Become a host
           </Link>
