@@ -10,10 +10,10 @@ export const metadata: Metadata = {
     "Travailaway traveller membership: Solo, Couple or Family, each for a full year. Your fee helps us run Travailaway.",
 };
 
-// Banner photo: Unsplash (Unsplash License), same free photo used on the
-// Travel companions page.
+// Banner photo: two women smiling together on a beach, Unsplash (Unsplash
+// License), published 2018.
 const BANNER =
-  "https://images.unsplash.com/photo-1758599668974-6da5d7cc6cc4?auto=format&fit=crop&w=1800&q=70";
+  "https://images.unsplash.com/photo-1530047139082-5435ca3c4614?auto=format&fit=crop&w=1800&q=85";
 
 const PLANS = [
   {
