@@ -78,13 +78,13 @@ export default function RegisterPage() {
 
       {accountType === "host" ? (
         <PageBanner
-          image="https://images.unsplash.com/photo-1530047139082-5435ca3c4614?auto=format&fit=crop&w=1600&q=70"
+          image="https://images.unsplash.com/photo-1758653003886-a70e78de253d?auto=format&fit=crop&w=1600&q=70"
           message="Open your door to the world."
           subtitle="Share your place and welcome travellers."
         />
       ) : (
         <PageBanner
-          image="https://images.unsplash.com/photo-1758599667717-27c61bcdd14b?auto=format&fit=crop&w=1600&q=70"
+          image="https://images.unsplash.com/photo-1758653003886-a70e78de253d?auto=format&fit=crop&w=1600&q=70"
           message="Your next adventure starts here."
           subtitle="Join a community that travels to connect."
         />
