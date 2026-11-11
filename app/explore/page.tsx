@@ -28,6 +28,11 @@ type Listing = {
 const logo =
   "https://sbgfaplqdxejirqfqfpn.supabase.co/storage/v1/object/public/brand-assets/1000296575-removebg-preview.png";
 
+// Photo behind the Explore heading. To change it, replace only this address.
+// Photo: Steve Jewett on Unsplash (free licence), published April 2021.
+const HERO_IMAGE =
+  "https://images.unsplash.com/photo-1618521715147-29e4b97e2ebd?auto=format&fit=crop&w=2000&q=75";
+
 // Same country lists as the "Create an opportunity" form, grouped by continent.
 const CONTINENT_COUNTRIES: Record<string, string[]> = {
   Africa: [
@@ -303,17 +308,25 @@ export default function ExplorePage() {
       </header>
 
       {/* HERO */}
-      <section className="bg-emerald-950 px-5 pb-24 pt-14 text-center text-white md:pb-28 md:pt-20">
-        <span className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-300">
-          Discover · Connect · Experience
-        </span>
-        <h1 className="mx-auto mt-4 max-w-3xl text-4xl font-extrabold leading-tight md:text-5xl">
-          Explore opportunities
-        </h1>
-        <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-emerald-100/80">
-          Find hosts and experiences around the world, and start a meaningful
-          cultural exchange.
-        </p>
+      <section className="relative overflow-hidden bg-emerald-950 px-5 pb-28 pt-16 text-center text-white md:pb-36 md:pt-24">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${HERO_IMAGE})` }}
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0 bg-emerald-950/70" aria-hidden="true" />
+        <div className="relative z-10">
+          <span className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-300">
+            Discover · Connect · Experience
+          </span>
+          <h1 className="mx-auto mt-4 max-w-3xl text-4xl font-extrabold leading-tight md:text-5xl">
+            Explore opportunities
+          </h1>
+          <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-emerald-100/90">
+            Find hosts and experiences around the world, and start a meaningful
+            cultural exchange.
+          </p>
+        </div>
       </section>
 
       {/* FILTERS */}
