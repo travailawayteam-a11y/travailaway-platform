@@ -36,17 +36,17 @@ const slides = [
     subtitle: "Travel beyond the ordinary. Connect with people, share experiences and discover new cultures."
   },
   {
-    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2000&q=85",
+    image: "https://images.unsplash.com/photo-1622352496174-9e1d969b1945?auto=format&fit=crop&w=2000&q=85",
     title: "Find your place in the world.",
     subtitle: "Explore meaningful opportunities and experience everyday life in places you've always dreamed of visiting."
   },
   {
-    image: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=2000&q=85",
+    image: "https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=2000&q=85",
     title: "Meet people. Share skills. Grow.",
     subtitle: "Build friendships across borders through cultural exchange, learning and shared experiences."
   },
   {
-    image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2000&q=85",
+    image: "https://images.unsplash.com/photo-1530047139082-5435ca3c4614?auto=format&fit=crop&w=2000&q=85",
     title: "Make travel mean more.",
     subtitle: "From nature and farms to hostels and community projects, find an experience that inspires you."
   }
@@ -192,14 +192,14 @@ export default function HomePage() {
         {slides.map((item, index) => (
           <div key={item.title} className={`absolute inset-0 transition-opacity duration-1000 ${slide === index ? "opacity-100" : "opacity-0"}`} style={{ backgroundImage: `url(${item.image})`, backgroundPosition: "center", backgroundSize: "cover" }} />
         ))}
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/20 to-black/5" />
         <div className="relative z-10 mx-auto w-full max-w-7xl px-5 py-24 text-white md:px-8">
           <div className="max-w-3xl">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-4 py-2 text-sm font-semibold">
               <Globe2 size={17} /> A world of cultural exchange
             </div>
-            <h1 className="text-4xl font-extrabold leading-tight md:text-6xl lg:text-7xl">{slides[slide].title}</h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/90 md:text-xl">{slides[slide].subtitle}</p>
+            <h1 className="text-4xl font-extrabold leading-tight drop-shadow-lg md:text-6xl lg:text-7xl">{slides[slide].title}</h1>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-white drop-shadow-md md:text-xl">{slides[slide].subtitle}</p>
             <div className="mt-9 flex flex-wrap gap-4">
               <a href="/register?type=traveller" className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-7 py-4 font-bold text-white hover:bg-emerald-700">Join as a traveller <ArrowRight size={19} /></a>
               <a href="/register?type=host" className="rounded-full border border-white px-7 py-4 font-bold text-white hover:bg-white hover:text-slate-900">Join as a host</a>
@@ -300,24 +300,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CATEGORIES */}
+      {/* DISCOVER EXPERIENCES */}
       <section className="mx-auto max-w-7xl px-5 py-24 md:px-8">
-        <div className="mx-auto mb-12 max-w-2xl text-center">
-          <span className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-700">Find what inspires you</span>
-          <h2 className="mt-3 text-3xl font-extrabold text-slate-900 md:text-4xl">Discover experiences</h2>
-          <p className="mt-4 text-gray-600">From helping on a farm to learning a new language, there are many ways to connect with the world.</p>
-        </div>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-          {categories.map(item => {
-            const Icon = item.icon;
-            return (
-              <a key={item.name} href={`/explore?category=${encodeURIComponent(item.name)}`} className="group rounded-2xl border border-gray-100 p-5 text-center transition hover:-translate-y-1 hover:border-emerald-200 hover:bg-emerald-50 hover:shadow-md">
-                <Icon className="mx-auto text-emerald-700" size={30} />
-                <h3 className="mt-4 text-sm font-bold">{item.name}</h3>
-              </a>
-            );
-          })}
-        </div>
+        <a href="/explore" className="group relative block h-[420px] overflow-hidden rounded-3xl shadow-lg md:h-[520px]">
+          <img src="https://images.unsplash.com/photo-1555993538-2befa9c02a60?auto=format&fit=crop&w=2000&q=85" alt="A group of friends jumping together with joy on a hill" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+          <div className="absolute bottom-0 w-full p-7 text-white md:p-12">
+            <span className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-300">Find what inspires you</span>
+            <h2 className="mt-3 text-3xl font-extrabold drop-shadow-lg md:text-5xl">Discover experiences</h2>
+            <p className="mt-4 max-w-2xl text-lg leading-8 text-white drop-shadow-md">From helping on a farm to learning a new language, there are many ways to connect with the world.</p>
+            <span className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3 font-bold text-emerald-800 transition group-hover:bg-emerald-50">Discover opportunities <ArrowRight size={18} /></span>
+          </div>
+        </a>
       </section>
 
       {/* HOW IT WORKS */}
@@ -399,7 +393,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-7xl px-5 pb-24 md:px-8">
         <a href="/travel-buddies" className="group grid overflow-hidden rounded-3xl bg-amber-50 transition hover:bg-amber-100 md:grid-cols-2">
           <div className="relative h-72 md:order-2 md:h-auto">
-            <img src="https://images.unsplash.com/photo-1758599668974-6da5d7cc6cc4?auto=format&fit=crop&w=1200&q=70" alt="Two smiling friends with backpacks setting out together" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+            <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=85" alt="Friends smiling and hugging together" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
           </div>
           <div className="flex flex-col justify-center px-7 py-12 text-center md:order-1 md:px-12 md:text-left">
             <span className="text-sm font-bold uppercase tracking-[0.2em] text-amber-700">Travel better together</span>
@@ -414,7 +408,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-7xl px-5 pb-24 md:px-8">
         <a href="/ambassador" className="group grid overflow-hidden rounded-3xl bg-emerald-50 transition hover:bg-emerald-100 md:grid-cols-2">
           <div className="relative h-72 md:h-auto">
-            <img src="https://images.unsplash.com/photo-1758599668294-8d13c0942601?auto=format&fit=crop&w=1200&q=70" alt="Smiling volunteers sharing a moment together" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+            <img src="https://images.unsplash.com/photo-1521070207300-13a93726542b?auto=format&fit=crop&w=1200&q=85" alt="Two smiling friends together" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
           </div>
           <div className="flex flex-col justify-center px-7 py-12 text-center md:px-12 md:text-left">
             <span className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-700">Be the face of the community</span>
@@ -429,7 +423,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-7xl px-5 pb-24 md:px-8">
         <a href="/membership" className="group grid overflow-hidden rounded-3xl bg-emerald-950 text-white transition hover:bg-emerald-900 md:grid-cols-2">
           <div className="relative h-72 md:order-2 md:h-auto">
-            <img src="https://images.unsplash.com/photo-1565793244233-3d09028aad47?auto=format&fit=crop&w=1200&q=70" alt="A smiling woman" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+            <img src="https://images.unsplash.com/photo-1565793244233-3d09028aad47?auto=format&fit=crop&w=1200&q=85" alt="A smiling woman" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
           </div>
           <div className="flex flex-col justify-center px-7 py-12 text-center md:order-1 md:px-12 md:text-left">
             <span className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-300">Traveller membership</span>
