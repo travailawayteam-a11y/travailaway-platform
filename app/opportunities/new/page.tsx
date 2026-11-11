@@ -45,6 +45,53 @@ const labelClass = "mb-2 block text-sm font-semibold text-gray-800";
 
 const MAX_PHOTOS = 8;
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
+const MAX_PHOTO_SIDE = 1600;
+
+// Stops the form from waiting forever if the connection is very slow.
+function withTimeout<T>(promise: PromiseLike<T>, ms: number, message: string): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error(message)), ms);
+    Promise.resolve(promise).then(
+      (value) => {
+        clearTimeout(timer);
+        resolve(value);
+      },
+      (err) => {
+        clearTimeout(timer);
+        reject(err);
+      }
+    );
+  });
+}
+
+// Shrinks big phone photos before uploading so they send quickly on mobile data.
+async function shrinkPhoto(file: File): Promise<Blob> {
+  try {
+    const bitmap = await createImageBitmap(file);
+    const scale = Math.min(1, MAX_PHOTO_SIDE / Math.max(bitmap.width, bitmap.height));
+    const width = Math.round(bitmap.width * scale);
+    const height = Math.round(bitmap.height * scale);
+
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    const context = canvas.getContext("2d");
+    if (!context) return file;
+
+    context.fillStyle = "#ffffff";
+    context.fillRect(0, 0, width, height);
+    context.drawImage(bitmap, 0, 0, width, height);
+    bitmap.close();
+
+    const blob = await new Promise<Blob | null>((resolve) =>
+      canvas.toBlob(resolve, "image/jpeg", 0.82)
+    );
+
+    return blob && blob.size < file.size ? blob : file;
+  } catch {
+    return file;
+  }
+}
 
 export default function NewOpportunityPage() {
   const supabase = createClient();
@@ -53,6 +100,7 @@ export default function NewOpportunityPage() {
   const [region, setRegion] = useState("");
   const [country, setCountry] = useState("");
   const [loading, setLoading] = useState(false);
+  const [progress, setProgress] = useState("");
   const [error, setError] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const errorRef = useRef<HTMLDivElement | null>(null);
@@ -191,17 +239,24 @@ export default function NewOpportunityPage() {
       const uploadedUrls: string[] = [];
 
       for (let index = 0; index < selectedPhotos.length; index++) {
-        const photo = selectedPhotos[index];
-        const safeName = photo.name.replace(/[^a-zA-Z0-9._-]/g, "-");
-        const path = `${user.id}/${listingId}/${crypto.randomUUID()}-${safeName}`;
+        setProgress(`Uploading photo ${index + 1} of ${selectedPhotos.length}...`);
 
-        const { error: uploadError } = await supabase.storage
-          .from("opportunity-photos")
-          .upload(path, photo, {
+        const photo = selectedPhotos[index];
+        const smaller = await shrinkPhoto(photo);
+        const isJpeg = smaller !== photo;
+        const baseName = photo.name.replace(/\.[^.]+$/, "").replace(/[^a-zA-Z0-9_-]/g, "-") || "photo";
+        const extension = isJpeg ? "jpg" : photo.name.split(".").pop()?.toLowerCase() || "jpg";
+        const path = `${user.id}/${listingId}/${crypto.randomUUID()}-${baseName}.${extension}`;
+
+        const { error: uploadError } = await withTimeout(
+          supabase.storage.from("opportunity-photos").upload(path, smaller, {
             cacheControl: "3600",
             upsert: false,
-            contentType: photo.type,
-          });
+            contentType: isJpeg ? "image/jpeg" : photo.type,
+          }),
+          90000,
+          "A photo took too long to upload. Please check your internet connection and try again."
+        );
 
         if (uploadError) {
           throw new Error(`Photo upload failed: ${uploadError.message}`);
@@ -223,7 +278,9 @@ export default function NewOpportunityPage() {
           ]
         : [];
 
-      const { error: insertError } = await supabase.from("listings").insert({
+      setProgress("Saving your opportunity...");
+
+      const { error: insertError } = await withTimeout(supabase.from("listings").insert({
         id: listingId,
         host_id: user.id,
         title,
@@ -243,12 +300,16 @@ export default function NewOpportunityPage() {
         images: orderedImages,
         // New opportunities wait for review by our team before they are listed.
         status: "draft",
-      });
+      }),
+        60000,
+        "Saving took too long. Please check your internet connection and try again."
+      );
 
       if (insertError) {
         throw new Error(insertError.message);
       }
 
+      setProgress("");
       setLoading(false);
       setSubmitted(true);
     } catch (err) {
@@ -261,6 +322,7 @@ export default function NewOpportunityPage() {
           ? err.message
           : "Something went wrong while creating your opportunity."
       );
+      setProgress("");
       setLoading(false);
     }
   }
@@ -280,7 +342,7 @@ export default function NewOpportunityPage() {
           </h1>
           <p className="mt-3 text-gray-600">
             Thank you! Our team reviews every new opportunity before it is
-            listed. You will see it on your dashboard as &ldquo;Awaiting
+            listed. You will see it on your dashboard as &ldquo;Pending
             review&rdquo; until it is approved.
           </p>
           <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
@@ -498,7 +560,7 @@ export default function NewOpportunityPage() {
 
           <p className="rounded-xl bg-emerald-50 p-4 text-sm text-emerald-900">
             Our team reviews every new opportunity before it is listed. You will
-            see it on your dashboard as &ldquo;Awaiting review&rdquo; until it
+            see it on your dashboard as &ldquo;Pending review&rdquo; until it
             is approved.
           </p>
 
@@ -513,7 +575,7 @@ export default function NewOpportunityPage() {
             disabled={loading}
             className="w-full rounded-xl bg-emerald-700 px-6 py-4 font-bold text-white transition hover:bg-emerald-800 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {loading ? "Submitting for review..." : "Submit for review"}
+            {loading ? progress || "Submitting for review..." : "Submit for review"}
           </button>
         </form>
       </div>
