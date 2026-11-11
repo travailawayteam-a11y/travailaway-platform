@@ -5,6 +5,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
+import PageBanner from "@/components/page-banner";
 
 export default function AmbassadorApplyPage() {
   const [checking, setChecking] = useState(true);
@@ -84,6 +85,12 @@ export default function AmbassadorApplyPage() {
   return (
     <main className="min-h-screen bg-[#f7faf8]">
       <SiteHeader />
+
+      <PageBanner
+        image="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1600&q=85"
+        message="Become the face of Travailaway."
+        subtitle="Tell us your story and help others travel with purpose."
+      />
 
       <div className="px-4 py-10">
         <div className="mx-auto max-w-xl">
