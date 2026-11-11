@@ -9,10 +9,10 @@ export const metadata: Metadata = {
     "Volunteer your skills and help us build Travailaway. Different skills, different countries, one shared vision.",
 };
 
-// Photo: Vitaly Gariev, Unsplash (Unsplash License)
-// https://unsplash.com/photos/diverse-volunteers-holding-trash-bags-in-a-forest-OwLmtn2_Cmw
+// Photo: Spencer Davis, Unsplash (Unsplash License), published April 2019
+// https://unsplash.com/photos/six-group-of-people-jumping-on-hill-o7MVbPwxSBI
 const HERO_PHOTO =
-  "https://images.unsplash.com/photo-1758599667717-27c61bcdd14b?auto=format&fit=crop&w=1800&q=70";
+  "https://images.unsplash.com/photo-1555993538-2befa9c02a60?auto=format&fit=crop&w=1800&q=70";
 
 const AREAS = [
   {
@@ -53,7 +53,7 @@ export default function WorkWithUsPage() {
       <section className="relative overflow-hidden bg-[#104c3a] px-4 py-20 text-white md:py-28">
         <img
           src={HERO_PHOTO}
-          alt="A smiling team of volunteers from different backgrounds standing together outdoors"
+          alt="A group of friends jumping together with joy on a hill"
           className="absolute inset-0 h-full w-full object-cover"
           loading="eager"
         />
