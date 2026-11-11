@@ -23,10 +23,9 @@ export default function AmbassadorPage() {
       <SiteHeader />
 
       <PageBanner
-        image="https://images.unsplash.com/photo-1758599668294-8d13c0942601?auto=format&fit=crop&w=1600&q=70"
+        image="https://images.unsplash.com/photo-1521070207300-13a93726542b?auto=format&fit=crop&w=1600&q=70"
         message="Be the face of a global community."
         subtitle="Travel with purpose and inspire others to follow."
-        credit="Vitaly Gariev"
       />
 
       <section className="mx-auto max-w-3xl px-5 py-12 md:py-16">
