@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import LogoutButton from "./logout-button";
+import ListingActions from "./listing-actions";
 
 type MyListing = {
   id: string;
@@ -10,19 +11,35 @@ type MyListing = {
   country: string;
   city: string | null;
   created_at: string;
+  images: string[] | null;
+  rejection_reason: string | null;
+  host_paused: boolean;
+  published_at: string | null;
 };
 
-function statusLabel(status: string) {
-  if (status === "published") return "Live";
-  if (status === "draft") return "Awaiting review";
-  if (status === "paused") return "Paused";
-  return status;
+function statusLabel(listing: MyListing) {
+  if (listing.status === "published") return "Live";
+  if (listing.status === "draft") return "Pending review";
+  if (listing.status === "rejected") return "Needs changes";
+  if (listing.status === "paused") {
+    return listing.host_paused ? "Paused by you" : "Paused by our team";
+  }
+  return listing.status;
 }
 
 function statusClass(status: string) {
   if (status === "published") return "bg-[#e8f3ed] text-[#176b50]";
+  if (status === "rejected") return "bg-red-50 text-red-700";
   if (status === "paused" || status === "draft") return "bg-amber-50 text-amber-700";
   return "bg-gray-100 text-gray-600";
+}
+
+function formatDate(value: string) {
+  return new Date(value).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
 }
 
 export default async function DashboardPage() {
@@ -42,16 +59,19 @@ export default async function DashboardPage() {
     user.email ||
     "Traveller";
 
-  const accountType =
-    user.user_metadata?.account_type || "traveller";
-
-  const isHost = accountType === "host";
-
   const { data: profileData, error: profileQueryError } = await supabase
     .from("profiles")
-    .select("country, bio")
+    .select("full_name, country, city, bio, account_type")
     .eq("id", user.id)
     .maybeSingle();
+
+  // The profile is the source of truth for the account type.
+  const accountType =
+    profileData?.account_type ||
+    user.user_metadata?.account_type ||
+    "traveller";
+
+  const isHost = accountType === "host";
 
   const profileComplete =
     Boolean(profileData?.bio?.trim()) && Boolean(profileData?.country?.trim());
@@ -62,7 +82,9 @@ export default async function DashboardPage() {
   if (isHost) {
     const { data: listingsData, error: listingsQueryError } = await supabase
       .from("listings")
-      .select("id, title, status, country, city, created_at")
+      .select(
+        "id, title, status, country, city, created_at, images, rejection_reason, host_paused, published_at"
+      )
       .eq("host_id", user.id)
       .order("created_at", { ascending: false });
 
@@ -168,6 +190,41 @@ export default async function DashboardPage() {
           </div>
         )}
 
+        <div className="mt-8 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h2 className="text-lg font-bold text-[#17231f]">Your account</h2>
+            <Link
+              href="/dashboard/profile"
+              className="text-sm font-semibold text-[#176b50] hover:underline"
+            >
+              Edit profile →
+            </Link>
+          </div>
+          <dl className="mt-4 grid gap-4 text-sm sm:grid-cols-2">
+            <div>
+              <dt className="text-gray-500">Name</dt>
+              <dd className="font-medium text-[#17231f]">
+                {profileData?.full_name || fullName}
+              </dd>
+            </div>
+            <div>
+              <dt className="text-gray-500">Email</dt>
+              <dd className="break-all font-medium text-[#17231f]">{user.email}</dd>
+            </div>
+            <div>
+              <dt className="text-gray-500">Account type</dt>
+              <dd className="font-medium capitalize text-[#17231f]">{accountType}</dd>
+            </div>
+            <div>
+              <dt className="text-gray-500">Location</dt>
+              <dd className="font-medium text-[#17231f]">
+                {[profileData?.city, profileData?.country].filter(Boolean).join(", ") ||
+                  "Not added yet"}
+              </dd>
+            </div>
+          </dl>
+        </div>
+
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {isHost ? (
             <>
@@ -240,35 +297,92 @@ export default async function DashboardPage() {
                 to share your first one with travellers.
               </p>
             ) : (
-              <ul className="mt-5 divide-y divide-gray-100">
+              <ul className="mt-5 space-y-4">
                 {myListings.map((listing) => (
                   <li
                     key={listing.id}
-                    className="flex flex-wrap items-center justify-between gap-3 py-4"
+                    className="rounded-xl border border-gray-100 p-4"
                   >
-                    <div>
-                      <p className="font-semibold text-[#17231f]">
-                        {listing.title}
-                      </p>
-                      <p className="mt-1 text-sm text-gray-600">
-                        {[listing.city, listing.country]
-                          .filter(Boolean)
-                          .join(", ")}
-                        {" · "}
-                        Created{" "}
-                        {new Date(listing.created_at).toLocaleDateString(
-                          "en-GB",
-                          { day: "numeric", month: "short", year: "numeric" }
-                        )}
-                      </p>
+                    <div className="flex gap-4">
+                      {listing.images && listing.images[0] ? (
+                        <img
+                          src={listing.images[0]}
+                          alt=""
+                          className="h-20 w-20 shrink-0 rounded-lg object-cover sm:h-24 sm:w-24"
+                        />
+                      ) : (
+                        <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-lg bg-gray-100 text-xs text-gray-400 sm:h-24 sm:w-24">
+                          No photo
+                        </div>
+                      )}
+
+                      <div className="min-w-0 flex-1">
+                        <div className="flex flex-wrap items-start justify-between gap-2">
+                          <p className="font-semibold text-[#17231f]">
+                            {listing.title}
+                          </p>
+                          <span
+                            className={`rounded-full px-3 py-1 text-xs font-semibold ${statusClass(
+                              listing.status
+                            )}`}
+                          >
+                            {statusLabel(listing)}
+                          </span>
+                        </div>
+                        <p className="mt-1 text-sm text-gray-600">
+                          {[listing.city, listing.country]
+                            .filter(Boolean)
+                            .join(", ")}
+                        </p>
+                        <p className="mt-1 text-xs text-gray-500">
+                          Created {formatDate(listing.created_at)}
+                          {listing.status === "published" && listing.published_at
+                            ? ` · Live since ${formatDate(listing.published_at)}`
+                            : ""}
+                        </p>
+                      </div>
                     </div>
-                    <span
-                      className={`rounded-full px-3 py-1 text-xs font-semibold ${statusClass(
-                        listing.status
-                      )}`}
-                    >
-                      {statusLabel(listing.status)}
-                    </span>
+
+                    {listing.status === "draft" && (
+                      <p className="mt-3 rounded-lg bg-amber-50 p-3 text-sm text-amber-800">
+                        Our team is reviewing this opportunity. It will appear
+                        on Explore once it is approved.
+                      </p>
+                    )}
+
+                    {listing.status === "rejected" && (
+                      <p className="mt-3 rounded-lg bg-red-50 p-3 text-sm text-red-800">
+                        <span className="font-semibold">
+                          This opportunity needs changes before it can go live.
+                        </span>{" "}
+                        {listing.rejection_reason
+                          ? `Reason: ${listing.rejection_reason}`
+                          : "Our team did not leave a reason. Please contact us if you need help."}
+                      </p>
+                    )}
+
+                    {listing.status === "paused" && !listing.host_paused && (
+                      <p className="mt-3 rounded-lg bg-amber-50 p-3 text-sm text-amber-800">
+                        Our team has paused this opportunity. Please contact us
+                        to find out more.
+                      </p>
+                    )}
+
+                    <div className="mt-3 flex flex-wrap items-center gap-3">
+                      {listing.status === "published" && (
+                        <Link
+                          href="/explore"
+                          className="text-sm font-semibold text-[#176b50] hover:underline"
+                        >
+                          View on Explore →
+                        </Link>
+                      )}
+                      <ListingActions
+                        id={listing.id}
+                        status={listing.status}
+                        hostPaused={listing.host_paused}
+                      />
+                    </div>
                   </li>
                 ))}
               </ul>
