@@ -106,7 +106,7 @@ export default function LoginPage() {
       <SiteHeader />
 
       <PageBanner
-        image="https://images.unsplash.com/photo-1758599668294-8d13c0942601?auto=format&fit=crop&w=1600&q=70"
+        image="https://images.unsplash.com/photo-1622352496174-9e1d969b1945?auto=format&fit=crop&w=1600&q=70"
         message="Welcome back."
         subtitle="Log in to continue your Travailaway journey."
       />
