@@ -78,7 +78,7 @@ export default function RegisterPage() {
 
       {accountType === "host" ? (
         <PageBanner
-          image="https://images.unsplash.com/photo-1758599668294-8d13c0942601?auto=format&fit=crop&w=1600&q=70"
+          image="https://images.unsplash.com/photo-1530047139082-5435ca3c4614?auto=format&fit=crop&w=1600&q=70"
           message="Open your door to the world."
           subtitle="Share your place and welcome travellers."
         />
