@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
 
 const logo =
   "https://sbgfaplqdxejirqfqfpn.supabase.co/storage/v1/object/public/brand-assets/1000296575-removebg-preview.png";
@@ -64,8 +65,69 @@ export const MENU_ITEMS = [
   },
 ];
 
+type Account = { type: string; admin: boolean } | null;
+
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
+  // undefined = still checking, null = logged out
+  const [account, setAccount] = useState<Account | undefined>(undefined);
+
+  useEffect(() => {
+    const supabase = createClient();
+    let active = true;
+
+    async function load() {
+      try {
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+
+        if (!user) {
+          if (active) setAccount(null);
+          return;
+        }
+
+        const [profileResult, adminResult] = await Promise.all([
+          supabase.from("profiles").select("account_type").eq("id", user.id).maybeSingle(),
+          supabase.from("admins").select("user_id").eq("user_id", user.id).maybeSingle(),
+        ]);
+
+        if (active) {
+          setAccount({
+            type: profileResult.data?.account_type ?? user.user_metadata?.account_type ?? "traveller",
+            admin: Boolean(adminResult.data),
+          });
+        }
+      } catch {
+        if (active) setAccount(null);
+      }
+    }
+
+    load();
+
+    const { data: listener } = supabase.auth.onAuthStateChange(() => {
+      load();
+    });
+
+    return () => {
+      active = false;
+      listener.subscription.unsubscribe();
+    };
+  }, []);
+
+  async function handleLogout() {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    window.location.href = "/";
+  }
+
+  const accountLinks = account
+    ? [
+        { label: "My dashboard", href: "/dashboard" },
+        { label: "Messages", href: "/messages" },
+        ...(account.admin ? [{ label: "Team review", href: "/admin" }] : []),
+      ]
+    : [];
 
   return (
     <header className="sticky top-0 z-50 border-b bg-white/95 backdrop-blur">
@@ -91,18 +153,39 @@ export default function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2 md:gap-3">
-          <Link
-            href="/login"
-            className="hidden px-4 py-2 text-sm font-semibold sm:block"
-          >
-            Log in
-          </Link>
-          <Link
-            href="/register"
-            className="hidden rounded-full bg-emerald-700 px-5 py-2.5 text-sm font-bold text-white hover:bg-emerald-800 sm:block"
-          >
-            Join Travailaway
-          </Link>
+          {account === null && (
+            <>
+              <Link
+                href="/login"
+                className="hidden px-4 py-2 text-sm font-semibold sm:block"
+              >
+                Log in
+              </Link>
+              <Link
+                href="/register"
+                className="hidden rounded-full bg-emerald-700 px-5 py-2.5 text-sm font-bold text-white hover:bg-emerald-800 sm:block"
+              >
+                Join Travailaway
+              </Link>
+            </>
+          )}
+          {account && (
+            <>
+              <Link
+                href="/dashboard"
+                className="hidden rounded-full bg-emerald-700 px-5 py-2.5 text-sm font-bold text-white hover:bg-emerald-800 sm:block"
+              >
+                My dashboard
+              </Link>
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="hidden px-3 py-2 text-sm font-semibold text-slate-700 hover:text-emerald-700 sm:block"
+              >
+                Log out
+              </button>
+            </>
+          )}
           <button
             type="button"
             onClick={() => setOpen(!open)}
@@ -117,6 +200,28 @@ export default function SiteHeader() {
 
       {open && (
         <div className="max-h-[80vh] overflow-y-auto border-t bg-white px-4 py-5 md:px-8 2xl:hidden">
+          {account && (
+            <div className="mx-auto mb-4 flex max-w-7xl flex-wrap gap-2 border-b pb-4">
+              {accountLinks.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className="rounded-full bg-emerald-700 px-4 py-2 text-sm font-bold text-white"
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="rounded-full border border-gray-300 px-4 py-2 text-sm font-semibold"
+              >
+                Log out
+              </button>
+            </div>
+          )}
+
           <nav className="mx-auto grid max-w-7xl gap-1 sm:grid-cols-2 lg:grid-cols-4">
             {MENU_ITEMS.map((item) => (
               <Link
@@ -135,6 +240,7 @@ export default function SiteHeader() {
             ))}
           </nav>
 
+          {account === null && (
           <div className="mx-auto mt-4 flex max-w-7xl gap-3 border-t pt-4 sm:hidden">
             <Link
               href="/login"
@@ -151,6 +257,7 @@ export default function SiteHeader() {
               Join Travailaway
             </Link>
           </div>
+          )}
         </div>
       )}
     </header>
