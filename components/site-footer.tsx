@@ -18,6 +18,7 @@ const columns = [
     links: [
       { label: "Join as a traveller", href: "/register?type=traveller" },
       { label: "Become a host", href: "/register?type=host" },
+      { label: "Membership", href: "/membership" },
       { label: "Log in", href: "/login" },
     ],
   },
@@ -29,7 +30,16 @@ const columns = [
       { label: "Our community", href: "/community" },
       { label: "Work with us", href: "/work-with-us" },
       { label: "Our impact", href: "/giving-back" },
+      { label: "Become an ambassador", href: "/ambassador" },
+    ],
+  },
+  {
+    title: "Support & legal",
+    links: [
+      { label: "Contact us", href: "/contact" },
       { label: "Safety & trust", href: "/safety" },
+      { label: "Terms of service", href: "/terms" },
+      { label: "Privacy policy", href: "/privacy" },
     ],
   },
 ];
@@ -39,7 +49,7 @@ export default function SiteFooter() {
 
   return (
     <footer className="bg-slate-900 text-slate-300">
-      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 md:grid-cols-4 md:px-8">
+      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 sm:grid-cols-2 md:px-8 lg:grid-cols-5">
         <div>
           <Link href="/">
             <img
