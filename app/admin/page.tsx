@@ -137,7 +137,7 @@ export default function AdminPage() {
       ]);
 
       if (l.error || p.error || a.error) {
-        setError("Some items could not be loaded. Please refresh the page.");
+        setError("Could not load: " + [l.error?.message, p.error?.message, a.error?.message].filter(Boolean).join(" | "));
       }
 
       const loaded = (l.data || []) as Listing[];
