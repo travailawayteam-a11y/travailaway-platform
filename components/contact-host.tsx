@@ -19,7 +19,7 @@ type Stage =
   | "ready"
   | "sent";
 
-export default function ContactHost({ listingId, hostId, title }: Props) {
+function ContactHostBox({ listingId, hostId, title }: Props) {
   const [stage, setStage] = useState<Stage>("loading");
   const [userId, setUserId] = useState<string | null>(null);
   const [text, setText] = useState("");
@@ -63,6 +63,8 @@ export default function ContactHost({ listingId, hostId, title }: Props) {
           .from("memberships")
           .select("expires_at")
           .eq("user_id", user.id)
+          .order("expires_at", { ascending: false })
+          .limit(1)
           .maybeSingle();
 
         if (!active) return;
@@ -236,5 +238,21 @@ export default function ContactHost({ listingId, hostId, title }: Props) {
         {sending ? "Sending..." : "Send message"}
       </button>
     </form>
+  );
+}
+
+export default function ContactHost(props: Props) {
+  return (
+    <div className="space-y-3">
+      <ContactHostBox {...props} />
+      {props.hostId && (
+        <Link
+          href={`/hosts/${props.hostId}`}
+          className="block text-sm font-bold text-emerald-700 underline"
+        >
+          View host profile and reviews
+        </Link>
+      )}
+    </div>
   );
 }
