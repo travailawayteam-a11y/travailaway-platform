@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import ReviewsPanel from "./reviews-panel";
 
 type Found = {
   user_id: string;
@@ -11,6 +12,13 @@ type Found = {
   plan: string | null;
   expires_at: string | null;
   active: boolean;
+};
+
+type Conversation = {
+  listing_id: string;
+  title: string;
+  host_name: string | null;
+  stay_completed: boolean;
 };
 
 type LiveListing = {
@@ -34,6 +42,7 @@ export default function MembersPanel() {
   const [found, setFound] = useState<Found | null>(null);
   const [searched, setSearched] = useState(false);
   const [listings, setListings] = useState<LiveListing[]>([]);
+  const [convos, setConvos] = useState<Conversation[]>([]);
   const [plan, setPlan] = useState("solo");
   const [reference, setReference] = useState("");
   const [busy, setBusy] = useState("");
@@ -53,10 +62,49 @@ export default function MembersPanel() {
     loadListings();
   }, []);
 
+  async function loadConvos(userId: string) {
+    const supabase = createClient();
+    const { data, error: rpcError } = await supabase.rpc("admin_traveller_conversations", {
+      p_traveller_id: userId,
+    });
+    if (rpcError) {
+      setError(rpcError.message);
+      setConvos([]);
+    } else {
+      setConvos((data || []) as Conversation[]);
+    }
+  }
+
+  async function markStay(listingId: string) {
+    if (!found) return;
+    setError("");
+    setNotice("");
+
+    setBusy(`stay-${listingId}`);
+    const supabase = createClient();
+    const { error: rpcError } = await supabase.rpc("admin_mark_stay_completed", {
+      p_traveller_id: found.user_id,
+      p_listing_id: listingId,
+    });
+
+    if (rpcError) {
+      setError(rpcError.message);
+    } else {
+      setConvos((current) =>
+        current.map((item) =>
+          item.listing_id === listingId ? { ...item, stay_completed: true } : item
+        )
+      );
+      setNotice("Stay marked as completed. The traveller can now write a review.");
+    }
+    setBusy("");
+  }
+
   async function findTraveller() {
     setError("");
     setNotice("");
     setFound(null);
+    setConvos([]);
     setSearched(false);
 
     if (!email.trim()) {
@@ -76,6 +124,9 @@ export default function MembersPanel() {
       const rows = (data || []) as Found[];
       setFound(rows.length > 0 ? rows[0] : null);
       setSearched(true);
+      if (rows.length > 0 && rows[0].account_type !== "host") {
+        await loadConvos(rows[0].user_id);
+      }
     }
     setBusy("");
   }
@@ -129,6 +180,7 @@ export default function MembersPanel() {
           ? `Connected to ${added} new opportunit${added === 1 ? "y" : "ies"}. The conversations now show in Messages for the traveller and the hosts.`
           : "Already connected to every live opportunity. Nothing new to add."
       );
+      await loadConvos(found.user_id);
     }
     setBusy("");
   }
@@ -136,6 +188,7 @@ export default function MembersPanel() {
   const isHost = found?.account_type === "host";
 
   return (
+    <>
     <section>
       <h2 className="text-2xl font-bold text-[#0f3d2e]">Members and connections</h2>
       <p className="mt-1 text-sm text-gray-600">
@@ -262,11 +315,50 @@ export default function MembersPanel() {
                     )}
                   </div>
                 )}
+
+                {convos.length > 0 && (
+                  <div className="rounded-2xl border border-[#e8dfc8] p-4">
+                    <p className="text-sm font-bold text-[#17231f]">Stays</p>
+                    <p className="mt-1 text-xs text-gray-500">
+                      Mark a stay as completed when the traveller has finished their exchange.
+                      Only then can they write a review of that host.
+                    </p>
+                    <ul className="mt-3 space-y-3">
+                      {convos.map((item) => (
+                        <li
+                          key={item.listing_id}
+                          className="flex flex-col gap-2 rounded-xl bg-[#fbf6ea] p-3 sm:flex-row sm:items-center sm:justify-between"
+                        >
+                          <span className="text-sm text-[#17231f]">
+                            <span className="font-semibold">{item.title}</span>
+                            <br />
+                            <span className="text-gray-600">Host: {item.host_name || "Name not added"}</span>
+                          </span>
+                          {item.stay_completed ? (
+                            <span className="text-sm font-bold text-[#176b50]">Stay completed</span>
+                          ) : (
+                            <button
+                              type="button"
+                              onClick={() => markStay(item.listing_id)}
+                              disabled={busy === `stay-${item.listing_id}`}
+                              className="shrink-0 rounded-full bg-[#176b50] px-5 py-2 text-sm font-bold text-white hover:bg-[#0f3d2e] disabled:opacity-50"
+                            >
+                              {busy === `stay-${item.listing_id}` ? "Saving..." : "Mark stay completed"}
+                            </button>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </>
             )}
           </div>
         )}
       </div>
     </section>
+
+    <ReviewsPanel />
+    </>
   );
 }
