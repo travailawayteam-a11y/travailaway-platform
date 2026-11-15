@@ -36,7 +36,6 @@ export default function MembersPanel() {
   const [listings, setListings] = useState<LiveListing[]>([]);
   const [plan, setPlan] = useState("solo");
   const [reference, setReference] = useState("");
-  const [listingId, setListingId] = useState("");
   const [busy, setBusy] = useState("");
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
@@ -115,23 +114,20 @@ export default function MembersPanel() {
     setError("");
     setNotice("");
 
-    if (!listingId) {
-      setError("Please choose an opportunity first.");
-      return;
-    }
-
     setBusy("connect");
     const supabase = createClient();
-    const { error: rpcError } = await supabase.rpc("admin_connect_traveller", {
+    const { data, error: rpcError } = await supabase.rpc("admin_connect_traveller_to_all", {
       p_traveller_id: found.user_id,
-      p_listing_id: listingId,
     });
 
     if (rpcError) {
       setError(rpcError.message);
     } else {
+      const added = typeof data === "number" ? data : 0;
       setNotice(
-        "Connected. The conversation now shows in Messages for both the traveller and the host."
+        added > 0
+          ? `Connected to ${added} new opportunit${added === 1 ? "y" : "ies"}. The conversations now show in Messages for the traveller and the hosts.`
+          : "Already connected to every live opportunity. Nothing new to add."
       );
     }
     setBusy("");
@@ -244,35 +240,25 @@ export default function MembersPanel() {
 
                 {found.active && (
                   <div className="rounded-2xl border border-[#e8dfc8] p-4">
-                    <p className="text-sm font-bold text-[#17231f]">Connect to a host</p>
+                    <p className="text-sm font-bold text-[#17231f]">Connect to hosts</p>
+                    <p className="mt-1 text-xs text-gray-500">
+                      A paid member can reach every host. This opens a conversation with each
+                      live opportunity ({listings.length} right now). Run it again later to add
+                      newly approved ones.
+                    </p>
                     {listings.length === 0 ? (
                       <p className="mt-2 text-sm text-gray-600">
                         There are no live opportunities yet. Approve one first.
                       </p>
                     ) : (
-                      <>
-                        <select
-                          value={listingId}
-                          onChange={(event) => setListingId(event.target.value)}
-                          className="mt-3 w-full rounded-xl border border-gray-300 bg-white px-3 py-2 text-sm"
-                        >
-                          <option value="">Choose an opportunity...</option>
-                          {listings.map((item) => (
-                            <option key={item.id} value={item.id}>
-                              {item.title} ({item.city ? `${item.city}, ` : ""}
-                              {item.country})
-                            </option>
-                          ))}
-                        </select>
-                        <button
-                          type="button"
-                          onClick={connect}
-                          disabled={busy === "connect"}
-                          className="mt-3 rounded-full bg-[#176b50] px-6 py-2 text-sm font-bold text-white hover:bg-[#0f3d2e] disabled:opacity-50"
-                        >
-                          {busy === "connect" ? "Connecting..." : "Connect traveller to host"}
-                        </button>
-                      </>
+                      <button
+                        type="button"
+                        onClick={connect}
+                        disabled={busy === "connect"}
+                        className="mt-3 rounded-full bg-[#176b50] px-6 py-2 text-sm font-bold text-white hover:bg-[#0f3d2e] disabled:opacity-50"
+                      >
+                        {busy === "connect" ? "Connecting..." : "Connect to all live opportunities"}
+                      </button>
                     )}
                   </div>
                 )}
