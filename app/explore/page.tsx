@@ -2,9 +2,11 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { Clock, Compass, MapPin, Menu, Search, X } from "lucide-react";
+import { Clock, Compass, MapPin, Search } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import ContactHost from "@/components/contact-host";
+import SiteHeader from "@/components/site-header";
+import SiteFooter from "@/components/site-footer";
 
 type Listing = {
   id: string;
@@ -24,9 +26,6 @@ type Listing = {
   images: string[] | null;
   created_at: string;
 };
-
-const logo =
-  "https://sbgfaplqdxejirqfqfpn.supabase.co/storage/v1/object/public/brand-assets/1000296575-removebg-preview.png";
 
 // Photo behind the Explore heading. To change it, replace only this address.
 // Photo: Steve Jewett on Unsplash (free licence), published April 2021.
@@ -135,7 +134,6 @@ function Chips({ items }: { items: string[] }) {
 }
 
 export default function ExplorePage() {
-  const [menuOpen, setMenuOpen] = useState(false);
   const [listings, setListings] = useState<Listing[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -253,59 +251,7 @@ export default function ExplorePage() {
 
   return (
     <main className="min-h-screen bg-white text-slate-800">
-      {/* HEADER */}
-      <header className="sticky top-0 z-50 border-b bg-white/95 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-8">
-          <Link href="/" className="shrink-0">
-            <img
-              src={logo}
-              alt="Travailaway"
-              className="h-16 w-auto object-contain md:h-20 lg:h-24"
-            />
-          </Link>
-
-          <nav className="hidden items-center gap-7 text-sm font-semibold lg:flex">
-            <Link href="/" className="hover:text-emerald-700">Home</Link>
-            <Link href="/explore" className="text-emerald-700">Explore</Link>
-          </nav>
-
-          <div className="hidden items-center gap-3 lg:flex">
-            <Link href="/login" className="px-4 py-2 text-sm font-semibold">
-              Log in
-            </Link>
-            <Link
-              href="/register"
-              className="rounded-full bg-emerald-700 px-6 py-3 text-sm font-bold text-white hover:bg-emerald-800"
-            >
-              Join Travailaway
-            </Link>
-          </div>
-
-          <button
-            type="button"
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="rounded-lg p-2 lg:hidden"
-            aria-label="Toggle menu"
-          >
-            {menuOpen ? <X size={27} /> : <Menu size={27} />}
-          </button>
-        </div>
-
-        {menuOpen && (
-          <div className="border-t bg-white px-6 py-5 lg:hidden">
-            <nav className="flex flex-col gap-5 font-semibold">
-              <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
-              <Link href="/explore" onClick={() => setMenuOpen(false)} className="text-emerald-700">
-                Explore opportunities
-              </Link>
-              <Link href="/login" onClick={() => setMenuOpen(false)}>Log in</Link>
-              <Link href="/register" onClick={() => setMenuOpen(false)} className="text-emerald-700">
-                Join Travailaway
-              </Link>
-            </nav>
-          </div>
-        )}
-      </header>
+      <SiteHeader />
 
       {/* HERO */}
       <section className="relative overflow-hidden bg-emerald-950 px-5 pb-28 pt-16 text-center text-white md:pb-36 md:pt-24">
@@ -590,23 +536,7 @@ export default function ExplorePage() {
         )}
       </section>
 
-      {/* FOOTER */}
-      <footer className="bg-slate-950 px-5 pb-8 pt-12 text-gray-300">
-        <div className="mx-auto flex max-w-7xl flex-col justify-between gap-6 md:flex-row md:items-center">
-          <Link href="/">
-            <img src={logo} alt="Travailaway" className="h-16 w-auto object-contain" />
-          </Link>
-          <div className="flex flex-wrap gap-6 text-sm">
-            <Link href="/" className="hover:text-emerald-300">Home</Link>
-            <Link href="/explore" className="hover:text-emerald-300">Explore</Link>
-            <Link href="/register?type=host" className="hover:text-emerald-300">Become a host</Link>
-            <Link href="/login" className="hover:text-emerald-300">Log in</Link>
-          </div>
-        </div>
-        <p className="mx-auto mt-8 max-w-7xl border-t border-white/10 pt-6 text-xs text-gray-500">
-          © {new Date().getFullYear()} Travailaway. All rights reserved.
-        </p>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
