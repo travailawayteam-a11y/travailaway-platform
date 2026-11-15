@@ -5,6 +5,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
+import MembersPanel from "./members-panel";
 
 type Listing = {
   id: string;
@@ -291,6 +292,8 @@ export default function AdminPage() {
                 {notice}
               </p>
             )}
+
+            <MembersPanel />
 
             <section>
               <h2 className="text-2xl font-bold text-[#0f3d2e]">Opportunities</h2>
