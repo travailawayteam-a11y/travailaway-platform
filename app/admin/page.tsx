@@ -92,6 +92,8 @@ export default function AdminPage() {
   const [busyId, setBusyId] = useState("");
   const [rejectId, setRejectId] = useState("");
   const [rejectReason, setRejectReason] = useState("");
+  const [deleteId, setDeleteId] = useState("");
+  const [deleteText, setDeleteText] = useState("");
 
   useEffect(() => {
     async function load() {
@@ -209,6 +211,28 @@ export default function AdminPage() {
     setBusyId("");
   }
 
+  async function removeListing(item: Listing) {
+    setError("");
+    setNotice("");
+    setBusyId(item.id);
+
+    const supabase = createClient();
+    const { error: rpcError } = await supabase.rpc("admin_delete_listing", {
+      p_listing_id: item.id,
+    });
+
+    if (rpcError) {
+      setError(rpcError.message);
+    } else {
+      setListings((current) => current.filter((row) => row.id !== item.id));
+      setDeleteId("");
+      setDeleteText("");
+      setNotice("The opportunity was permanently removed.");
+    }
+
+    setBusyId("");
+  }
+
   async function setStatus(
     table: "companion_posts" | "ambassador_applications",
     id: string,
@@ -307,6 +331,8 @@ export default function AdminPage() {
                       setTab(item.id);
                       setRejectId("");
                       setRejectReason("");
+                      setDeleteId("");
+                      setDeleteText("");
                     }}
                     className={`shrink-0 rounded-full px-4 py-2 text-sm font-bold ${
                       tab === item.id
@@ -543,6 +569,60 @@ export default function AdminPage() {
                                 {busy ? "Saving..." : "Reactivate"}
                               </button>
                             )}
+                            <button
+                              type="button"
+                              disabled={busy}
+                              onClick={() => {
+                                setDeleteId(item.id);
+                                setDeleteText("");
+                              }}
+                              className="rounded-full px-5 py-2 text-sm font-semibold text-red-700 underline hover:bg-red-50 disabled:opacity-50"
+                            >
+                              Delete permanently
+                            </button>
+                          </div>
+                        )}
+
+                        {deleteId === item.id && (
+                          <div className="mt-4 rounded-2xl border border-red-300 bg-red-50 p-4">
+                            <p className="text-sm font-bold text-red-800">
+                              Permanently delete this opportunity?
+                            </p>
+                            <p className="mt-1 text-sm text-red-800">
+                              It disappears from Explore and from the host's dashboard, and it
+                              cannot be undone. Saved copies by travellers are removed too.
+                              Conversations, completed stays and reviews are kept. If you only
+                              want to hide it for now, use Pause instead.
+                            </p>
+                            <label className="mt-3 block text-sm font-semibold text-red-800">
+                              Type DELETE to confirm
+                            </label>
+                            <input
+                              type="text"
+                              value={deleteText}
+                              onChange={(event) => setDeleteText(event.target.value)}
+                              className="mt-1 w-full rounded-xl border border-red-200 bg-white px-3 py-2 text-sm outline-none focus:border-red-400"
+                            />
+                            <div className="mt-3 flex flex-wrap gap-3">
+                              <button
+                                type="button"
+                                disabled={busy || deleteText.trim() !== "DELETE"}
+                                onClick={() => removeListing(item)}
+                                className="rounded-full bg-red-700 px-5 py-2 text-sm font-bold text-white hover:bg-red-800 disabled:opacity-50"
+                              >
+                                {busy ? "Deleting..." : "Delete for good"}
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setDeleteId("");
+                                  setDeleteText("");
+                                }}
+                                className={declineClass}
+                              >
+                                Cancel
+                              </button>
+                            </div>
                           </div>
                         )}
                       </article>
