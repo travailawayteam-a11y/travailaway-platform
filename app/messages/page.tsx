@@ -269,6 +269,16 @@ export default function MessagesPage() {
                       {otherPerson(openConvo)}
                     </h2>
                     <p className="text-sm text-gray-600">{topic(openConvo)}</p>
+                    <Link
+                      href={
+                        openConvo.traveller_id === userId
+                          ? `/hosts/${openConvo.host_id}`
+                          : `/travellers/${openConvo.traveller_id}`
+                      }
+                      className="mt-1 inline-block text-sm font-semibold text-emerald-700 underline"
+                    >
+                      View profile
+                    </Link>
                   </div>
 
                   <div className="mt-4 max-h-[420px] space-y-3 overflow-y-auto">
@@ -328,7 +338,7 @@ export default function MessagesPage() {
                       </button>
                       <button
                         type="button"
-                        onClick={() => openConversation(openConvo.id)}
+                        onClick={() => openConvo && openConversation(openConvo.id)}
                         className="rounded-full border border-gray-300 px-5 py-2.5 text-sm font-bold text-gray-700 hover:bg-gray-50"
                       >
                         Refresh
