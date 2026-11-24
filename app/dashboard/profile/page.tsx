@@ -42,6 +42,15 @@ function shrinkPhoto(file: File): Promise<Blob> {
   });
 }
 
+// "English, Luganda" becomes ["English", "Luganda"]. The table stores these as lists.
+function toList(text: string): string[] {
+  return text
+    .split(",")
+    .map((item) => item.trim().slice(0, 40))
+    .filter(Boolean)
+    .slice(0, 20);
+}
+
 // Turns a public photo link back into its path inside the avatars folder.
 function avatarPathFromUrl(url: string): string | null {
   const marker = `/${AVATAR_BUCKET}/`;
@@ -97,9 +106,9 @@ export default function ProfilePage() {
         setCountry(data.country || "");
         setCity(data.city || "");
         setBio(data.bio || "");
-        setLanguages(data.languages || "");
-        setSkills(data.skills || "");
-        setInterests(data.interests || "");
+        setLanguages((data.languages || []).join(", "));
+        setSkills((data.skills || []).join(", "));
+        setInterests((data.interests || []).join(", "));
         setAvatarUrl(data.avatar_url || "");
         setAccountType(data.account_type || "traveller");
       }
@@ -125,9 +134,9 @@ export default function ProfilePage() {
         country: country.trim(),
         city: city.trim(),
         bio: bio.trim(),
-        languages: languages.trim(),
-        skills: skills.trim(),
-        interests: interests.trim(),
+        languages: toList(languages),
+        skills: toList(skills),
+        interests: toList(interests),
         updated_at: new Date().toISOString(),
       })
       .eq("id", userId);
