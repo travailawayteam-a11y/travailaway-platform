@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import NewsletterPanel from "./newsletter-panel";
 
 type PendingReview = {
   id: string;
@@ -90,6 +91,7 @@ export default function ReviewsPanel() {
   }
 
   return (
+    <>
     <section>
       <h2 className="text-2xl font-bold text-[#0f3d2e]">
         Reviews waiting for approval ({reviews.length})
@@ -158,5 +160,8 @@ export default function ReviewsPanel() {
         </div>
       )}
     </section>
+
+    <NewsletterPanel />
+    </>
   );
 }
