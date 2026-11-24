@@ -1,4 +1,5 @@
 import Link from "next/link";
+import NewsletterForm from "@/components/newsletter-form";
 
 const logo =
   "https://sbgfaplqdxejirqfqfpn.supabase.co/storage/v1/object/public/brand-assets/1000296575-removebg-preview.png";
@@ -49,6 +50,19 @@ export default function SiteFooter() {
 
   return (
     <footer className="bg-slate-900 text-slate-300">
+      <div className="border-b border-slate-700">
+        <div className="mx-auto grid max-w-7xl gap-6 px-5 py-10 md:grid-cols-2 md:items-center md:px-8">
+          <div>
+            <h3 className="text-xl font-bold text-white">Travel stories in your inbox</h3>
+            <p className="mt-2 max-w-md text-sm leading-6">
+              News of new hosts, real traveller stories and tips for travelling differently. No
+              spam.
+            </p>
+          </div>
+          <NewsletterForm source="footer" />
+        </div>
+      </div>
+
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 sm:grid-cols-2 md:px-8 lg:grid-cols-5">
         <div>
           <Link href="/">
