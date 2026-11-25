@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import NewsletterForm from "@/components/newsletter-form";
 import {
   ArrowRight, Globe2, Heart, MapPin, Menu, Search, ShieldCheck,
   Users, X, Home, PawPrint, GraduationCap, Palette, Sailboat,
@@ -497,6 +498,15 @@ export default function HomePage() {
 
       {/* FOOTER */}
       <footer className="bg-slate-950 px-5 pb-8 pt-16 text-gray-300">
+        <div className="mx-auto mb-14 grid max-w-7xl gap-6 border-b border-white/10 pb-14 md:grid-cols-2 md:items-center">
+          <div>
+            <h3 className="text-xl font-bold text-white">Travel stories in your inbox</h3>
+            <p className="mt-2 max-w-md text-sm leading-6 text-gray-400">
+              News of new hosts, real traveller stories and tips for travelling differently. No spam.
+            </p>
+          </div>
+          <NewsletterForm source="home" />
+        </div>
         <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <a href="/"><img src={logo} alt="Travailaway" className="h-20 w-auto object-contain" /></a>
