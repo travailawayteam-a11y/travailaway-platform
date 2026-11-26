@@ -3,6 +3,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+import { notify } from "@/lib/notify";
 
 type Props = {
   listingId: string;
@@ -143,6 +144,7 @@ function ContactHostBox({ listingId, hostId, title }: Props) {
         return;
       }
 
+      notify("message", conversationId);
       setText("");
       setStage("sent");
     } catch (err) {
