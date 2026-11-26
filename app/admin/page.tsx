@@ -635,3 +635,101 @@ export default function AdminPage() {
                 </div>
               )}
             </section>
+            
+            <section>
+              <h2 className="text-2xl font-bold text-[#0f3d2e]">
+                Travel companion listings awaiting review ({posts.length})
+              </h2>
+              {posts.length === 0 ? (
+                <p className="mt-4 text-gray-600">Nothing waiting.</p>
+              ) : (
+                <div className="mt-4 space-y-4">
+                  {posts.map((item) => (
+                    <article key={item.id} className="rounded-3xl border border-[#e8dfc8] bg-white p-5 shadow-sm">
+                      <h3 className="text-xl font-bold text-[#17231f]">
+                        Heading to {item.destination}
+                      </h3>
+                      <p className="mt-1 text-sm text-gray-600">
+                        {item.start_date || "Dates open"}
+                        {item.end_date ? ` to ${item.end_date}` : ""}
+                        {item.from_country ? ` · From ${item.from_country}` : ""}
+                      </p>
+                      <p className="mt-3 whitespace-pre-line text-sm leading-6 text-gray-700">
+                        {item.message}
+                      </p>
+                      <p className="mt-3 text-sm text-gray-600">
+                        Contact: {item.contact_method}
+                      </p>
+                      <div className="mt-4 flex flex-wrap gap-3">
+                        <button
+                          type="button"
+                          disabled={busyId === item.id}
+                          onClick={() => setStatus("companion_posts", item.id, "open")}
+                          className={approveClass}
+                        >
+                          Approve
+                        </button>
+                        <button
+                          type="button"
+                          disabled={busyId === item.id}
+                          onClick={() => setStatus("companion_posts", item.id, "closed")}
+                          className={declineClass}
+                        >
+                          Decline
+                        </button>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              )}
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-bold text-[#0f3d2e]">
+                Ambassador applications ({ambassadors.length})
+              </h2>
+              {ambassadors.length === 0 ? (
+                <p className="mt-4 text-gray-600">Nothing waiting.</p>
+              ) : (
+                <div className="mt-4 space-y-4">
+                  {ambassadors.map((item) => (
+                    <article key={item.id} className="rounded-3xl border border-[#e8dfc8] bg-white p-5 shadow-sm">
+                      <h3 className="text-xl font-bold text-[#17231f]">{item.full_name}</h3>
+                      <p className="mt-1 text-sm text-gray-600">
+                        {item.country}
+                        {item.social_link ? ` · ${item.social_link}` : ""}
+                      </p>
+                      <p className="mt-3 whitespace-pre-line text-sm leading-6 text-gray-700">
+                        {item.motivation}
+                      </p>
+                      <div className="mt-4 flex flex-wrap gap-3">
+                        <button
+                          type="button"
+                          disabled={busyId === item.id}
+                          onClick={() => setStatus("ambassador_applications", item.id, "approved")}
+                          className={approveClass}
+                        >
+                          Approve
+                        </button>
+                        <button
+                          type="button"
+                          disabled={busyId === item.id}
+                          onClick={() => setStatus("ambassador_applications", item.id, "declined")}
+                          className={declineClass}
+                        >
+                          Decline
+                        </button>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              )}
+            </section>
+          </div>
+        )}
+      </div>
+
+      <SiteFooter />
+    </main>
+  );
+}
