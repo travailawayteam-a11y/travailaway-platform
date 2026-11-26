@@ -475,3 +475,163 @@ export default function AdminPage() {
                             </div>
                           </dl>
                         </details>
+                      
+                        {rejectId === item.id ? (
+                          <div className="mt-4 rounded-2xl border border-red-200 bg-red-50 p-4">
+                            <label className="block text-sm font-bold text-red-800">
+                              Tell the host what to change (they will see this)
+                            </label>
+                            <textarea
+                              value={rejectReason}
+                              onChange={(event) => setRejectReason(event.target.value)}
+                              rows={3}
+                              maxLength={500}
+                              className="mt-2 w-full rounded-xl border border-red-200 bg-white px-3 py-2 text-sm outline-none focus:border-red-400"
+                              placeholder="For example: Please add clearer photos of the accommodation."
+                            />
+                            <div className="mt-3 flex flex-wrap gap-3">
+                              <button
+                                type="button"
+                                disabled={busy || rejectReason.trim().length < 5}
+                                onClick={() =>
+                                  changeListing(
+                                    item,
+                                    { status: "rejected", rejection_reason: rejectReason.trim() },
+                                    "Sent back to the host with your reason.",
+                                    true
+                                  )
+                                }
+                                className="rounded-full bg-red-700 px-5 py-2 text-sm font-bold text-white hover:bg-red-800 disabled:opacity-50"
+                              >
+                                {busy ? "Sending..." : "Send rejection"}
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setRejectId("");
+                                  setRejectReason("");
+                                }}
+                                className={declineClass}
+                              >
+                                Cancel
+                              </button>
+                            </div>
+                            {rejectReason.trim().length < 5 && (
+                              <p className="mt-2 text-xs text-red-700">
+                                Please write a short reason (at least 5 characters).
+                              </p>
+                            )}
+                          </div>
+                        ) : (
+                          <div className="mt-4 flex flex-wrap gap-3">
+                            {(item.status === "draft" || item.status === "rejected") && (
+                              <button
+                                type="button"
+                                disabled={busy}
+                                onClick={() =>
+                                  changeListing(item, { status: "published" }, "Approved. It is now live on Explore.", true)
+                                }
+                                className={approveClass}
+                              >
+                                {busy ? "Saving..." : "Approve and publish"}
+                              </button>
+                            )}
+                            {item.status === "draft" && (
+                              <button
+                                type="button"
+                                disabled={busy}
+                                onClick={() => {
+                                  setRejectId(item.id);
+                                  setRejectReason("");
+                                }}
+                                className={rejectClass}
+                              >
+                                Reject with reason
+                              </button>
+                            )}
+                            {item.status === "published" && (
+                              <button
+                                type="button"
+                                disabled={busy}
+                                onClick={() =>
+                                  changeListing(item, { status: "paused" }, "Paused. It is hidden from Explore.")
+                                }
+                                className={declineClass}
+                              >
+                                {busy ? "Saving..." : "Pause"}
+                              </button>
+                            )}
+                            {item.status === "paused" && (
+                              <button
+                                type="button"
+                                disabled={busy}
+                                onClick={() =>
+                                  changeListing(item, { status: "published" }, "Reactivated. It is live on Explore again.")
+                                }
+                                className={approveClass}
+                              >
+                                {busy ? "Saving..." : "Reactivate"}
+                              </button>
+                            )}
+                            <button
+                              type="button"
+                              disabled={busy}
+                              onClick={() => {
+                                setDeleteId(item.id);
+                                setDeleteText("");
+                              }}
+                              className="rounded-full px-5 py-2 text-sm font-semibold text-red-700 underline hover:bg-red-50 disabled:opacity-50"
+                            >
+                              Delete permanently
+                            </button>
+                          </div>
+                        )}
+
+                        {deleteId === item.id && (
+                          <div className="mt-4 rounded-2xl border border-red-300 bg-red-50 p-4">
+                            <p className="text-sm font-bold text-red-800">
+                              Permanently delete this opportunity?
+                            </p>
+                            <p className="mt-1 text-sm text-red-800">
+                              It disappears from Explore and from the host's dashboard, and it
+                              cannot be undone. Saved copies by travellers are removed too.
+                              Conversations, completed stays and reviews are kept. If you only
+                              want to hide it for now, use Pause instead.
+                            </p>
+                            <label className="mt-3 block text-sm font-semibold text-red-800">
+                              Type DELETE to confirm
+                            </label>
+                            <input
+                              type="text"
+                              value={deleteText}
+                              onChange={(event) => setDeleteText(event.target.value)}
+                              className="mt-1 w-full rounded-xl border border-red-200 bg-white px-3 py-2 text-sm outline-none focus:border-red-400"
+                            />
+                            <div className="mt-3 flex flex-wrap gap-3">
+                              <button
+                                type="button"
+                                disabled={busy || deleteText.trim() !== "DELETE"}
+                                onClick={() => removeListing(item)}
+                                className="rounded-full bg-red-700 px-5 py-2 text-sm font-bold text-white hover:bg-red-800 disabled:opacity-50"
+                              >
+                                {busy ? "Deleting..." : "Delete for good"}
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setDeleteId("");
+                                  setDeleteText("");
+                                }}
+                                className={declineClass}
+                              >
+                                Cancel
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </article>
+                    );
+                  })}
+                </div>
+              )}
+            </section>
