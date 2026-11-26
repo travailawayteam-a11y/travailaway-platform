@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+import { notify } from "@/lib/notify";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 
@@ -175,6 +176,7 @@ export default function MessagesPage() {
           "We could not send your reply. If you are a traveller, check that your membership is active."
         );
       } else {
+        notify("message", openId);
         setReply("");
         await openConversation(openId);
       }
