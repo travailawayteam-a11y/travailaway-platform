@@ -277,3 +277,201 @@ export default function AdminPage() {
   };
 
   const visible = listings.filter((item) => item.status === tab);
+  
+  return (
+    <main className="min-h-screen bg-[#fbf6ea]">
+      <SiteHeader />
+
+      <div className="mx-auto max-w-5xl px-4 py-10">
+        <h1 className="text-3xl font-bold text-[#0f3d2e]">Team review</h1>
+        <p className="mt-2 text-gray-600">
+          Review what is ready to go live on Travailaway. Only the Travailaway team can see this page.
+        </p>
+
+        {checking ? (
+          <p className="mt-8 text-gray-600">Loading...</p>
+        ) : !isAdmin ? (
+          <div className="mt-8 rounded-2xl bg-white p-6 shadow-sm">
+            <p className="font-semibold text-[#17231f]">
+              This page is for the Travailaway team.
+            </p>
+            <p className="mt-2 text-sm text-gray-600">
+              If you are on the team, please log in with your team account.
+            </p>
+            <div className="mt-4 flex gap-5 font-semibold text-[#176b50]">
+              <Link href="/login" className="underline">
+                Log in
+              </Link>
+              <Link href="/" className="underline">
+                Home
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <div className="mt-8 space-y-12">
+            {error && (
+              <p role="alert" className="rounded-xl bg-red-50 p-4 text-sm font-medium text-red-700">
+                {error}
+              </p>
+            )}
+            {notice && (
+              <p role="status" className="rounded-xl bg-[#e3f1e9] p-4 text-sm font-medium text-[#0f5a3f]">
+                {notice}
+              </p>
+            )}
+
+            <MembersPanel />
+
+            <section>
+              <h2 className="text-2xl font-bold text-[#0f3d2e]">Opportunities</h2>
+
+              <div className="mt-4 flex gap-2 overflow-x-auto pb-2">
+                {TABS.map((item) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => {
+                      setTab(item.id);
+                      setRejectId("");
+                      setRejectReason("");
+                      setDeleteId("");
+                      setDeleteText("");
+                    }}
+                    className={`shrink-0 rounded-full px-4 py-2 text-sm font-bold ${
+                      tab === item.id
+                        ? "bg-[#176b50] text-white"
+                        : "border border-[#e8dfc8] bg-white text-[#1f2a26] hover:bg-[#f3ecd9]"
+                    }`}
+                  >
+                    {item.label} ({counts[item.id]})
+                  </button>
+                ))}
+              </div>
+
+              {visible.length === 0 ? (
+                <p className="mt-6 text-gray-600">Nothing here.</p>
+              ) : (
+                <div className="mt-4 space-y-5">
+                  {visible.map((item) => {
+                    const host = hosts[item.host_id];
+                    const busy = busyId === item.id;
+
+                    return (
+                      <article
+                        key={item.id}
+                        className="rounded-3xl border border-[#e8dfc8] bg-white p-5 shadow-sm"
+                      >
+                        <div className="flex flex-wrap items-start justify-between gap-2">
+                          <div className="min-w-0">
+                            <h3 className="text-xl font-bold text-[#17231f]">{item.title}</h3>
+                            <p className="mt-1 text-sm text-gray-600">
+                              {item.category} · {item.city ? `${item.city}, ` : ""}
+                              {item.country}
+                            </p>
+                          </div>
+                          <p className="text-xs text-gray-500">
+                            Submitted {formatDate(item.created_at)}
+                            {item.published_at ? ` · Live since ${formatDate(item.published_at)}` : ""}
+                          </p>
+                        </div>
+
+                        <div className="mt-3 rounded-2xl bg-[#f3ecd9] p-3 text-sm text-[#4a3a12]">
+                          <p className="font-semibold">
+                            Host: {host?.full_name || "Name not added"}
+                          </p>
+                          <p>
+                            {[host?.city, host?.country].filter(Boolean).join(", ") ||
+                              "Location not added"}
+                            {host?.created_at ? ` · Joined ${formatDate(host.created_at)}` : ""}
+                          </p>
+                          {host?.bio && <p className="mt-1 whitespace-pre-line">{host.bio}</p>}
+                        </div>
+
+                        {item.status === "rejected" && item.rejection_reason && (
+                          <p className="mt-3 rounded-2xl bg-red-50 p-3 text-sm text-red-800">
+                            <span className="font-semibold">Reason sent to host: </span>
+                            {item.rejection_reason}
+                          </p>
+                        )}
+                        {item.status === "paused" && (
+                          <p className="mt-3 text-sm text-gray-600">
+                            {item.host_paused ? "Paused by the host." : "Paused by the team."}
+                          </p>
+                        )}
+
+                        <details className="mt-4" open={item.status === "draft"}>
+                          <summary className="cursor-pointer text-sm font-bold text-[#176b50]">
+                            Full details and photos
+                          </summary>
+
+                          {item.images && item.images.length > 0 ? (
+                            <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
+                              {item.images.map((url, index) => (
+                                <a
+                                  key={url}
+                                  href={url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="block overflow-hidden rounded-xl border border-gray-200"
+                                >
+                                  <img
+                                    src={url}
+                                    alt={`Photo ${index + 1}${index === 0 ? " (cover)" : ""}`}
+                                    className="h-28 w-full object-cover"
+                                  />
+                                </a>
+                              ))}
+                            </div>
+                          ) : (
+                            <p className="mt-3 text-sm text-gray-500">No photos uploaded.</p>
+                          )}
+
+                          <p className="mt-4 whitespace-pre-line text-sm leading-6 text-gray-700">
+                            {item.description}
+                          </p>
+
+                          <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
+                            <div>
+                              <dt className="text-gray-500">Location</dt>
+                              <dd className="font-medium text-[#17231f]">
+                                {[item.city, item.region, item.country, item.continent]
+                                  .filter(Boolean)
+                                  .join(", ")}
+                              </dd>
+                            </div>
+                            <div>
+                              <dt className="text-gray-500">Accommodation</dt>
+                              <dd className="font-medium text-[#17231f]">{item.accommodation || "Not set"}</dd>
+                            </div>
+                            <div>
+                              <dt className="text-gray-500">Meals</dt>
+                              <dd className="font-medium text-[#17231f]">{item.meals || "Not set"}</dd>
+                            </div>
+                            <div>
+                              <dt className="text-gray-500">Hours per week</dt>
+                              <dd className="font-medium text-[#17231f]">
+                                {item.hours_per_week ?? "Not set"}
+                              </dd>
+                            </div>
+                            <div>
+                              <dt className="text-gray-500">Stay</dt>
+                              <dd className="font-medium text-[#17231f]">
+                                {item.min_stay_weeks ?? "?"} to {item.max_stay_weeks ?? "?"} weeks
+                              </dd>
+                            </div>
+                            <div>
+                              <dt className="text-gray-500">Skills</dt>
+                              <dd className="font-medium text-[#17231f]">
+                                {item.skills && item.skills.length > 0 ? item.skills.join(", ") : "None listed"}
+                              </dd>
+                            </div>
+                            <div className="sm:col-span-2">
+                              <dt className="text-gray-500">Benefits</dt>
+                              <dd className="font-medium text-[#17231f]">
+                                {item.benefits && item.benefits.length > 0
+                                  ? item.benefits.join(", ")
+                                  : "None listed"}
+                              </dd>
+                            </div>
+                          </dl>
+                        </details>
