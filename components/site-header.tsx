@@ -28,6 +28,12 @@ export const MENU_ITEMS = [
     href: "/how-it-works",
   },
   {
+    label: "Travel guides",
+    short: "Travel guides",
+    description: "Advice for travellers and hosts, country by country.",
+    href: "/guides",
+  },
+  {
     label: "Gatherings & events",
     short: "Events",
     description: "Meet fellow travellers and hosts in person.",
