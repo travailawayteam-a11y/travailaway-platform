@@ -15,6 +15,7 @@ const PAGES = [
   "/volunteer-in-europe",
   "/host-volunteers",
   "/list-your-place",
+  "/guides",
   "/volunteer-in-italy",
   "/volunteer-in-france",
   "/register",
