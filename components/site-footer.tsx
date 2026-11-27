@@ -13,6 +13,7 @@ const columns = [
       { label: "Travel companions", href: "/travel-buddies" },
       { label: "Events", href: "/meetups" },
       { label: "Travel guides", href: "/guides" },
+      { label: "Budget planner", href: "/budget-planner" },
     ],
   },
   {
