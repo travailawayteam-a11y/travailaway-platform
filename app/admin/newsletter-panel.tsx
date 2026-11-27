@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 
 type Subscriber = {
@@ -67,6 +68,20 @@ export default function NewsletterPanel() {
   }
 
   return (
+    <>
+    <section>
+      <h2 className="text-2xl font-bold text-[#0f3d2e]">Ambassador links</h2>
+      <p className="mt-2 text-gray-600">
+        Give each ambassador their own link and see who signed up through it.
+      </p>
+      <Link
+        href="/admin/referrals"
+        className="mt-4 inline-block rounded-full bg-[#176b50] px-6 py-2 text-sm font-bold text-white hover:bg-[#0f3d2e]"
+      >
+        Open ambassador links
+      </Link>
+    </section>
+
     <section>
       <h2 className="text-2xl font-bold text-[#0f3d2e]">
         Newsletter subscribers ({subscribers.length})
@@ -103,5 +118,6 @@ export default function NewsletterPanel() {
         </div>
       )}
     </section>
+    </>
   );
 }
