@@ -13,6 +13,8 @@ const PAGES = [
   "/ambassador",
   "/volunteer",
   "/volunteer-in-europe",
+  "/host-volunteers",
+  "/list-your-place",
   "/register",
   "/privacy",
   "/terms",
