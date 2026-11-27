@@ -10,6 +10,12 @@ export const metadata: Metadata = {
 export default function VolunteerInItalyPage() {
   return (
     <GuidePage
+      banner={{
+        image:
+          "https://images.unsplash.com/photo-1759955392586-3ab03e4285ef?auto=format&fit=crop&w=1600&q=70",
+        message: "Share your time. Taste Italy.",
+        subtitle: "Stay with welcoming hosts across the Italian countryside.",
+      }}
       kicker="Travel guide"
       title="Volunteer in Italy with free accommodation"
       intro="Italy is full of small farms, vineyards, guesthouses and family projects that welcome travellers who share a few hours of help a day. Here is what to expect and how to find a stay that suits you."
