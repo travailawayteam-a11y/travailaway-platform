@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import LanguageSwitcher from "@/components/language-switcher";
+import ReferralTracker from "@/components/referral-tracker";
 
 export const metadata: Metadata = {
   title: "Travailaway | Travel. Connect. Experience.",
@@ -17,6 +18,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body>
         {children}
+        <ReferralTracker />
         <LanguageSwitcher />
       </body>
     </html>
