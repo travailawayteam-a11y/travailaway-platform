@@ -1,6 +1,7 @@
 import Link from "next/link";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
+import PageBanner from "@/components/page-banner";
 
 export type GuideSection = { heading: string; body: string[] };
 
@@ -13,6 +14,7 @@ type Props = {
   ctaText: string;
   primary: { label: string; href: string };
   secondary?: { label: string; href: string };
+  banner?: { image: string; message: string; subtitle?: string };
 };
 
 // One shared layout for our guide pages, so each guide is only its words.
@@ -25,10 +27,19 @@ export default function GuidePage({
   ctaText,
   primary,
   secondary,
+  banner,
 }: Props) {
   return (
     <main className="min-h-screen bg-white text-slate-800">
       <SiteHeader />
+
+      {banner && (
+        <PageBanner
+          image={banner.image}
+          message={banner.message}
+          subtitle={banner.subtitle}
+        />
+      )}
 
       <article className="mx-auto max-w-3xl px-5 py-12 md:py-16">
         <p className="text-sm font-semibold uppercase tracking-wide text-[#176b50]">
