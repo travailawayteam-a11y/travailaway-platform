@@ -34,6 +34,12 @@ export const MENU_ITEMS = [
     href: "/guides",
   },
   {
+    label: "Travel budget planner",
+    short: "Budget planner",
+    description: "Estimate the cost of your trip, with currency conversion.",
+    href: "/budget-planner",
+  },
+  {
     label: "Gatherings & events",
     short: "Events",
     description: "Meet fellow travellers and hosts in person.",
