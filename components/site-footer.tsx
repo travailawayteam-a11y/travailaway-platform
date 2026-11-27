@@ -12,6 +12,7 @@ const columns = [
       { label: "How it works", href: "/how-it-works" },
       { label: "Travel companions", href: "/travel-buddies" },
       { label: "Events", href: "/meetups" },
+      { label: "Travel guides", href: "/guides" },
     ],
   },
   {
