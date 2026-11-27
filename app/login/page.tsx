@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import PageBanner from "@/components/page-banner";
+import PasswordInput from "@/components/password-input";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -147,15 +148,13 @@ export default function LoginPage() {
                 >
                   Password
                 </label>
-                <input
+                <PasswordInput
                   id="password"
-                  type="password"
                   autoComplete="current-password"
                   required
                   value={password}
-                  onChange={(event) => setPassword(event.target.value)}
+                  onChange={setPassword}
                   placeholder="Enter your password"
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-[#176b50] focus:ring-2 focus:ring-[#176b50]/20"
                 />
               </div>
 
