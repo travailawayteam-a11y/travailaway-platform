@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
+import PageBanner from "@/components/page-banner";
 
 export const metadata: Metadata = {
   title: "Free travel tools | Travailaway",
@@ -36,6 +37,12 @@ export default function ToolsPage() {
   return (
     <main className="min-h-screen bg-white text-slate-800">
       <SiteHeader />
+
+      <PageBanner
+        image="https://images.unsplash.com/photo-1530047139082-5435ca3c4614?auto=format&fit=crop&w=1600&q=70"
+        message="Plan it. Pack it. Go."
+        subtitle="Free tools for your next adventure"
+      />
 
       <section className="mx-auto max-w-4xl px-5 py-12 md:py-16">
         <p className="text-sm font-semibold uppercase tracking-wide text-[#176b50]">
