@@ -7,10 +7,15 @@ import PageBanner from "@/components/page-banner";
 export const metadata: Metadata = {
   title: "Free travel tools | Travailaway",
   description:
-    "Free tools for travellers: budget planner, currency converter, packing list and a checklist of questions to ask your host.",
+    "Free tools for travellers: trip planner, budget planner, currency converter, packing list, time zone planner, travel journal and a checklist of questions to ask your host.",
 };
 
 const TOOLS: { title: string; text: string; href: string }[] = [
+  {
+    title: "My trip",
+    text: "A countdown to your departure, a before-you-go checklist and your notes in one place.",
+    href: "/my-trip",
+  },
   {
     title: "Travel budget planner",
     text: "Add up flights, food, transport and activities, and see the total in another currency.",
@@ -30,6 +35,16 @@ const TOOLS: { title: string; text: string; href: string }[] = [
     title: "What to ask your host",
     text: "The questions to ask before you confirm a stay: work, hours, food, costs and safety.",
     href: "/host-checklist",
+  },
+  {
+    title: "Time zone planner",
+    text: "See the time at your host's place and find a good time to talk.",
+    href: "/time-zones",
+  },
+  {
+    title: "Travel journal",
+    text: "A private diary with a new question every day. Saved on your own device.",
+    href: "/travel-journal",
   },
 ];
 
