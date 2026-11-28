@@ -4,9 +4,8 @@ import SiteFooter from "@/components/site-footer";
 
 /*
   PHOTO SOURCES (real photographs, free licences; credits are kept here, not shown on the page)
-  1. Hero: "a multicultural lunch or dinner with friends around a welcome table"
-     DJ Paine, Unsplash (Unsplash License)
-     https://unsplash.com/photos/a-group-of-people-sitting-around-a-table-eating-food-G4QFpOsoS7w
+  1. Hero: bright turquoise sea in sunshine, Unsplash (Unsplash License)
+     photo-1507699622108-4be3abd695ad
   2. Why we exist: "A multiracial couple works on their farm in rural Washington state"
      Land O'Lakes, Inc., Unsplash (Unsplash License)
      https://unsplash.com/photos/two-people-working-with-a-laptop-outside-greenhouse-JUivXruBs2U
@@ -17,11 +16,11 @@ import SiteFooter from "@/components/site-footer";
 
 const PHOTOS = {
   hero: {
-    src: "https://images.unsplash.com/photo-1721180672399-0ff1a0d96abc?auto=format&fit=crop&w=1800&q=70",
-    alt: "Friends from different backgrounds sharing a meal around a long welcome table",
-    credit: "DJ Paine",
+    src: "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?auto=format&fit=crop&w=1800&q=85",
+    alt: "Bright sunshine over a turquoise tropical sea",
+    credit: "Unsplash",
     source: "Unsplash",
-    href: "https://unsplash.com/photos/a-group-of-people-sitting-around-a-table-eating-food-G4QFpOsoS7w",
+    href: "https://unsplash.com/photos/photo-1507699622108-4be3abd695ad",
   },
   farm: {
     src: "https://images.unsplash.com/photo-1761839258575-038fef381ee7?auto=format&fit=crop&w=1200&q=70",
@@ -97,7 +96,7 @@ export default function MissionPage() {
           </p>
         </div>
       </section>
-
+      
       {/* INTRO */}
       <section className="mx-auto max-w-3xl px-5 py-16 md:py-20">
         <p className="text-lg leading-8 text-gray-700">
