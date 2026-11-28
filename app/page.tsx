@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import NewsletterForm from "@/components/newsletter-form";
+import WorldClock from "@/components/world-clock";
 import {
   ArrowRight, Globe2, Heart, MapPin, Menu, Search, ShieldCheck,
   Users, X, Home, PawPrint, GraduationCap, Palette, Sailboat,
@@ -247,8 +248,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+    <WorldClock />
 
-      {/* INTRO */}
+   {/* INTRO */}
       <section className="mx-auto max-w-7xl px-5 py-24 md:px-8">
         <div className="mx-auto max-w-3xl text-center">
           <span className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-700">Welcome to Travailaway</span>
