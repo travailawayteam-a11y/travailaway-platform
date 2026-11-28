@@ -6,7 +6,18 @@ import { CITIES, timeIn, dayIn } from "@/lib/time-zones";
 
 const SHOWN = ["Kampala", "London", "Rome", "New York", "Dubai", "Tokyo"];
 
-// A small strip of live clocks for the home page.
+const TOOLS: { title: string; text: string; href: string }[] = [
+  { title: "My trip", text: "Countdown, checklist and notes in one place.", href: "/my-trip" },
+  { title: "Budget planner", text: "Add up what your trip will cost.", href: "/budget-planner" },
+  { title: "Currency converter", text: "Latest rates for 35+ currencies.", href: "/currency-converter" },
+  { title: "Packing list", text: "Tick off what to bring to your host.", href: "/packing-list" },
+  { title: "Questions for your host", text: "What to ask before you confirm.", href: "/host-checklist" },
+  { title: "Time zone planner", text: "Find a time to talk with your host.", href: "/time-zones" },
+  { title: "Travel journal", text: "A private diary with a daily question.", href: "/travel-journal" },
+  { title: "Travel guides", text: "Volunteer in Europe, Italy and France.", href: "/guides" },
+];
+
+// Home page section: links to our free tools, plus a strip of live clocks.
 export default function WorldClock() {
   const [now, setNow] = useState<Date | null>(null);
 
@@ -19,8 +30,36 @@ export default function WorldClock() {
   const cities = CITIES.filter((c) => SHOWN.includes(c.name));
 
   return (
-    <section className="mx-auto max-w-7xl px-5 pt-16 md:px-8">
-      <div className="rounded-3xl bg-slate-900 p-6 text-white md:p-8">
+    <section className="mx-auto max-w-7xl px-5 pt-20 md:px-8">
+      <div className="text-center">
+        <p className="text-sm font-semibold uppercase tracking-wide text-emerald-700">
+          Free for every traveller
+        </p>
+        <h2 className="mt-2 text-3xl font-extrabold text-slate-900 md:text-4xl">
+          Free tools for your trip
+        </h2>
+        <p className="mx-auto mt-3 max-w-2xl text-gray-600">
+          Plan, budget and prepare. No sign-up needed.
+        </p>
+      </div>
+
+      <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
+        {TOOLS.map((tool) => (
+          <Link
+            key={tool.href}
+            href={tool.href}
+            className="block rounded-2xl border border-gray-200 bg-white p-5 transition hover:-translate-y-1 hover:border-emerald-600 hover:shadow-md"
+          >
+            <h3 className="font-bold text-slate-900">{tool.title}</h3>
+            <p className="mt-1 text-sm leading-6 text-gray-600">{tool.text}</p>
+            <span className="mt-3 inline-block text-sm font-semibold text-emerald-700">
+              Open
+            </span>
+          </Link>
+        ))}
+      </div>
+
+      <div className="mt-10 rounded-3xl bg-slate-900 p-6 text-white md:p-8">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h2 className="text-xl font-bold md:text-2xl">
             What time is it where your host lives?
